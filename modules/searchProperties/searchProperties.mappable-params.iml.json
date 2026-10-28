@@ -1,0 +1,716 @@
+[
+  {
+    "name": "query",
+    "type": "text",
+    "label": "Location or text query",
+    "help": "City, county, ZIP code or address text to search in. Leave empty to rely on the filters below."
+  },
+  {
+    "name": "quickLists",
+    "type": "array",
+    "label": "Quick lists (all must match)",
+    "help": "Prebuilt lead lists. Choose a \"not-\" entry to exclude a list.",
+    "spec": {
+      "type": "select",
+      "options": [
+        {
+          "label": "absentee-owner",
+          "value": "absentee-owner"
+        },
+        {
+          "label": "active-auction",
+          "value": "active-auction"
+        },
+        {
+          "label": "active-listing",
+          "value": "active-listing"
+        },
+        {
+          "label": "canceled-listing",
+          "value": "canceled-listing"
+        },
+        {
+          "label": "cash-buyer",
+          "value": "cash-buyer"
+        },
+        {
+          "label": "corporate-owned",
+          "value": "corporate-owned"
+        },
+        {
+          "label": "expired-listing",
+          "value": "expired-listing"
+        },
+        {
+          "label": "failed-listing",
+          "value": "failed-listing"
+        },
+        {
+          "label": "fix-and-flip",
+          "value": "fix-and-flip"
+        },
+        {
+          "label": "free-and-clear",
+          "value": "free-and-clear"
+        },
+        {
+          "label": "for-sale-by-owner",
+          "value": "for-sale-by-owner"
+        },
+        {
+          "label": "has-hoa",
+          "value": "has-hoa"
+        },
+        {
+          "label": "has-hoa-fees",
+          "value": "has-hoa-fees"
+        },
+        {
+          "label": "high-equity",
+          "value": "high-equity"
+        },
+        {
+          "label": "inherited",
+          "value": "inherited"
+        },
+        {
+          "label": "involuntary-lien",
+          "value": "involuntary-lien"
+        },
+        {
+          "label": "in-state-absentee-owner",
+          "value": "in-state-absentee-owner"
+        },
+        {
+          "label": "listed-below-market-price",
+          "value": "listed-below-market-price"
+        },
+        {
+          "label": "low-equity",
+          "value": "low-equity"
+        },
+        {
+          "label": "mailing-address-vacant",
+          "value": "mailing-address-vacant"
+        },
+        {
+          "label": "notice-of-default",
+          "value": "notice-of-default"
+        },
+        {
+          "label": "notice-of-lis-pendens",
+          "value": "notice-of-lis-pendens"
+        },
+        {
+          "label": "notice-of-sale",
+          "value": "notice-of-sale"
+        },
+        {
+          "label": "on-market",
+          "value": "on-market"
+        },
+        {
+          "label": "out-of-state-absentee-owner",
+          "value": "out-of-state-absentee-owner"
+        },
+        {
+          "label": "out-of-state-owner",
+          "value": "out-of-state-owner"
+        },
+        {
+          "label": "owner-occupied",
+          "value": "owner-occupied"
+        },
+        {
+          "label": "pending-listing",
+          "value": "pending-listing"
+        },
+        {
+          "label": "preforeclosure",
+          "value": "preforeclosure"
+        },
+        {
+          "label": "recently-sold",
+          "value": "recently-sold"
+        },
+        {
+          "label": "same-property-and-mailing-address",
+          "value": "same-property-and-mailing-address"
+        },
+        {
+          "label": "senior-owner",
+          "value": "senior-owner"
+        },
+        {
+          "label": "tax-default",
+          "value": "tax-default"
+        },
+        {
+          "label": "tired-landlord",
+          "value": "tired-landlord"
+        },
+        {
+          "label": "trust-owned",
+          "value": "trust-owned"
+        },
+        {
+          "label": "unknown-equity",
+          "value": "unknown-equity"
+        },
+        {
+          "label": "vacant",
+          "value": "vacant"
+        },
+        {
+          "label": "vacant-lot",
+          "value": "vacant-lot"
+        },
+        {
+          "label": "not-absentee-owner",
+          "value": "not-absentee-owner"
+        },
+        {
+          "label": "not-active-auction",
+          "value": "not-active-auction"
+        },
+        {
+          "label": "not-active-listing",
+          "value": "not-active-listing"
+        },
+        {
+          "label": "not-canceled-listing",
+          "value": "not-canceled-listing"
+        },
+        {
+          "label": "not-cash-buyer",
+          "value": "not-cash-buyer"
+        },
+        {
+          "label": "not-corporate-owned",
+          "value": "not-corporate-owned"
+        },
+        {
+          "label": "not-expired-listing",
+          "value": "not-expired-listing"
+        },
+        {
+          "label": "not-failed-listing",
+          "value": "not-failed-listing"
+        },
+        {
+          "label": "not-fix-and-flip",
+          "value": "not-fix-and-flip"
+        },
+        {
+          "label": "not-free-and-clear",
+          "value": "not-free-and-clear"
+        },
+        {
+          "label": "not-for-sale-by-owner",
+          "value": "not-for-sale-by-owner"
+        },
+        {
+          "label": "not-has-hoa",
+          "value": "not-has-hoa"
+        },
+        {
+          "label": "not-has-hoa-fees",
+          "value": "not-has-hoa-fees"
+        },
+        {
+          "label": "not-high-equity",
+          "value": "not-high-equity"
+        },
+        {
+          "label": "not-inherited",
+          "value": "not-inherited"
+        },
+        {
+          "label": "not-involuntary-lien",
+          "value": "not-involuntary-lien"
+        },
+        {
+          "label": "not-in-state-absentee-owner",
+          "value": "not-in-state-absentee-owner"
+        },
+        {
+          "label": "not-listed-below-market-price",
+          "value": "not-listed-below-market-price"
+        },
+        {
+          "label": "not-low-equity",
+          "value": "not-low-equity"
+        },
+        {
+          "label": "not-mailing-address-vacant",
+          "value": "not-mailing-address-vacant"
+        },
+        {
+          "label": "not-notice-of-default",
+          "value": "not-notice-of-default"
+        },
+        {
+          "label": "not-notice-of-lis-pendens",
+          "value": "not-notice-of-lis-pendens"
+        },
+        {
+          "label": "not-notice-of-sale",
+          "value": "not-notice-of-sale"
+        },
+        {
+          "label": "not-on-market",
+          "value": "not-on-market"
+        },
+        {
+          "label": "not-out-of-state-absentee-owner",
+          "value": "not-out-of-state-absentee-owner"
+        },
+        {
+          "label": "not-out-of-state-owner",
+          "value": "not-out-of-state-owner"
+        },
+        {
+          "label": "not-owner-occupied",
+          "value": "not-owner-occupied"
+        },
+        {
+          "label": "not-pending-listing",
+          "value": "not-pending-listing"
+        },
+        {
+          "label": "not-preforeclosure",
+          "value": "not-preforeclosure"
+        },
+        {
+          "label": "not-recently-sold",
+          "value": "not-recently-sold"
+        },
+        {
+          "label": "not-same-property-and-mailing-address",
+          "value": "not-same-property-and-mailing-address"
+        },
+        {
+          "label": "not-senior-owner",
+          "value": "not-senior-owner"
+        },
+        {
+          "label": "not-tax-default",
+          "value": "not-tax-default"
+        },
+        {
+          "label": "not-tired-landlord",
+          "value": "not-tired-landlord"
+        },
+        {
+          "label": "not-trust-owned",
+          "value": "not-trust-owned"
+        },
+        {
+          "label": "not-unknown-equity",
+          "value": "not-unknown-equity"
+        },
+        {
+          "label": "not-vacant",
+          "value": "not-vacant"
+        },
+        {
+          "label": "not-vacant-lot",
+          "value": "not-vacant-lot"
+        }
+      ]
+    }
+  },
+  {
+    "name": "orQuickLists",
+    "type": "array",
+    "label": "Quick lists (any may match)",
+    "spec": {
+      "type": "select",
+      "options": [
+        {
+          "label": "absentee-owner",
+          "value": "absentee-owner"
+        },
+        {
+          "label": "active-auction",
+          "value": "active-auction"
+        },
+        {
+          "label": "active-listing",
+          "value": "active-listing"
+        },
+        {
+          "label": "canceled-listing",
+          "value": "canceled-listing"
+        },
+        {
+          "label": "cash-buyer",
+          "value": "cash-buyer"
+        },
+        {
+          "label": "corporate-owned",
+          "value": "corporate-owned"
+        },
+        {
+          "label": "expired-listing",
+          "value": "expired-listing"
+        },
+        {
+          "label": "failed-listing",
+          "value": "failed-listing"
+        },
+        {
+          "label": "fix-and-flip",
+          "value": "fix-and-flip"
+        },
+        {
+          "label": "free-and-clear",
+          "value": "free-and-clear"
+        },
+        {
+          "label": "for-sale-by-owner",
+          "value": "for-sale-by-owner"
+        },
+        {
+          "label": "has-hoa",
+          "value": "has-hoa"
+        },
+        {
+          "label": "has-hoa-fees",
+          "value": "has-hoa-fees"
+        },
+        {
+          "label": "high-equity",
+          "value": "high-equity"
+        },
+        {
+          "label": "inherited",
+          "value": "inherited"
+        },
+        {
+          "label": "involuntary-lien",
+          "value": "involuntary-lien"
+        },
+        {
+          "label": "in-state-absentee-owner",
+          "value": "in-state-absentee-owner"
+        },
+        {
+          "label": "listed-below-market-price",
+          "value": "listed-below-market-price"
+        },
+        {
+          "label": "low-equity",
+          "value": "low-equity"
+        },
+        {
+          "label": "mailing-address-vacant",
+          "value": "mailing-address-vacant"
+        },
+        {
+          "label": "notice-of-default",
+          "value": "notice-of-default"
+        },
+        {
+          "label": "notice-of-lis-pendens",
+          "value": "notice-of-lis-pendens"
+        },
+        {
+          "label": "notice-of-sale",
+          "value": "notice-of-sale"
+        },
+        {
+          "label": "on-market",
+          "value": "on-market"
+        },
+        {
+          "label": "out-of-state-absentee-owner",
+          "value": "out-of-state-absentee-owner"
+        },
+        {
+          "label": "out-of-state-owner",
+          "value": "out-of-state-owner"
+        },
+        {
+          "label": "owner-occupied",
+          "value": "owner-occupied"
+        },
+        {
+          "label": "pending-listing",
+          "value": "pending-listing"
+        },
+        {
+          "label": "preforeclosure",
+          "value": "preforeclosure"
+        },
+        {
+          "label": "recently-sold",
+          "value": "recently-sold"
+        },
+        {
+          "label": "same-property-and-mailing-address",
+          "value": "same-property-and-mailing-address"
+        },
+        {
+          "label": "senior-owner",
+          "value": "senior-owner"
+        },
+        {
+          "label": "tax-default",
+          "value": "tax-default"
+        },
+        {
+          "label": "tired-landlord",
+          "value": "tired-landlord"
+        },
+        {
+          "label": "trust-owned",
+          "value": "trust-owned"
+        },
+        {
+          "label": "unknown-equity",
+          "value": "unknown-equity"
+        },
+        {
+          "label": "vacant",
+          "value": "vacant"
+        },
+        {
+          "label": "vacant-lot",
+          "value": "vacant-lot"
+        }
+      ]
+    }
+  },
+  {
+    "name": "building",
+    "type": "collection",
+    "label": "Building",
+    "spec": [
+      {
+        "name": "bedroomCount",
+        "type": "collection",
+        "label": "Bedrooms",
+        "spec": [
+          {
+            "name": "min",
+            "type": "number",
+            "label": "Minimum"
+          },
+          {
+            "name": "max",
+            "type": "number",
+            "label": "Maximum"
+          }
+        ]
+      },
+      {
+        "name": "bathroomCount",
+        "type": "collection",
+        "label": "Bathrooms",
+        "spec": [
+          {
+            "name": "min",
+            "type": "number",
+            "label": "Minimum"
+          },
+          {
+            "name": "max",
+            "type": "number",
+            "label": "Maximum"
+          }
+        ]
+      },
+      {
+        "name": "yearBuilt",
+        "type": "collection",
+        "label": "Year built",
+        "spec": [
+          {
+            "name": "min",
+            "type": "number",
+            "label": "Minimum"
+          },
+          {
+            "name": "max",
+            "type": "number",
+            "label": "Maximum"
+          }
+        ]
+      },
+      {
+        "name": "livingAreaSquareFeet",
+        "type": "collection",
+        "label": "Living area (sq ft)",
+        "spec": [
+          {
+            "name": "min",
+            "type": "number",
+            "label": "Minimum"
+          },
+          {
+            "name": "max",
+            "type": "number",
+            "label": "Maximum"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "general",
+    "type": "collection",
+    "label": "Property type",
+    "spec": [
+      {
+        "name": "propertyTypeCategory",
+        "type": "collection",
+        "label": "Property type category",
+        "spec": [
+          {
+            "name": "equals",
+            "type": "text",
+            "label": "Equals",
+            "help": "For example Single Family, Multi Family, Condo."
+          }
+        ]
+      },
+      {
+        "name": "propertyTypeDetail",
+        "type": "collection",
+        "label": "Property type detail",
+        "spec": [
+          {
+            "name": "equals",
+            "type": "text",
+            "label": "Equals"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "lot",
+    "type": "collection",
+    "label": "Lot",
+    "spec": [
+      {
+        "name": "lotSizeAcres",
+        "type": "collection",
+        "label": "Lot size (acres)",
+        "spec": [
+          {
+            "name": "min",
+            "type": "number",
+            "label": "Minimum"
+          },
+          {
+            "name": "max",
+            "type": "number",
+            "label": "Maximum"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "valuation",
+    "type": "collection",
+    "label": "Valuation",
+    "spec": [
+      {
+        "name": "estimatedValue",
+        "type": "collection",
+        "label": "Estimated value",
+        "spec": [
+          {
+            "name": "min",
+            "type": "number",
+            "label": "Minimum"
+          },
+          {
+            "name": "max",
+            "type": "number",
+            "label": "Maximum"
+          }
+        ]
+      },
+      {
+        "name": "equityPercent",
+        "type": "collection",
+        "label": "Equity percent",
+        "spec": [
+          {
+            "name": "min",
+            "type": "number",
+            "label": "Minimum"
+          },
+          {
+            "name": "max",
+            "type": "number",
+            "label": "Maximum"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "sale",
+    "type": "collection",
+    "label": "Sale",
+    "spec": [
+      {
+        "name": "lastSaleDate",
+        "type": "collection",
+        "label": "Last sale date",
+        "spec": [
+          {
+            "name": "minDate",
+            "type": "text",
+            "label": "From (YYYY-MM-DD)"
+          },
+          {
+            "name": "maxDate",
+            "type": "text",
+            "label": "To (YYYY-MM-DD)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "owner",
+    "type": "collection",
+    "label": "Owner",
+    "spec": [
+      {
+        "name": "ownerOccupied",
+        "type": "collection",
+        "label": "Owner occupied",
+        "spec": [
+          {
+            "name": "equals",
+            "type": "boolean",
+            "label": "Equals"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "take",
+    "type": "uinteger",
+    "label": "Max results",
+    "default": 25,
+    "validate": {
+      "max": 100
+    },
+    "help": "Up to 100 per run. You are billed per record returned, and a value of 0 is billed as 1 record."
+  },
+  {
+    "name": "skip",
+    "type": "uinteger",
+    "label": "Skip",
+    "help": "Number of records to skip, for paging."
+  }
+]

@@ -1,0 +1,34 @@
+{
+  "baseUrl": "https://api.batchdata.com/api",
+  "headers": {
+    "Authorization": "Bearer {{connection.apiKey}}",
+    "Content-Type": "application/json"
+  },
+  "response": {
+    "error": {
+      "400": {
+        "type": "DataError",
+        "message": "[400] {{ifempty(body.status.message, 'The request was rejected. Check the values you entered.')}}"
+      },
+      "401": {
+        "type": "InvalidAccessTokenError",
+        "message": "Your BatchData API token is invalid or expired. Create a new connection with a valid token."
+      },
+      "403": {
+        "type": "RuntimeError",
+        "message": "Your BatchData API token does not have access to this data. Contact support@batchservice.com to enable it."
+      },
+      "429": {
+        "type": "RateLimitError",
+        "message": "The BatchData rate limit was reached. Wait a moment and try again."
+      },
+      "message": "[{{statusCode}}] {{ifempty(body.status.message, ifempty(body.status.text, 'The BatchData API returned an unexpected error.'))}}",
+      "type": "RuntimeError"
+    }
+  },
+  "log": {
+    "sanitize": [
+      "request.headers.authorization"
+    ]
+  }
+}

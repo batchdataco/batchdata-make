@@ -1,0 +1,36 @@
+[
+  {
+    "label": "Properties",
+    "modules": [
+      "searchProperties",
+      "lookupProperty"
+    ]
+  },
+  {
+    "label": "Owner contact",
+    "modules": [
+      "skipTraceV1",
+      "skipTraceV3"
+    ]
+  },
+  {
+    "label": "Addresses",
+    "modules": [
+      "verifyAddress"
+    ]
+  },
+  {
+    "label": "Phone numbers",
+    "modules": [
+      "verifyPhones",
+      "checkDnc",
+      "checkTcpa"
+    ]
+  },
+  {
+    "label": "Other",
+    "modules": [
+      "makeAnApiCall"
+    ]
+  }
+]

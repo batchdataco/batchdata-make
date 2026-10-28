@@ -1,0 +1,40 @@
+{
+ "status": {
+  "code": 200,
+  "text": "OK"
+ },
+ "results": {
+  "phoneNumbers": [
+   {
+    "carrier": "OMNIPOINT COMMUNICATIONS- INC.",
+    "dnc": false,
+    "notFound": false,
+    "number": "6462467560",
+    "reachable": true,
+    "state": "NY",
+    "tcpa": false,
+    "tested": true,
+    "type": "Mobile",
+    "meta": {
+     "error": false,
+     "matched": true
+    }
+   }
+  ],
+  "meta": {
+   "apiVersion": "2.0",
+   "results": {
+    "requestCount": 1,
+    "matchCount": 1,
+    "noMatchCount": 0,
+    "errorCount": 0
+   },
+   "performance": {
+    "totalRequestTime": 6,
+    "startTime": "2021-10-06T20:45:49.164Z",
+    "endTime": "2021-10-06T20:45:49.170Z"
+   },
+   "requestId": "OATS6vACiiIxFlT"
+  }
+ }
+}

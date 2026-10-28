@@ -1,0 +1,61 @@
+{
+ "status": {
+  "code": 200,
+  "text": "OK"
+ },
+ "results": {
+  "addresses": [
+   {
+    "street": "2800 N 24th St",
+    "city": "Phoenix",
+    "state": "AZ",
+    "zip": "85008",
+    "county": "Maricopa",
+    "hash": "90a01b18e3834e349a8d1d07d7e086ba",
+    "latitude": 33.47865,
+    "longitude": -112.03029,
+    "geoLocation": [
+     33.47865,
+     -112.03029
+    ],
+    "requestId": 0,
+    "formattedStreet": "N 24th St",
+    "streetNoUnit": "2800 N 24th St",
+    "meta": {
+     "error": false,
+     "normalized": true,
+     "hashed": true
+    },
+    "houseNumber": "2800",
+    "zipPlus4": "1049",
+    "vacant": "No",
+    "countyFipsCode": "04013",
+    "carrierRoute": "C009",
+    "congressionalDistrict": "07",
+    "timeZone": "Mountain",
+    "utcOffset": -7,
+    "daylightSavingsTime": false,
+    "dpvMatchCode": "D",
+    "dpvFootnotes": "AAN1",
+    "footnotes": "B#H#"
+   }
+  ],
+  "meta": {
+   "apiVersion": "2.0",
+   "results": {
+    "requestCount": 1,
+    "normalizedCount": 1,
+    "notNormalizedCount": 0,
+    "hashedCount": 1,
+    "notHashedCount": 0,
+    "errorCount": 0
+   },
+   "performance": {
+    "totalRequestTime": 278,
+    "startTime": "2021-10-06T20:28:23.617Z",
+    "endTime": "2021-10-06T20:28:23.895Z"
+   },
+   "requestId": "M2CiaQam0XxT64K"
+  }
+ }
+}

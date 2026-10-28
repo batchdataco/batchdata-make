@@ -1,0 +1,19 @@
+{
+  "url": "/{{if(contains(lower(parameters.url), 'wallet'), 'blocked/not-available', trim(parameters.url))}}",
+  "method": "{{parameters.method}}",
+  "headers": {
+    "{{...}}": "{{toCollection(parameters.headers, 'key', 'value')}}"
+  },
+  "qs": {
+    "{{...}}": "{{toCollection(parameters.qs, 'key', 'value')}}"
+  },
+  "body": "{{parameters.body}}",
+  "type": "json",
+  "response": {
+    "output": {
+      "statusCode": "{{statusCode}}",
+      "headers": "{{headers}}",
+      "body": "{{body}}"
+    }
+  }
+}

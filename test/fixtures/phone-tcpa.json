@@ -1,0 +1,41 @@
+{
+ "status": {
+  "code": 200,
+  "text": "OK"
+ },
+ "results": {
+  "phoneNumbers": [
+   {
+    "number": "2024561111",
+    "tcpa": false,
+    "meta": {
+     "error": false,
+     "matched": false
+    }
+   },
+   {
+    "number": "6027828692",
+    "tcpa": true,
+    "meta": {
+     "error": false,
+     "matched": true
+    }
+   }
+  ],
+  "meta": {
+   "apiVersion": "2.15.4",
+   "results": {
+    "requestCount": 2,
+    "matchCount": 1,
+    "noMatchCount": 1,
+    "errorCount": 0
+   },
+   "performance": {
+    "totalRequestTime": 7,
+    "startTime": "2022-07-13T09:38:02.738Z",
+    "endTime": "2022-07-13T09:38:02.745Z"
+   },
+   "requestId": "z5JmWWXdNT18vMV"
+  }
+ }
+}

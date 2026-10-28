@@ -1,0 +1,168 @@
+{
+  "input": {
+    "propertyAddress": {
+      "street": "1011 Rosegold St",
+      "city": "Franklin Square",
+      "state": "NY",
+      "zip": "11010"
+    }
+  },
+  "property": {
+    "id": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
+    "address": {
+      "hash": "b7bd4cea51b26af459febfbf822c99e2",
+      "addressValidity": "Valid",
+      "fullAddress": "1011 Rosegold St, Franklin Square, NY 11010-2507",
+      "street": "1011 Rosegold St",
+      "city": "Franklin Square",
+      "county": "Nassau",
+      "state": "NY",
+      "zip": "11010",
+      "zipPlus4": "2507"
+    },
+    "mailingAddress": {
+      "hash": "b7bd4cea51b26af459febfbf822c99e2",
+      "addressValidity": "Valid",
+      "fullAddress": "1011 Rosegold St, Franklin Square, NY 11010-2507",
+      "street": "1011 Rosegold St",
+      "city": "Franklin Square",
+      "county": "Nassau",
+      "state": "NY",
+      "zip": "11010",
+      "zipPlus4": "2507"
+    },
+    "owners": [
+      {
+        "name": {
+          "first": "John",
+          "last": "Doe",
+          "full": "John Doe",
+          "akas": [
+            {
+              "first": "John",
+              "middle": "Quinn",
+              "last": "Doe",
+              "full": "John Quinn Doe",
+              "rank": 2
+            },
+            {
+              "first": "Jhon",
+              "last": "Doe",
+              "full": "Jhon Doe",
+              "rank": 3
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "persons": [
+    {
+      "propertyOwner": true,
+      "name": {
+        "first": "John",
+        "last": "Doe",
+        "full": "John Doe",
+        "akas": [
+          {
+            "first": "John",
+            "middle": "Quinn",
+            "last": "Doe",
+            "full": "John Quinn Doe",
+            "rank": 2
+          },
+          {
+            "first": "Jhon",
+            "last": "Doe",
+            "full": "Jhon Doe",
+            "rank": 3
+          }
+        ]
+      },
+      "addresses": [
+        {
+          "hash": "b7bd4cea51b26af459febfbf822c99e2",
+          "addressValidity": "Valid",
+          "fullAddress": "1011 Rosegold St, Franklin Square, NY 11010-2507",
+          "street": "1011 Rosegold St",
+          "city": "Franklin Square",
+          "county": "Nassau",
+          "state": "NY",
+          "zip": "11010",
+          "zipPlus4": "2507",
+          "rank": 1,
+          "propertyMailingAddress": true
+        },
+        {
+          "hash": "c8ce5dfa62c37bg560gfcgcg933da0f3",
+          "addressValidity": "Valid",
+          "fullAddress": "500 Maple Ave, Hempstead, NY 11550-3210",
+          "street": "500 Maple Ave",
+          "city": "Hempstead",
+          "county": "Nassau",
+          "state": "NY",
+          "zip": "11550",
+          "zipPlus4": "3210",
+          "rank": 2,
+          "propertyMailingAddress": false
+        }
+      ],
+      "phones": [
+        {
+          "rank": 1,
+          "number": "1112223333",
+          "type": "Mobile",
+          "carrier": "OMNIPOINT COMMUNICATIONS- INC.",
+          "tested": true,
+          "reachable": true,
+          "dnc": false,
+          "tcpa": false
+        },
+        {
+          "rank": 2,
+          "number": "4445556666",
+          "type": "Land Line",
+          "carrier": "VERIZON NEW YORK- INC.",
+          "tested": false,
+          "reachable": false,
+          "dnc": false,
+          "tcpa": false
+        },
+        {
+          "rank": 3,
+          "number": "7778889999",
+          "type": "Land Line",
+          "carrier": "VERIZON NEW YORK- INC.",
+          "tested": true,
+          "reachable": true,
+          "dnc": true,
+          "tcpa": false
+        },
+        {
+          "rank": 4,
+          "number": "1011121314",
+          "type": "Land Line",
+          "carrier": "VERIZON NEW YORK- INC.",
+          "tested": true,
+          "reachable": true,
+          "dnc": false,
+          "tcpa": true
+        }
+      ],
+      "emails": [
+        {
+          "rank": 1,
+          "email": "johndoe@gmail.net",
+          "tested": true
+        }
+      ],
+      "litigator": false,
+      "deceased": false,
+      "dob": "1985-07-21T00:00:00.000Z"
+    }
+  ],
+  "meta": {
+    "matched": true,
+    "error": false
+  }
+}

@@ -1,0 +1,196 @@
+{
+  "fileVersion": 1,
+  "generalCodeFiles": {
+    "base": "general/base.iml.json",
+    "common": "general/common.json",
+    "readme": "README.md",
+    "groups": "modules/groups.json"
+  },
+  "components": {
+    "connection": {
+      "batchdata": {
+        "label": "BatchData",
+        "codeFiles": {
+          "communication": "connections/batchdata/batchdata.communication.iml.json",
+          "params": "connections/batchdata/batchdata.params.iml.json"
+        }
+      }
+    },
+    "module": {
+      "searchProperties": {
+        "moduleType": "search",
+        "label": "Search Properties",
+        "description": "Finds properties that match your filters. Billed per record returned. A Max results value of 0 is billed as 1 record. One call returns at most 100 records.",
+        "actionCrud": "read",
+        "connection": "batchdata",
+        "codeFiles": {
+          "communication": "modules/searchProperties/searchProperties.communication.iml.json",
+          "mappableParams": "modules/searchProperties/searchProperties.mappable-params.iml.json",
+          "interface": "modules/searchProperties/searchProperties.interface.iml.json",
+          "samples": "modules/searchProperties/searchProperties.samples.iml.json"
+        }
+      },
+      "lookupProperty": {
+        "moduleType": "action",
+        "label": "Get Property Details",
+        "description": "Returns property data for one address or identifier. Billed per matched property. Skip trace, if included, is billed separately.",
+        "actionCrud": "read",
+        "connection": "batchdata",
+        "codeFiles": {
+          "communication": "modules/lookupProperty/lookupProperty.communication.iml.json",
+          "mappableParams": "modules/lookupProperty/lookupProperty.mappable-params.iml.json",
+          "interface": "modules/lookupProperty/lookupProperty.interface.iml.json",
+          "samples": "modules/lookupProperty/lookupProperty.samples.iml.json"
+        }
+      },
+      "skipTraceV1": {
+        "moduleType": "search",
+        "label": "Skip Trace Owner (V1)",
+        "description": "Finds owner contact details for a property, one result per person. Billed per matched property. Phone numbers flagged as TCPA litigators are removed unless you turn that option on. Results are data only. You are responsible for TCPA and Do Not Call compliance.",
+        "actionCrud": "read",
+        "connection": "batchdata",
+        "codeFiles": {
+          "communication": "modules/skipTraceV1/skipTraceV1.communication.iml.json",
+          "mappableParams": "modules/skipTraceV1/skipTraceV1.mappable-params.iml.json",
+          "interface": "modules/skipTraceV1/skipTraceV1.interface.iml.json",
+          "samples": "modules/skipTraceV1/skipTraceV1.samples.iml.json"
+        }
+      },
+      "skipTraceV3": {
+        "moduleType": "search",
+        "label": "Skip Trace Owner (V3)",
+        "description": "Finds owner contact details using the V3 skip trace, one result per property with a list of persons. Billed per matched property. Phone numbers flagged as TCPA litigators are removed unless you turn that option on. Results are data only. You are responsible for TCPA and Do Not Call compliance.",
+        "actionCrud": "read",
+        "connection": "batchdata",
+        "codeFiles": {
+          "communication": "modules/skipTraceV3/skipTraceV3.communication.iml.json",
+          "mappableParams": "modules/skipTraceV3/skipTraceV3.mappable-params.iml.json",
+          "interface": "modules/skipTraceV3/skipTraceV3.interface.iml.json",
+          "samples": "modules/skipTraceV3/skipTraceV3.samples.iml.json"
+        }
+      },
+      "verifyAddress": {
+        "moduleType": "action",
+        "label": "Verify Address",
+        "description": "Standardizes and validates one US address. Billed per address.",
+        "actionCrud": "read",
+        "connection": "batchdata",
+        "codeFiles": {
+          "communication": "modules/verifyAddress/verifyAddress.communication.iml.json",
+          "mappableParams": "modules/verifyAddress/verifyAddress.mappable-params.iml.json",
+          "interface": "modules/verifyAddress/verifyAddress.interface.iml.json",
+          "samples": "modules/verifyAddress/verifyAddress.samples.iml.json"
+        }
+      },
+      "verifyPhones": {
+        "moduleType": "search",
+        "label": "Verify Phone Numbers",
+        "description": "Checks whether phone numbers are reachable and returns carrier, DNC and TCPA flags, one result per number. Billed per phone number. Results are data only. You are responsible for TCPA and Do Not Call compliance.",
+        "actionCrud": "read",
+        "connection": "batchdata",
+        "codeFiles": {
+          "communication": "modules/verifyPhones/verifyPhones.communication.iml.json",
+          "mappableParams": "modules/verifyPhones/verifyPhones.mappable-params.iml.json",
+          "interface": "modules/verifyPhones/verifyPhones.interface.iml.json",
+          "samples": "modules/verifyPhones/verifyPhones.samples.iml.json"
+        }
+      },
+      "checkDnc": {
+        "moduleType": "search",
+        "label": "Check Do Not Call",
+        "description": "Checks phone numbers against the Do Not Call registry, one result per number. Billed per phone number. Results are data only. You are responsible for TCPA and Do Not Call compliance.",
+        "actionCrud": "read",
+        "connection": "batchdata",
+        "codeFiles": {
+          "communication": "modules/checkDnc/checkDnc.communication.iml.json",
+          "mappableParams": "modules/checkDnc/checkDnc.mappable-params.iml.json",
+          "interface": "modules/checkDnc/checkDnc.interface.iml.json",
+          "samples": "modules/checkDnc/checkDnc.samples.iml.json"
+        }
+      },
+      "checkTcpa": {
+        "moduleType": "search",
+        "label": "Check TCPA Litigator",
+        "description": "Checks phone numbers against the TCPA litigator list, one result per number. Billed per phone number. Results are data only. You are responsible for TCPA and Do Not Call compliance.",
+        "actionCrud": "read",
+        "connection": "batchdata",
+        "codeFiles": {
+          "communication": "modules/checkTcpa/checkTcpa.communication.iml.json",
+          "mappableParams": "modules/checkTcpa/checkTcpa.mappable-params.iml.json",
+          "interface": "modules/checkTcpa/checkTcpa.interface.iml.json",
+          "samples": "modules/checkTcpa/checkTcpa.samples.iml.json"
+        }
+      },
+      "makeAnApiCall": {
+        "moduleType": "universal",
+        "label": "Make an API Call",
+        "description": "Performs an authorized call to any BatchData API path. Billing follows the endpoint you call. Account balance (wallet) endpoints are not available.",
+        "connection": "batchdata",
+        "codeFiles": {
+          "communication": "modules/makeAnApiCall/makeAnApiCall.communication.iml.json",
+          "mappableParams": "modules/makeAnApiCall/makeAnApiCall.mappable-params.iml.json",
+          "interface": "modules/makeAnApiCall/makeAnApiCall.interface.iml.json",
+          "samples": "modules/makeAnApiCall/makeAnApiCall.samples.iml.json"
+        }
+      }
+    }
+  },
+  "origins": [
+    {
+      "label": "Make (set your zone)",
+      "baseUrl": "https://eu1.make.com/api",
+      "appId": "batchdata",
+      "appVersion": 1,
+      "apikeyFile": ".secrets/apikey",
+      "idMapping": {
+        "connection": [
+          {
+            "local": "batchdata",
+            "remote": "batchdata"
+          }
+        ],
+        "module": [
+          {
+            "local": "searchProperties",
+            "remote": "searchProperties"
+          },
+          {
+            "local": "lookupProperty",
+            "remote": "lookupProperty"
+          },
+          {
+            "local": "skipTraceV1",
+            "remote": "skipTraceV1"
+          },
+          {
+            "local": "skipTraceV3",
+            "remote": "skipTraceV3"
+          },
+          {
+            "local": "verifyAddress",
+            "remote": "verifyAddress"
+          },
+          {
+            "local": "verifyPhones",
+            "remote": "verifyPhones"
+          },
+          {
+            "local": "checkDnc",
+            "remote": "checkDnc"
+          },
+          {
+            "local": "checkTcpa",
+            "remote": "checkTcpa"
+          },
+          {
+            "local": "makeAnApiCall",
+            "remote": "makeAnApiCall"
+          }
+        ],
+        "function": [],
+        "rpc": [],
+        "webhook": []
+      }
+    }
+  ]
+}

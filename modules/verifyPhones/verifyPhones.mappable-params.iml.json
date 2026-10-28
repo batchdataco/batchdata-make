@@ -1,0 +1,13 @@
+[
+  {
+    "name": "phoneNumbers",
+    "type": "array",
+    "label": "Phone numbers",
+    "required": true,
+    "help": "One number per item, for example 4805550123. You are billed per phone number.",
+    "spec": {
+      "type": "text",
+      "label": "Phone number"
+    }
+  }
+]

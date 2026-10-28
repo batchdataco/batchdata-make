@@ -1,0 +1,155 @@
+[
+  {
+    "name": "identifyBy",
+    "type": "select",
+    "label": "Identify property by",
+    "required": true,
+    "default": "address",
+    "options": [
+      {
+        "label": "Address",
+        "value": "address"
+      },
+      {
+        "label": "Property ID",
+        "value": "propertyId"
+      },
+      {
+        "label": "Address hash",
+        "value": "hash"
+      },
+      {
+        "label": "APN and county FIPS code",
+        "value": "apn"
+      }
+    ],
+    "help": "Only the identifier chosen here is sent. The other identifier fields are ignored."
+  },
+  {
+    "name": "address",
+    "type": "collection",
+    "label": "Address",
+    "spec": [
+      {
+        "name": "street",
+        "type": "text",
+        "label": "Street"
+      },
+      {
+        "name": "city",
+        "type": "text",
+        "label": "City"
+      },
+      {
+        "name": "state",
+        "type": "text",
+        "label": "State",
+        "help": "Two-letter state code, for example AZ."
+      },
+      {
+        "name": "zip",
+        "type": "text",
+        "label": "ZIP code"
+      }
+    ]
+  },
+  {
+    "name": "propertyId",
+    "type": "text",
+    "label": "Property ID"
+  },
+  {
+    "name": "hash",
+    "type": "text",
+    "label": "Address hash"
+  },
+  {
+    "name": "apn",
+    "type": "text",
+    "label": "APN"
+  },
+  {
+    "name": "countyFipsCode",
+    "type": "text",
+    "label": "County FIPS code"
+  },
+  {
+    "name": "datasets",
+    "type": "array",
+    "label": "Datasets",
+    "help": "Extra data to include. \"basic\" and \"core\" cannot be combined. Leave empty for the default set.",
+    "spec": {
+      "type": "select",
+      "options": [
+        {
+          "label": "basic",
+          "value": "basic"
+        },
+        {
+          "label": "comps",
+          "value": "comps"
+        },
+        {
+          "label": "batchrank",
+          "value": "batchrank"
+        },
+        {
+          "label": "contact",
+          "value": "contact"
+        },
+        {
+          "label": "core",
+          "value": "core"
+        },
+        {
+          "label": "deed",
+          "value": "deed"
+        },
+        {
+          "label": "demographic",
+          "value": "demographic"
+        },
+        {
+          "label": "foreclosure",
+          "value": "foreclosure"
+        },
+        {
+          "label": "listing",
+          "value": "listing"
+        },
+        {
+          "label": "mortgage-liens",
+          "value": "mortgage-liens"
+        },
+        {
+          "label": "owner",
+          "value": "owner"
+        },
+        {
+          "label": "permit",
+          "value": "permit"
+        },
+        {
+          "label": "quicklist",
+          "value": "quicklist"
+        },
+        {
+          "label": "valuation",
+          "value": "valuation"
+        }
+      ]
+    }
+  },
+  {
+    "name": "includeSkipTrace",
+    "type": "boolean",
+    "label": "Include skip trace",
+    "help": "Skip trace is billed separately for each matched record."
+  },
+  {
+    "name": "requestId",
+    "type": "text",
+    "label": "Request ID",
+    "help": "Optional value returned with the result so you can match it later."
+  }
+]

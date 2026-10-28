@@ -1,0 +1,33 @@
+{
+  "url": "https://api.batchdata.com/api/v1/address/verify",
+  "method": "POST",
+  "headers": {
+    "Authorization": "Bearer {{parameters.apiKey}}",
+    "Content-Type": "application/json"
+  },
+  "body": {
+    "requests": []
+  },
+  "response": {
+    "valid": "{{statusCode == 400 || (statusCode >= 200 && statusCode < 300)}}",
+    "data": {
+      "apiKey": "{{parameters.apiKey}}"
+    },
+    "error": {
+      "401": {
+        "type": "InvalidAccessTokenError",
+        "message": "Invalid API token. Copy a fresh token from your BatchData account."
+      },
+      "403": {
+        "type": "RuntimeError",
+        "message": "This token cannot use the BatchData API. Contact support@batchservice.com."
+      },
+      "message": "[{{statusCode}}] {{ifempty(body.status.message, 'Could not verify the API token.')}}"
+    }
+  },
+  "log": {
+    "sanitize": [
+      "request.headers.authorization"
+    ]
+  }
+}

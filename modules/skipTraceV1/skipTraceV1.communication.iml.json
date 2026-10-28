@@ -1,0 +1,26 @@
+{
+  "url": "/v1/property/skip-trace",
+  "method": "POST",
+  "body": {
+    "requests": [
+      {
+        "propertyAddress": "{{if(parameters.findBy == 'address', parameters.propertyAddress, undefined)}}",
+        "apn": "{{if(parameters.findBy == 'apn', ifempty(parameters.apn, undefined), undefined)}}",
+        "countyFipsCode": "{{if(parameters.findBy == 'apn', ifempty(parameters.countyFipsCode, undefined), undefined)}}",
+        "county": "{{if(parameters.findBy == 'apn', ifempty(parameters.county, undefined), undefined)}}",
+        "state": "{{if(parameters.findBy == 'apn', ifempty(parameters.state, undefined), undefined)}}",
+        "name": "{{ifempty(parameters.name, undefined)}}",
+        "mailingAddress": "{{ifempty(parameters.mailingAddress, undefined)}}",
+        "requestId": "{{ifempty(parameters.requestId, undefined)}}"
+      }
+    ],
+    "options": {
+      "includeTCPABlacklistedPhones": "{{if(parameters.includeTcpaFlaggedPhones == true, true, false)}}",
+      "prioritizeMobilePhones": "{{ifempty(parameters.prioritizeMobilePhones, undefined)}}"
+    }
+  },
+  "response": {
+    "iterate": "{{body.results.persons}}",
+    "output": "{{item}}"
+  }
+}

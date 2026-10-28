@@ -1,0 +1,147 @@
+[
+  {
+    "name": "street",
+    "type": "text",
+    "label": "Street"
+  },
+  {
+    "name": "city",
+    "type": "text",
+    "label": "City"
+  },
+  {
+    "name": "state",
+    "type": "text",
+    "label": "State"
+  },
+  {
+    "name": "zip",
+    "type": "text",
+    "label": "Zip"
+  },
+  {
+    "name": "county",
+    "type": "text",
+    "label": "County"
+  },
+  {
+    "name": "hash",
+    "type": "text",
+    "label": "Hash"
+  },
+  {
+    "name": "latitude",
+    "type": "number",
+    "label": "Latitude"
+  },
+  {
+    "name": "longitude",
+    "type": "number",
+    "label": "Longitude"
+  },
+  {
+    "name": "geoLocation",
+    "type": "array",
+    "label": "Geo location",
+    "spec": {
+      "type": "number"
+    }
+  },
+  {
+    "name": "requestId",
+    "type": "number",
+    "label": "Request id"
+  },
+  {
+    "name": "formattedStreet",
+    "type": "text",
+    "label": "Formatted street"
+  },
+  {
+    "name": "streetNoUnit",
+    "type": "text",
+    "label": "Street no unit"
+  },
+  {
+    "name": "meta",
+    "type": "collection",
+    "label": "Meta",
+    "spec": [
+      {
+        "name": "error",
+        "type": "boolean",
+        "label": "Error"
+      },
+      {
+        "name": "normalized",
+        "type": "boolean",
+        "label": "Normalized"
+      },
+      {
+        "name": "hashed",
+        "type": "boolean",
+        "label": "Hashed"
+      }
+    ]
+  },
+  {
+    "name": "houseNumber",
+    "type": "text",
+    "label": "House number"
+  },
+  {
+    "name": "zipPlus4",
+    "type": "text",
+    "label": "Zip plus4"
+  },
+  {
+    "name": "vacant",
+    "type": "text",
+    "label": "Vacant"
+  },
+  {
+    "name": "countyFipsCode",
+    "type": "text",
+    "label": "County fips code"
+  },
+  {
+    "name": "carrierRoute",
+    "type": "text",
+    "label": "Carrier route"
+  },
+  {
+    "name": "congressionalDistrict",
+    "type": "text",
+    "label": "Congressional district"
+  },
+  {
+    "name": "timeZone",
+    "type": "text",
+    "label": "Time zone"
+  },
+  {
+    "name": "utcOffset",
+    "type": "number",
+    "label": "Utc offset"
+  },
+  {
+    "name": "daylightSavingsTime",
+    "type": "boolean",
+    "label": "Daylight savings time"
+  },
+  {
+    "name": "dpvMatchCode",
+    "type": "text",
+    "label": "Dpv match code"
+  },
+  {
+    "name": "dpvFootnotes",
+    "type": "text",
+    "label": "Dpv footnotes"
+  },
+  {
+    "name": "footnotes",
+    "type": "text",
+    "label": "Footnotes"
+  }
+]
