@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import { root, write, toInterface } from './lib.mjs';
 import * as P from './params.mjs';
+import { catalogModules, catalogGroups, webhooks, rpcs } from './catalog-modules.mjs';
 
 const fx = (n) => JSON.parse(fs.readFileSync(`${root}/../fixtures/${n}.json`, 'utf8'));
 const ue = (e) => `ifempty(${e}, undefined)`;
@@ -38,6 +39,20 @@ const skipBody = (path, iterate) => ({
   },
   response: { iterate, output: '{{item}}' },
 });
+
+// Blocks account-balance (wallet) paths, asynchronous callback endpoints, path tricks and monitor
+// creation. The same rules exist in the Zapier and n8n integrations (catalog apiRequest.guard).
+const lc = 'lower(parameters.url)';
+const API_GUARD = [
+  `contains(${lc}, 'wallet')`,
+  `contains(${lc}, 'async')`,
+  `contains(${lc}, '..')`,
+  `contains(${lc}, '%')`,
+  `contains(${lc}, '?')`,
+  `contains(${lc}, '://')`,
+  `contains(lower(ifempty(parameters.body, '')), 'webhook')`,
+  `(contains(${lc}, 'property-subscription') && (parameters.method == 'POST' || parameters.method == 'PUT' || parameters.method == 'PATCH'))`,
+].join(' || ');
 
 const modules = {
   searchProperties: {
@@ -161,13 +176,13 @@ const modules = {
   makeAnApiCall: {
     moduleType: 'universal',
     label: 'Make an API Call',
-    description: 'Performs an authorized call to any BatchData API path. Billing follows the endpoint you call. Account balance (wallet) endpoints are not available.',
+    description: 'Performs an authorized call to any BatchData API path. Billing follows the endpoint you call. Account balance (wallet) endpoints, asynchronous (callback) endpoints and monitor creation are not available here; use the dedicated modules for those.',
     communication: {
-      url: "/{{if(contains(lower(parameters.url), 'wallet'), 'blocked/not-available', trim(parameters.url))}}",
+      url: `/{{if(${API_GUARD}, 'blocked/not-available', trim(parameters.url))}}`,
       method: '{{parameters.method}}',
       headers: { '{{...}}': "{{toCollection(parameters.headers, 'key', 'value')}}" },
       qs: { '{{...}}': "{{toCollection(parameters.qs, 'key', 'value')}}" },
-      body: '{{parameters.body}}',
+      body: "{{if(length(ifempty(parameters.body, '')) > 0, parseJSON(parameters.body), undefined)}}",
       type: 'json',
       response: { output: { statusCode: '{{statusCode}}', headers: '{{headers}}', body: '{{body}}' } },
     },
@@ -176,27 +191,40 @@ const modules = {
   },
 };
 
-const groups = [
+Object.assign(modules, catalogModules);
+
+const baseGroups = [
   { label: 'Properties', modules: ['searchProperties', 'lookupProperty'] },
   { label: 'Owner contact', modules: ['skipTraceV1', 'skipTraceV3'] },
   { label: 'Addresses', modules: ['verifyAddress'] },
   { label: 'Phone numbers', modules: ['verifyPhones', 'checkDnc', 'checkTcpa'] },
   { label: 'Other', modules: ['makeAnApiCall'] },
 ];
+// Same-named groups are merged; the generic API call stays last.
+const groups = [];
+for (const g of [...baseGroups.filter((x) => x.label !== 'Other'), ...catalogGroups, ...baseGroups.filter((x) => x.label === 'Other')]) {
+  const hit = groups.find((x) => x.label === g.label);
+  if (hit) hit.modules.push(...g.modules);
+  else groups.push({ label: g.label, modules: [...g.modules] });
+}
 
 const moduleComponents = {};
 const idMap = [];
 for (const [key, m] of Object.entries(modules)) {
   const dir = `modules/${key}/${key}`;
-  const files = {
-    communication: `${dir}.communication.iml.json`,
-    mappableParams: `${dir}.mappable-params.iml.json`,
-    interface: `${dir}.interface.iml.json`,
-    samples: `${dir}.samples.iml.json`,
-  };
+  const isTrigger = m.moduleType.includes('trigger');
+  const files = { communication: `${dir}.communication.iml.json` };
+  if (isTrigger) {
+    if (m.moduleType === 'trigger') files.staticParams = `${dir}.static-params.iml.json`;
+  } else {
+    files.mappableParams = `${dir}.mappable-params.iml.json`;
+  }
+  files.interface = `${dir}.interface.iml.json`;
+  files.samples = `${dir}.samples.iml.json`;
   const sample = m.sampleFrom();
   write(files.communication, m.communication);
-  write(files.mappableParams, m.params);
+  if (files.mappableParams) write(files.mappableParams, m.params);
+  if (files.staticParams) write(files.staticParams, m.staticParams ?? []);
   write(files.samples, sample);
   write(
     files.interface,
@@ -212,11 +240,41 @@ for (const [key, m] of Object.entries(modules)) {
     moduleType: m.moduleType,
     label: m.label,
     description: m.description,
-    ...(m.moduleType === 'universal' ? {} : { actionCrud: 'read' }),
+    ...(m.moduleType === 'universal' || isTrigger ? {} : { actionCrud: m.actionCrud ?? 'read' }),
     connection: 'batchdata',
+    ...(m.webhook ? { webhook: m.webhook } : {}),
     codeFiles: files,
   };
   idMap.push({ local: key, remote: key });
+}
+
+const webhookComponents = {};
+const webhookIdMap = [];
+for (const [key, w] of Object.entries(webhooks)) {
+  const dir = `webhooks/${key}/${key}`;
+  const files = {
+    communication: `${dir}.communication.iml.json`,
+    params: `${dir}.params.iml.json`,
+    attach: `${dir}.attach.iml.json`,
+    detach: `${dir}.detach.iml.json`,
+  };
+  write(files.communication, w.communication);
+  write(files.params, w.params);
+  write(files.attach, w.attach);
+  write(files.detach, w.detach);
+  webhookComponents[key] = { label: w.label, webhookType: w.webhookType, connection: 'batchdata', codeFiles: files };
+  webhookIdMap.push({ local: key, remote: key });
+}
+
+const rpcComponents = {};
+const rpcIdMap = [];
+for (const [key, r] of Object.entries(rpcs)) {
+  const dir = `rpcs/${key}/${key}`;
+  const files = { communication: `${dir}.communication.iml.json`, params: `${dir}.params.iml.json` };
+  write(files.communication, r.communication);
+  write(files.params, r.params);
+  rpcComponents[key] = { label: r.label, connection: 'batchdata', codeFiles: files };
+  rpcIdMap.push({ local: key, remote: key });
 }
 
 write('modules/groups.json', groups);
@@ -282,6 +340,8 @@ write('makecomapp.json', {
       },
     },
     module: moduleComponents,
+    webhook: webhookComponents,
+    rpc: rpcComponents,
   },
   origins: [
     {
@@ -294,8 +354,8 @@ write('makecomapp.json', {
         connection: [{ local: 'batchdata', remote: 'batchdata' }],
         module: idMap,
         function: [],
-        rpc: [],
-        webhook: [],
+        rpc: rpcIdMap,
+        webhook: webhookIdMap,
       },
     },
   ],

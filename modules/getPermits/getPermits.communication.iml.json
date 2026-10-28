@@ -1,0 +1,29 @@
+{
+  "url": "/v2/property/get-property-permits",
+  "method": "POST",
+  "body": {
+    "request": {
+      "address": "{{ifempty(parameters.address, undefined)}}",
+      "status": "{{ifempty(parameters.status, undefined)}}",
+      "type": "{{ifempty(parameters.type, undefined)}}",
+      "description": "{{ifempty(parameters.description, undefined)}}",
+      "allTags": "{{ifempty(parameters.allTags, undefined)}}",
+      "issueDate": "{{ifempty(parameters.issueDate, undefined)}}",
+      "jobValue": "{{ifempty(parameters.jobValue, undefined)}}",
+      "propertyId": "{{ifempty(parameters.propertyId, undefined)}}",
+      "apn": "{{ifempty(parameters.apn, undefined)}}",
+      "countyFipsCode": "{{ifempty(parameters.countyFipsCode, undefined)}}"
+    },
+    "options": {
+      "take": "{{ifempty(parameters.take, 25)}}"
+    }
+  },
+  "response": {
+    "iterate": "{{body.result.permits}}",
+    "output": {
+      "{{...}}": "{{item}}",
+      "property": "{{body.result.property}}",
+      "searchMeta": "{{body.result.meta.results}}"
+    }
+  }
+}

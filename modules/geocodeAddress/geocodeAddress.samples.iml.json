@@ -1,0 +1,15 @@
+{
+  "street": "2800 N 24th St",
+  "city": "Phoenix",
+  "county": "Maricopa",
+  "state": "AZ",
+  "zip": "85008",
+  "fullAddress": "2800 N 24th St, Phoenix, Maricopa, AZ, 85008",
+  "latitude": 33.478332,
+  "longitude": -112.030474,
+  "geoStatus": "Rooftop",
+  "meta": {
+    "error": false,
+    "geocoded": true
+  }
+}

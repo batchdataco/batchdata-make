@@ -1,0 +1,23 @@
+{
+  "url": "/v2/investor/properties",
+  "method": "POST",
+  "body": {
+    "searchCriteria": {
+      "investorId": "{{parameters.investorId}}",
+      "ownership": "{{ifempty(parameters.ownership, undefined)}}",
+      "includeChildEntities": "{{if(parameters.includeChildEntities == true, true, undefined)}}"
+    },
+    "options": {
+      "take": "{{ifempty(parameters.take, 25)}}",
+      "pageCursor": "{{ifempty(parameters.pageCursor, undefined)}}"
+    }
+  },
+  "response": {
+    "iterate": "{{body.result.properties}}",
+    "output": {
+      "{{...}}": "{{item}}",
+      "resultsFound": "{{body.result.resultsFound}}",
+      "nextPageCursor": "{{body.result.nextPageCursor}}"
+    }
+  }
+}

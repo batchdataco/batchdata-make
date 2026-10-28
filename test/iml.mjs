@@ -10,6 +10,9 @@ const fns = {
   lower: (s) => String(s ?? '').toLowerCase(),
   trim: (s) => String(s ?? '').trim(),
   contains: (s, x) => (s ?? '').includes(x),
+  replace: (s, a, b) => String(s ?? '').split(a).join(b),
+  formatDate: (d) => (d ? new Date(d).toISOString().slice(0, 10) : undefined),
+  parseJSON: (s) => (s === undefined || s === null || s === '' ? undefined : JSON.parse(s)),
   toCollection: (arr, k, v) => Object.fromEntries((arr || []).map((e) => [e[k], e[v]])),
 };
 

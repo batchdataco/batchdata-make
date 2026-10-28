@@ -1,0 +1,17 @@
+{
+  "url": "/v1/address/reverse-geocode",
+  "method": "POST",
+  "body": {
+    "request": {
+      "latitude": "{{ifempty(parameters.latitude, undefined)}}",
+      "longitude": "{{ifempty(parameters.longitude, undefined)}}"
+    },
+    "options": {
+      "showPropertyOnly": "{{if(parameters.propertyOnly == true, true, undefined)}}"
+    }
+  },
+  "response": {
+    "iterate": "{{body.result.addresses}}",
+    "output": "{{item}}"
+  }
+}

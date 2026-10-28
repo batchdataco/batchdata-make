@@ -1,0 +1,14 @@
+{
+  "url": "/v1/address/verify",
+  "method": "POST",
+  "body": {
+    "requests": "{{parameters.addresses}}"
+  },
+  "response": {
+    "output": {
+      "addresses": "{{body.results.addresses}}",
+      "requestCount": "{{body.results.meta.results.requestCount}}",
+      "normalizedCount": "{{body.results.meta.results.normalizedCount}}"
+    }
+  }
+}

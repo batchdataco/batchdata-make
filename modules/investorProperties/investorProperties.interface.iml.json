@@ -1,0 +1,81 @@
+[
+  {
+    "name": "propertyId",
+    "type": "text",
+    "label": "Property id"
+  },
+  {
+    "name": "address",
+    "type": "collection",
+    "label": "Address",
+    "spec": [
+      {
+        "name": "street",
+        "type": "text",
+        "label": "Street"
+      },
+      {
+        "name": "city",
+        "type": "text",
+        "label": "City"
+      },
+      {
+        "name": "state",
+        "type": "text",
+        "label": "State"
+      },
+      {
+        "name": "zip",
+        "type": "text",
+        "label": "Zip"
+      },
+      {
+        "name": "latitude",
+        "type": "number",
+        "label": "Latitude"
+      },
+      {
+        "name": "longitude",
+        "type": "number",
+        "label": "Longitude"
+      }
+    ]
+  },
+  {
+    "name": "fips",
+    "type": "text",
+    "label": "Fips"
+  },
+  {
+    "name": "apn",
+    "type": "text",
+    "label": "Apn"
+  },
+  {
+    "name": "ownership",
+    "type": "collection",
+    "label": "Ownership",
+    "spec": [
+      {
+        "name": "isCurrentOwner",
+        "type": "boolean",
+        "label": "Is current owner"
+      },
+      {
+        "name": "isPreviousOwner",
+        "type": "boolean",
+        "label": "Is previous owner"
+      }
+    ]
+  },
+  {
+    "name": "resultsFound",
+    "type": "number",
+    "label": "Results found"
+  },
+  {
+    "name": "nextPageCursor",
+    "type": "text",
+    "label": "Next page cursor"
+  }
+]

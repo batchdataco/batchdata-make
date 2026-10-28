@@ -1,0 +1,67 @@
+[
+  {
+    "name": "properties",
+    "label": "Properties",
+    "required": true,
+    "help": "One row per property, up to 100. Billed per matched property.",
+    "type": "array",
+    "spec": [
+      {
+        "name": "propertyAddress",
+        "type": "collection",
+        "label": "Property address",
+        "spec": [
+          {
+            "name": "street",
+            "type": "text",
+            "label": "Street"
+          },
+          {
+            "name": "city",
+            "type": "text",
+            "label": "City"
+          },
+          {
+            "name": "state",
+            "type": "text",
+            "label": "State"
+          },
+          {
+            "name": "zip",
+            "type": "text",
+            "label": "ZIP Code"
+          }
+        ]
+      },
+      {
+        "name": "name",
+        "type": "collection",
+        "label": "Name",
+        "spec": [
+          {
+            "name": "first",
+            "type": "text",
+            "label": "Owner First Name"
+          },
+          {
+            "name": "last",
+            "type": "text",
+            "label": "Owner Last Name"
+          }
+        ]
+      },
+      {
+        "name": "requestId",
+        "type": "text",
+        "label": "Your Reference ID"
+      }
+    ]
+  },
+  {
+    "name": "includeTcpaFlagged",
+    "label": "Include TCPA-Flagged Phones",
+    "help": "Off by default: phone numbers flagged as TCPA litigators are left out. Turn on only with a documented compliance basis. Flagged numbers carry \"tcpa\": true in the result.",
+    "type": "boolean",
+    "default": false
+  }
+]

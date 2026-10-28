@@ -1,0 +1,21 @@
+{
+  "url": "/v2/property-subscription",
+  "method": "POST",
+  "body": {
+    "searchCriteria": {
+      "{{...}}": "{{if(parameters.additionalCriteria, parseJSON(parameters.additionalCriteria), undefined)}}",
+      "query": "{{ifempty(parameters.query, undefined)}}",
+      "quickLists": "{{if(length(parameters.quickLists) > 0, parameters.quickLists, undefined)}}",
+      "orQuickLists": "{{if(length(parameters.orQuickLists) > 0, parameters.orQuickLists, undefined)}}"
+    },
+    "deliveryConfig": {
+      "type": "webhook",
+      "url": "{{webhook.url}}"
+    }
+  },
+  "response": {
+    "data": {
+      "externalHookId": "{{body.result.subscriptionId}}"
+    }
+  }
+}

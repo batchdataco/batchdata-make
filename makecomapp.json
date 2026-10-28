@@ -124,13 +124,313 @@
       "makeAnApiCall": {
         "moduleType": "universal",
         "label": "Make an API Call",
-        "description": "Performs an authorized call to any BatchData API path. Billing follows the endpoint you call. Account balance (wallet) endpoints are not available.",
+        "description": "Performs an authorized call to any BatchData API path. Billing follows the endpoint you call. Account balance (wallet) endpoints, asynchronous (callback) endpoints and monitor creation are not available here; use the dedicated modules for those.",
         "connection": "batchdata",
         "codeFiles": {
           "communication": "modules/makeAnApiCall/makeAnApiCall.communication.iml.json",
           "mappableParams": "modules/makeAnApiCall/makeAnApiCall.mappable-params.iml.json",
           "interface": "modules/makeAnApiCall/makeAnApiCall.interface.iml.json",
           "samples": "modules/makeAnApiCall/makeAnApiCall.samples.iml.json"
+        }
+      },
+      "reverseSkipTrace": {
+        "moduleType": "search",
+        "label": "Reverse Skip Trace (Phone or Email)",
+        "description": "Finds the person (and associated property addresses) behind a phone number or an email address using the V3 reverse skip trace. Returns up to 3 persons. Billed per matched person; requests with no match are not billed. Results are data only. You are responsible for TCPA and Do Not Call compliance. Fill in at least one of: Phone Number, Email Address.",
+        "actionCrud": "read",
+        "connection": "batchdata",
+        "codeFiles": {
+          "communication": "modules/reverseSkipTrace/reverseSkipTrace.communication.iml.json",
+          "mappableParams": "modules/reverseSkipTrace/reverseSkipTrace.mappable-params.iml.json",
+          "interface": "modules/reverseSkipTrace/reverseSkipTrace.interface.iml.json",
+          "samples": "modules/reverseSkipTrace/reverseSkipTrace.samples.iml.json"
+        }
+      },
+      "getPermits": {
+        "moduleType": "search",
+        "label": "Get Property Permits",
+        "description": "Returns building permits for one property, one result per permit. Identify the property by address, BatchData property ID, or APN with county FIPS code. Billed per property requested, however many permits come back. Fill in at least one of: Street, BatchData Property ID, APN.",
+        "actionCrud": "read",
+        "connection": "batchdata",
+        "codeFiles": {
+          "communication": "modules/getPermits/getPermits.communication.iml.json",
+          "mappableParams": "modules/getPermits/getPermits.mappable-params.iml.json",
+          "interface": "modules/getPermits/getPermits.interface.iml.json",
+          "samples": "modules/getPermits/getPermits.samples.iml.json"
+        }
+      },
+      "batchSkipTrace": {
+        "moduleType": "action",
+        "label": "Batch Skip Trace Properties (V3)",
+        "description": "Skip traces up to 100 properties in one call with the V3 skip trace. Returns one result per submitted property, each with a list of persons. Billed per property matched. Results are data only. You are responsible for TCPA and Do Not Call compliance.",
+        "actionCrud": "read",
+        "connection": "batchdata",
+        "codeFiles": {
+          "communication": "modules/batchSkipTrace/batchSkipTrace.communication.iml.json",
+          "mappableParams": "modules/batchSkipTrace/batchSkipTrace.mappable-params.iml.json",
+          "interface": "modules/batchSkipTrace/batchSkipTrace.interface.iml.json",
+          "samples": "modules/batchSkipTrace/batchSkipTrace.samples.iml.json"
+        }
+      },
+      "batchLookupProperty": {
+        "moduleType": "action",
+        "label": "Batch Look Up Properties",
+        "description": "Returns full property records for up to 100 addresses in one call. Billed per property matched.",
+        "actionCrud": "read",
+        "connection": "batchdata",
+        "codeFiles": {
+          "communication": "modules/batchLookupProperty/batchLookupProperty.communication.iml.json",
+          "mappableParams": "modules/batchLookupProperty/batchLookupProperty.mappable-params.iml.json",
+          "interface": "modules/batchLookupProperty/batchLookupProperty.interface.iml.json",
+          "samples": "modules/batchLookupProperty/batchLookupProperty.samples.iml.json"
+        }
+      },
+      "autocompleteAddress": {
+        "moduleType": "search",
+        "label": "Autocomplete Address",
+        "description": "Suggests addresses for partial text, one result per suggestion. Billed per call.",
+        "actionCrud": "read",
+        "connection": "batchdata",
+        "codeFiles": {
+          "communication": "modules/autocompleteAddress/autocompleteAddress.communication.iml.json",
+          "mappableParams": "modules/autocompleteAddress/autocompleteAddress.mappable-params.iml.json",
+          "interface": "modules/autocompleteAddress/autocompleteAddress.interface.iml.json",
+          "samples": "modules/autocompleteAddress/autocompleteAddress.samples.iml.json"
+        }
+      },
+      "geocodeAddress": {
+        "moduleType": "search",
+        "label": "Geocode Address",
+        "description": "Returns latitude, longitude and the standardized form of one address. Billed per address submitted.",
+        "actionCrud": "read",
+        "connection": "batchdata",
+        "codeFiles": {
+          "communication": "modules/geocodeAddress/geocodeAddress.communication.iml.json",
+          "mappableParams": "modules/geocodeAddress/geocodeAddress.mappable-params.iml.json",
+          "interface": "modules/geocodeAddress/geocodeAddress.interface.iml.json",
+          "samples": "modules/geocodeAddress/geocodeAddress.samples.iml.json"
+        }
+      },
+      "reverseGeocode": {
+        "moduleType": "search",
+        "label": "Reverse Geocode (Find Nearby Addresses)",
+        "description": "Returns the nearest addresses to a latitude and longitude, one result per address. Billed per geo-location submitted.",
+        "actionCrud": "read",
+        "connection": "batchdata",
+        "codeFiles": {
+          "communication": "modules/reverseGeocode/reverseGeocode.communication.iml.json",
+          "mappableParams": "modules/reverseGeocode/reverseGeocode.mappable-params.iml.json",
+          "interface": "modules/reverseGeocode/reverseGeocode.interface.iml.json",
+          "samples": "modules/reverseGeocode/reverseGeocode.samples.iml.json"
+        }
+      },
+      "batchVerifyAddress": {
+        "moduleType": "action",
+        "label": "Batch Verify Addresses",
+        "description": "Standardizes and validates up to 100 US addresses in one call. Billed per address submitted.",
+        "actionCrud": "read",
+        "connection": "batchdata",
+        "codeFiles": {
+          "communication": "modules/batchVerifyAddress/batchVerifyAddress.communication.iml.json",
+          "mappableParams": "modules/batchVerifyAddress/batchVerifyAddress.mappable-params.iml.json",
+          "interface": "modules/batchVerifyAddress/batchVerifyAddress.interface.iml.json",
+          "samples": "modules/batchVerifyAddress/batchVerifyAddress.samples.iml.json"
+        }
+      },
+      "investorBuybox": {
+        "moduleType": "search",
+        "label": "Find Investors (Buy Box)",
+        "description": "Finds likely real estate investors for a subject property from nearby comparable sales, one result per investor with holdings, acquisitions and contacts. Billed according to your BatchData plan; contact support@batchservice.com for pricing. Results are data only. You are responsible for TCPA and Do Not Call compliance.",
+        "actionCrud": "read",
+        "connection": "batchdata",
+        "codeFiles": {
+          "communication": "modules/investorBuybox/investorBuybox.communication.iml.json",
+          "mappableParams": "modules/investorBuybox/investorBuybox.mappable-params.iml.json",
+          "interface": "modules/investorBuybox/investorBuybox.interface.iml.json",
+          "samples": "modules/investorBuybox/investorBuybox.samples.iml.json"
+        }
+      },
+      "investorProperties": {
+        "moduleType": "search",
+        "label": "Get Investor Properties",
+        "description": "Returns the properties of one investor, one result per property. Get the investor ID from Find Investors (Buy Box). Use the \"nextPageCursor\" value of the last result as Page Cursor to read the next page. Billed per property row returned (take sets the maximum cost of a call).",
+        "actionCrud": "read",
+        "connection": "batchdata",
+        "codeFiles": {
+          "communication": "modules/investorProperties/investorProperties.communication.iml.json",
+          "mappableParams": "modules/investorProperties/investorProperties.mappable-params.iml.json",
+          "interface": "modules/investorProperties/investorProperties.interface.iml.json",
+          "samples": "modules/investorProperties/investorProperties.samples.iml.json"
+        }
+      },
+      "listSearchSessions": {
+        "moduleType": "search",
+        "label": "List Search Sessions",
+        "description": "Lists your team's search sessions, oldest first. Needs a token with the property search sessions permission. This call does not bill property records.",
+        "actionCrud": "read",
+        "connection": "batchdata",
+        "codeFiles": {
+          "communication": "modules/listSearchSessions/listSearchSessions.communication.iml.json",
+          "mappableParams": "modules/listSearchSessions/listSearchSessions.mappable-params.iml.json",
+          "interface": "modules/listSearchSessions/listSearchSessions.interface.iml.json",
+          "samples": "modules/listSearchSessions/listSearchSessions.samples.iml.json"
+        }
+      },
+      "createSearchSession": {
+        "moduleType": "action",
+        "label": "Create or Advance Search Session",
+        "description": "Runs a property search inside a persistent session and returns the next properties that session has not delivered yet. The first call creates the session; calling again with the same Session ID continues it. Billed per property record delivered; a session never delivers (or bills) the same property twice. Each call bills up to Max Results records.",
+        "actionCrud": "create",
+        "connection": "batchdata",
+        "codeFiles": {
+          "communication": "modules/createSearchSession/createSearchSession.communication.iml.json",
+          "mappableParams": "modules/createSearchSession/createSearchSession.mappable-params.iml.json",
+          "interface": "modules/createSearchSession/createSearchSession.interface.iml.json",
+          "samples": "modules/createSearchSession/createSearchSession.samples.iml.json"
+        }
+      },
+      "deleteSearchSession": {
+        "moduleType": "action",
+        "label": "Delete Search Session",
+        "description": "Deletes a search session to free one of your 100 session slots. Deleting a session starts delivery over if you use the same ID again. This call does not bill property records.",
+        "actionCrud": "delete",
+        "connection": "batchdata",
+        "codeFiles": {
+          "communication": "modules/deleteSearchSession/deleteSearchSession.communication.iml.json",
+          "mappableParams": "modules/deleteSearchSession/deleteSearchSession.mappable-params.iml.json",
+          "interface": "modules/deleteSearchSession/deleteSearchSession.interface.iml.json",
+          "samples": "modules/deleteSearchSession/deleteSearchSession.samples.iml.json"
+        }
+      },
+      "listMonitors": {
+        "moduleType": "search",
+        "label": "List Property Monitors",
+        "description": "Lists your property monitors. Needs a token with the property subscription permission. Monitors and the events they deliver are billed according to your BatchData plan; contact support@batchservice.com for pricing. Limits: up to 5 monitors per team, a monitor cannot be edited after it is created (delete and recreate it), a new monitor can take up to 7 days to start delivering, and delivery is best effort (4 attempts per event).",
+        "actionCrud": "read",
+        "connection": "batchdata",
+        "codeFiles": {
+          "communication": "modules/listMonitors/listMonitors.communication.iml.json",
+          "mappableParams": "modules/listMonitors/listMonitors.mappable-params.iml.json",
+          "interface": "modules/listMonitors/listMonitors.interface.iml.json",
+          "samples": "modules/listMonitors/listMonitors.samples.iml.json"
+        }
+      },
+      "getMonitor": {
+        "moduleType": "search",
+        "label": "Get Property Monitor",
+        "description": "Returns one property monitor with its search criteria and delivery settings (secrets are masked). Monitors and the events they deliver are billed according to your BatchData plan; contact support@batchservice.com for pricing. Limits: up to 5 monitors per team, a monitor cannot be edited after it is created (delete and recreate it), a new monitor can take up to 7 days to start delivering, and delivery is best effort (4 attempts per event).",
+        "actionCrud": "read",
+        "connection": "batchdata",
+        "codeFiles": {
+          "communication": "modules/getMonitor/getMonitor.communication.iml.json",
+          "mappableParams": "modules/getMonitor/getMonitor.mappable-params.iml.json",
+          "interface": "modules/getMonitor/getMonitor.interface.iml.json",
+          "samples": "modules/getMonitor/getMonitor.samples.iml.json"
+        }
+      },
+      "createMonitor": {
+        "moduleType": "action",
+        "label": "Create Property Monitor (Stream Delivery)",
+        "description": "Creates a property monitor that streams changes for matching properties to your own AWS Kinesis stream or Azure Event Hub. For webhook delivery use the \"New Property Monitor Event\" trigger, which sets up and removes its own monitor. Monitors and the events they deliver are billed according to your BatchData plan; contact support@batchservice.com for pricing. Limits: up to 5 monitors per team, a monitor cannot be edited after it is created (delete and recreate it), a new monitor can take up to 7 days to start delivering, and delivery is best effort (4 attempts per event).",
+        "actionCrud": "create",
+        "connection": "batchdata",
+        "codeFiles": {
+          "communication": "modules/createMonitor/createMonitor.communication.iml.json",
+          "mappableParams": "modules/createMonitor/createMonitor.mappable-params.iml.json",
+          "interface": "modules/createMonitor/createMonitor.interface.iml.json",
+          "samples": "modules/createMonitor/createMonitor.samples.iml.json"
+        }
+      },
+      "deleteMonitor": {
+        "moduleType": "action",
+        "label": "Delete Property Monitor",
+        "description": "Deletes a property monitor so it stops delivering events. Monitors and the events they deliver are billed according to your BatchData plan; contact support@batchservice.com for pricing. Limits: up to 5 monitors per team, a monitor cannot be edited after it is created (delete and recreate it), a new monitor can take up to 7 days to start delivering, and delivery is best effort (4 attempts per event).",
+        "actionCrud": "delete",
+        "connection": "batchdata",
+        "codeFiles": {
+          "communication": "modules/deleteMonitor/deleteMonitor.communication.iml.json",
+          "mappableParams": "modules/deleteMonitor/deleteMonitor.mappable-params.iml.json",
+          "interface": "modules/deleteMonitor/deleteMonitor.interface.iml.json",
+          "samples": "modules/deleteMonitor/deleteMonitor.samples.iml.json"
+        }
+      },
+      "watchSearchSessions": {
+        "moduleType": "trigger",
+        "label": "Watch New Search Sessions",
+        "description": "Triggers when a new search session appears on your team. Needs a token with the property search sessions permission. This call does not bill property records.",
+        "connection": "batchdata",
+        "codeFiles": {
+          "communication": "modules/watchSearchSessions/watchSearchSessions.communication.iml.json",
+          "staticParams": "modules/watchSearchSessions/watchSearchSessions.static-params.iml.json",
+          "interface": "modules/watchSearchSessions/watchSearchSessions.interface.iml.json",
+          "samples": "modules/watchSearchSessions/watchSearchSessions.samples.iml.json"
+        }
+      },
+      "watchSessionProperties": {
+        "moduleType": "trigger",
+        "label": "Watch New Properties in a Search Session (Billed)",
+        "description": "Triggers when a search session delivers a property that it has not delivered before. Every check runs the search and bills each property delivered, up to Max Results per check, and a property is never billed twice within the same Session ID. Billed per property record delivered; a session never delivers (or bills) the same property twice. Use a low Max Results while you test. Every scheduled run of the scenario, and every \"Run once\", is a billed search.",
+        "connection": "batchdata",
+        "codeFiles": {
+          "communication": "modules/watchSessionProperties/watchSessionProperties.communication.iml.json",
+          "staticParams": "modules/watchSessionProperties/watchSessionProperties.static-params.iml.json",
+          "interface": "modules/watchSessionProperties/watchSessionProperties.interface.iml.json",
+          "samples": "modules/watchSessionProperties/watchSessionProperties.samples.iml.json"
+        }
+      },
+      "watchMonitorEvents": {
+        "moduleType": "instant_trigger",
+        "label": "Watch Property Monitor Events (Instant)",
+        "description": "Triggers when BatchData reports that a property matching your criteria was added to or removed from a monitor, or changed (instant). Turning the scenario on creates a monitor that delivers to this trigger's own hook URL; turning it off deletes that monitor. Each event carries the property ID and change details; use \"Watch Property Monitor Events with Property Record\" to also look up the full property record. Monitors and the events they deliver are billed according to your BatchData plan; contact support@batchservice.com for pricing. Limits: up to 5 monitors per team, a monitor cannot be edited after it is created (delete and recreate it), a new monitor can take up to 7 days to start delivering, and delivery is best effort (4 attempts per event).",
+        "connection": "batchdata",
+        "webhook": "monitorEvents",
+        "codeFiles": {
+          "communication": "modules/watchMonitorEvents/watchMonitorEvents.communication.iml.json",
+          "interface": "modules/watchMonitorEvents/watchMonitorEvents.interface.iml.json",
+          "samples": "modules/watchMonitorEvents/watchMonitorEvents.samples.iml.json"
+        }
+      },
+      "watchMonitorEventsWithProperty": {
+        "moduleType": "instant_trigger",
+        "label": "Watch Property Monitor Events with Property Record (Instant, Billed)",
+        "description": "Triggers when BatchData reports that a property matching your criteria was added to or removed from a monitor, or changed (instant). Turning the scenario on creates a monitor that delivers to this trigger's own hook URL; turning it off deletes that monitor. Each event carries the property ID and change details; use \"Watch Property Monitor Events with Property Record\" to also look up the full property record. Monitors and the events they deliver are billed according to your BatchData plan; contact support@batchservice.com for pricing. Limits: up to 5 monitors per team, a monitor cannot be edited after it is created (delete and recreate it), a new monitor can take up to 7 days to start delivering, and delivery is best effort (4 attempts per event). This version also looks up the full property record for every event. The lookup is billed per event, per matched property, on top of the monitor charges.",
+        "connection": "batchdata",
+        "webhook": "monitorEvents",
+        "codeFiles": {
+          "communication": "modules/watchMonitorEventsWithProperty/watchMonitorEventsWithProperty.communication.iml.json",
+          "interface": "modules/watchMonitorEventsWithProperty/watchMonitorEventsWithProperty.interface.iml.json",
+          "samples": "modules/watchMonitorEventsWithProperty/watchMonitorEventsWithProperty.samples.iml.json"
+        }
+      }
+    },
+    "webhook": {
+      "monitorEvents": {
+        "label": "Property monitor events",
+        "webhookType": "web",
+        "connection": "batchdata",
+        "codeFiles": {
+          "communication": "webhooks/monitorEvents/monitorEvents.communication.iml.json",
+          "params": "webhooks/monitorEvents/monitorEvents.params.iml.json",
+          "attach": "webhooks/monitorEvents/monitorEvents.attach.iml.json",
+          "detach": "webhooks/monitorEvents/monitorEvents.detach.iml.json"
+        }
+      }
+    },
+    "rpc": {
+      "listSearchSessions": {
+        "label": "List search sessions",
+        "connection": "batchdata",
+        "codeFiles": {
+          "communication": "rpcs/listSearchSessions/listSearchSessions.communication.iml.json",
+          "params": "rpcs/listSearchSessions/listSearchSessions.params.iml.json"
+        }
+      },
+      "listMonitors": {
+        "label": "List property monitors",
+        "connection": "batchdata",
+        "codeFiles": {
+          "communication": "rpcs/listMonitors/listMonitors.communication.iml.json",
+          "params": "rpcs/listMonitors/listMonitors.params.iml.json"
         }
       }
     }
@@ -185,11 +485,109 @@
           {
             "local": "makeAnApiCall",
             "remote": "makeAnApiCall"
+          },
+          {
+            "local": "reverseSkipTrace",
+            "remote": "reverseSkipTrace"
+          },
+          {
+            "local": "getPermits",
+            "remote": "getPermits"
+          },
+          {
+            "local": "batchSkipTrace",
+            "remote": "batchSkipTrace"
+          },
+          {
+            "local": "batchLookupProperty",
+            "remote": "batchLookupProperty"
+          },
+          {
+            "local": "autocompleteAddress",
+            "remote": "autocompleteAddress"
+          },
+          {
+            "local": "geocodeAddress",
+            "remote": "geocodeAddress"
+          },
+          {
+            "local": "reverseGeocode",
+            "remote": "reverseGeocode"
+          },
+          {
+            "local": "batchVerifyAddress",
+            "remote": "batchVerifyAddress"
+          },
+          {
+            "local": "investorBuybox",
+            "remote": "investorBuybox"
+          },
+          {
+            "local": "investorProperties",
+            "remote": "investorProperties"
+          },
+          {
+            "local": "listSearchSessions",
+            "remote": "listSearchSessions"
+          },
+          {
+            "local": "createSearchSession",
+            "remote": "createSearchSession"
+          },
+          {
+            "local": "deleteSearchSession",
+            "remote": "deleteSearchSession"
+          },
+          {
+            "local": "listMonitors",
+            "remote": "listMonitors"
+          },
+          {
+            "local": "getMonitor",
+            "remote": "getMonitor"
+          },
+          {
+            "local": "createMonitor",
+            "remote": "createMonitor"
+          },
+          {
+            "local": "deleteMonitor",
+            "remote": "deleteMonitor"
+          },
+          {
+            "local": "watchSearchSessions",
+            "remote": "watchSearchSessions"
+          },
+          {
+            "local": "watchSessionProperties",
+            "remote": "watchSessionProperties"
+          },
+          {
+            "local": "watchMonitorEvents",
+            "remote": "watchMonitorEvents"
+          },
+          {
+            "local": "watchMonitorEventsWithProperty",
+            "remote": "watchMonitorEventsWithProperty"
           }
         ],
         "function": [],
-        "rpc": [],
-        "webhook": []
+        "rpc": [
+          {
+            "local": "listSearchSessions",
+            "remote": "listSearchSessions"
+          },
+          {
+            "local": "listMonitors",
+            "remote": "listMonitors"
+          }
+        ],
+        "webhook": [
+          {
+            "local": "monitorEvents",
+            "remote": "monitorEvents"
+          }
+        ]
       }
     }
   ]

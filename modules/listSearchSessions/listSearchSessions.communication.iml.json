@@ -1,0 +1,12 @@
+{
+  "url": "/v2/property/search-sessions",
+  "method": "GET",
+  "qs": {
+    "take": "{{ifempty(parameters.take, 50)}}",
+    "skip": "{{ifempty(parameters.skip, undefined)}}"
+  },
+  "response": {
+    "iterate": "{{body.results.sessions}}",
+    "output": "{{item}}"
+  }
+}

@@ -212,5 +212,5 @@ export const apiCallParams = [
     label: 'Query string',
     spec: [txt('key', 'Key'), txt('value', 'Value')],
   },
-  { name: 'body', type: 'any', label: 'Body', help: 'JSON request body.' },
+  { name: 'body', type: 'text', label: 'Body', help: 'JSON request body, as text. Requests that contain a callback URL field are not sent.' },
 ];

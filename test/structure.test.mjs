@@ -26,7 +26,7 @@ test('manifest points at files that exist', () => {
     for (const rel of Object.values(c.codeFiles)) assert.ok(fs.existsSync(path.join(root, rel)), rel);
   }
   for (const [key, m] of Object.entries(app.components.module)) {
-    assert.ok(['search', 'action', 'universal'].includes(m.moduleType), key);
+    assert.ok(['search', 'action', 'universal', 'trigger', 'instant_trigger'].includes(m.moduleType), key);
     assert.equal(m.connection, 'batchdata');
     assert.ok(m.label && m.description, key);
     for (const rel of Object.values(m.codeFiles)) assert.ok(fs.existsSync(path.join(root, rel)), rel);
@@ -41,17 +41,52 @@ test('id mapping covers every module and groups cover every module', () => {
   assert.deepEqual(grouped, keys);
 });
 
-test('no triggers or webhooks are declared', () => {
-  for (const m of Object.values(app.components.module)) {
-    assert.ok(!m.moduleType.includes('trigger'));
+test('triggers: polling ones declare a trigger rule, instant ones point at a declared webhook', () => {
+  const polling = Object.entries(app.components.module).filter(([, m]) => m.moduleType === 'trigger');
+  const instant = Object.entries(app.components.module).filter(([, m]) => m.moduleType === 'instant_trigger');
+  assert.equal(polling.length, 2);
+  assert.equal(instant.length, 2);
+  for (const [key, m] of polling) {
+    const rule = read(m.codeFiles.communication).response.trigger;
+    assert.ok(['id', 'date'].includes(rule.type), key);
+    assert.ok(['asc', 'desc', 'unordered'].includes(rule.order), key);
+    assert.ok(m.codeFiles.staticParams, key);
+    assert.equal(m.codeFiles.mappableParams, undefined, key);
   }
-  assert.equal(app.components.webhook, undefined);
+  for (const [key, m] of instant) {
+    assert.ok(app.components.webhook[m.webhook], key);
+    assert.equal(m.actionCrud, undefined, key);
+  }
+});
+
+test('the webhook component creates and removes its own monitor and nothing else', () => {
+  const w = app.components.webhook.monitorEvents;
+  assert.equal(w.webhookType, 'web');
+  assert.equal(w.connection, 'batchdata');
+  for (const rel of Object.values(w.codeFiles)) assert.ok(fs.existsSync(path.join(root, rel)), rel);
+  const attach = read(w.codeFiles.attach);
+  assert.equal(attach.method, 'POST');
+  assert.equal(attach.url, '/v2/property-subscription');
+  assert.deepEqual(attach.body.deliveryConfig, { type: 'webhook', url: '{{webhook.url}}' });
+  assert.equal(attach.response.data.externalHookId, '{{body.result.subscriptionId}}');
+  const detach = read(w.codeFiles.detach);
+  assert.equal(detach.method, 'DELETE');
+  assert.equal(detach.url, '/v2/property-subscription/{{webhook.externalHookId}}');
+  assert.deepEqual(app.origins[0].idMapping.webhook.map((x) => x.local), ['monitorEvents']);
+});
+
+test('RPC dropdowns are declared, mapped and used', () => {
+  assert.deepEqual(Object.keys(app.components.rpc).sort(), ['listMonitors', 'listSearchSessions']);
+  assert.deepEqual(app.origins[0].idMapping.rpc.map((x) => x.local).sort(), ['listMonitors', 'listSearchSessions']);
+  for (const r of Object.values(app.components.rpc)) for (const rel of Object.values(r.codeFiles)) assert.ok(fs.existsSync(path.join(root, rel)), rel);
+  const used = JSON.stringify(read(app.components.module.deleteSearchSession.codeFiles.mappableParams));
+  assert.match(used, /rpc:\/\/listSearchSessions/);
 });
 
 test('module URLs use a versioned API path and never the wallet', () => {
   for (const [key, m] of Object.entries(app.components.module)) {
     const comm = read(m.codeFiles.communication);
-    if (m.moduleType !== 'universal') assert.match(comm.url, /^\/v[123]\//, key);
+    if (m.moduleType !== 'universal' && comm.url) assert.match(comm.url, /^\/v[123]\//, key);
   }
 });
 
@@ -82,7 +117,7 @@ test('retired product names never appear', () => {
 test('billing is disclosed on every data module', () => {
   for (const [key, m] of Object.entries(app.components.module)) {
     if (m.moduleType === 'universal') continue;
-    assert.match(m.description, /billed/i, key);
+    assert.match(m.description, /bill/i, key);
   }
 });
 

@@ -1,0 +1,10 @@
+{
+  "url": "/v2/property-subscription/{{replace(replace(parameters.id, '/', '_'), '.', '_')}}",
+  "method": "DELETE",
+  "response": {
+    "output": {
+      "deleted": true,
+      "id": "{{parameters.id}}"
+    }
+  }
+}

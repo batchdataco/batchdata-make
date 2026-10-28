@@ -1,0 +1,17 @@
+{
+  "url": "/v2/property/search-sessions",
+  "method": "GET",
+  "qs": {
+    "take": 100
+  },
+  "response": {
+    "iterate": "{{body.results.sessions}}",
+    "output": "{{item}}",
+    "trigger": {
+      "type": "date",
+      "date": "{{item.createdAt}}",
+      "id": "{{item.id}}",
+      "order": "unordered"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "url": "/v3/property/reverse-skip-trace",
+  "method": "POST",
+  "body": {
+    "requests": [
+      {
+        "phone": "{{ifempty(parameters.phone, undefined)}}",
+        "email": "{{ifempty(parameters.email, undefined)}}",
+        "requestId": "{{ifempty(parameters.requestId, undefined)}}"
+      }
+    ],
+    "options": {
+      "includeTCPABlacklistedPhones": "{{if(parameters.includeTcpaFlagged == true, true, false)}}"
+    }
+  },
+  "response": {
+    "iterate": {
+      "container": "{{body.result.data}}",
+      "condition": "{{item.meta.matched == true}}"
+    },
+    "output": "{{item}}"
+  }
+}

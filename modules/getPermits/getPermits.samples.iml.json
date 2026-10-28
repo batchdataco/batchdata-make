@@ -1,0 +1,26 @@
+{
+  "permitNumber": "BP-2026-004211",
+  "type": "Building",
+  "subtype": "Residential",
+  "status": "final",
+  "description": "Re-roof, composition shingle",
+  "issueDate": "2026-02-03",
+  "finalDate": "2026-02-20",
+  "jobValue": 14500,
+  "jurisdiction": "Phoenix",
+  "allTags": [
+    "roofing"
+  ],
+  "property": {
+    "address": {
+      "street": "2800 N 24th St",
+      "city": "Phoenix",
+      "state": "AZ",
+      "zip": "85008"
+    }
+  },
+  "searchMeta": {
+    "resultCount": 1,
+    "resultsFound": 1
+  }
+}

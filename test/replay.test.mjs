@@ -143,7 +143,8 @@ for (const [name, path_, file] of [
 }
 
 test('api call: builds url, method, headers and query; wallet paths are redirected', () => {
-  const r = request('makeAnApiCall', { url: 'v1/property/search', method: 'POST', body: { a: 1 } });
+  const r = request('makeAnApiCall', { url: 'v1/property/search', method: 'POST', body: '{"a":1}' });
+  assert.deepEqual(r.body, { a: 1 });
   assert.equal(r.url, '/v1/property/search');
   assert.equal(r.method, 'POST');
   const c = comm('makeAnApiCall');

@@ -1,0 +1,106 @@
+[
+  {
+    "name": "permitNumber",
+    "type": "text",
+    "label": "Permit number"
+  },
+  {
+    "name": "type",
+    "type": "text",
+    "label": "Type"
+  },
+  {
+    "name": "subtype",
+    "type": "text",
+    "label": "Subtype"
+  },
+  {
+    "name": "status",
+    "type": "text",
+    "label": "Status"
+  },
+  {
+    "name": "description",
+    "type": "text",
+    "label": "Description"
+  },
+  {
+    "name": "issueDate",
+    "type": "text",
+    "label": "Issue date"
+  },
+  {
+    "name": "finalDate",
+    "type": "text",
+    "label": "Final date"
+  },
+  {
+    "name": "jobValue",
+    "type": "number",
+    "label": "Job value"
+  },
+  {
+    "name": "jurisdiction",
+    "type": "text",
+    "label": "Jurisdiction"
+  },
+  {
+    "name": "allTags",
+    "type": "array",
+    "label": "All tags",
+    "spec": {
+      "type": "text"
+    }
+  },
+  {
+    "name": "property",
+    "type": "collection",
+    "label": "Property",
+    "spec": [
+      {
+        "name": "address",
+        "type": "collection",
+        "label": "Address",
+        "spec": [
+          {
+            "name": "street",
+            "type": "text",
+            "label": "Street"
+          },
+          {
+            "name": "city",
+            "type": "text",
+            "label": "City"
+          },
+          {
+            "name": "state",
+            "type": "text",
+            "label": "State"
+          },
+          {
+            "name": "zip",
+            "type": "text",
+            "label": "Zip"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "searchMeta",
+    "type": "collection",
+    "label": "Search meta",
+    "spec": [
+      {
+        "name": "resultCount",
+        "type": "number",
+        "label": "Result count"
+      },
+      {
+        "name": "resultsFound",
+        "type": "number",
+        "label": "Results found"
+      }
+    ]
+  }
+]

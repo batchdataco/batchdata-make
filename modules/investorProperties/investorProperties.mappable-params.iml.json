@@ -1,0 +1,50 @@
+[
+  {
+    "name": "investorId",
+    "label": "Investor ID",
+    "required": true,
+    "type": "text"
+  },
+  {
+    "name": "ownership",
+    "label": "Ownership",
+    "help": "Default current. \"any\" can return many more rows.",
+    "type": "select",
+    "options": [
+      {
+        "label": "current",
+        "value": "current"
+      },
+      {
+        "label": "previous",
+        "value": "previous"
+      },
+      {
+        "label": "any",
+        "value": "any"
+      }
+    ]
+  },
+  {
+    "name": "includeChildEntities",
+    "label": "Include Child Entities",
+    "type": "boolean"
+  },
+  {
+    "name": "take",
+    "label": "Max Results",
+    "help": "Whole number from 1 to 100. Default 25.",
+    "type": "integer",
+    "default": 25,
+    "validate": {
+      "min": 1,
+      "max": 100
+    }
+  },
+  {
+    "name": "pageCursor",
+    "label": "Page Cursor",
+    "help": "Optional. The nextPageCursor from the previous page, used with the same criteria.",
+    "type": "text"
+  }
+]

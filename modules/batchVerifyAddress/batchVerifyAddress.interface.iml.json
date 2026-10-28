@@ -1,0 +1,56 @@
+[
+  {
+    "name": "addresses",
+    "type": "array",
+    "label": "Addresses",
+    "spec": [
+      {
+        "name": "street",
+        "type": "text",
+        "label": "Street"
+      },
+      {
+        "name": "city",
+        "type": "text",
+        "label": "City"
+      },
+      {
+        "name": "state",
+        "type": "text",
+        "label": "State"
+      },
+      {
+        "name": "zip",
+        "type": "text",
+        "label": "Zip"
+      },
+      {
+        "name": "county",
+        "type": "text",
+        "label": "County"
+      },
+      {
+        "name": "meta",
+        "type": "collection",
+        "label": "Meta",
+        "spec": [
+          {
+            "name": "verified",
+            "type": "boolean",
+            "label": "Verified"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "requestCount",
+    "type": "number",
+    "label": "Request count"
+  },
+  {
+    "name": "normalizedCount",
+    "type": "number",
+    "label": "Normalized count"
+  }
+]

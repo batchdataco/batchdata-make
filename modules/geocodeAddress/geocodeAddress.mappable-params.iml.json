@@ -1,0 +1,14 @@
+[
+  {
+    "name": "address",
+    "label": "Address",
+    "required": true,
+    "help": "One full address, for example 2800 N 24th St, Phoenix, AZ 85008.",
+    "type": "text"
+  },
+  {
+    "name": "requestId",
+    "label": "Your Reference ID",
+    "type": "text"
+  }
+]

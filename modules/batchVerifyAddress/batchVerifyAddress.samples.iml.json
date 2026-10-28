@@ -1,0 +1,16 @@
+{
+  "addresses": [
+    {
+      "street": "2800 N 24th St",
+      "city": "Phoenix",
+      "state": "AZ",
+      "zip": "85008",
+      "county": "Maricopa",
+      "meta": {
+        "verified": true
+      }
+    }
+  ],
+  "requestCount": 1,
+  "normalizedCount": 1
+}

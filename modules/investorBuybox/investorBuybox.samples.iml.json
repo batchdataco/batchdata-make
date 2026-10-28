@@ -1,0 +1,29 @@
+{
+  "id": "inv_a1b2c3d4",
+  "name": "Evergreen Holdings LLC",
+  "type": "Company Owned",
+  "classification": [
+    "LANDLORD"
+  ],
+  "currentHoldings": {
+    "totalPropertyCount": 48
+  },
+  "acquisitions": {
+    "totalAcquisitionCount": 12
+  },
+  "mailingAddresses": [
+    {
+      "street": "1200 W Camelback Rd",
+      "city": "Phoenix",
+      "state": "AZ",
+      "zip": "85013",
+      "propertyCount": 48
+    }
+  ],
+  "matchedAsCurrentOwner": true,
+  "searchMeta": {
+    "resultCount": 25,
+    "resultsFound": 137
+  },
+  "warnings": []
+}

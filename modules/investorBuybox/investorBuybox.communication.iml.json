@@ -1,0 +1,28 @@
+{
+  "url": "/v2/investor/buybox",
+  "method": "POST",
+  "body": {
+    "searchCriteria": {
+      "investor": "{{ifempty(parameters.investor, undefined)}}",
+      "intel": "{{ifempty(parameters.intel, undefined)}}",
+      "{{...}}": "{{if(parameters.additionalCriteria, parseJSON(parameters.additionalCriteria), undefined)}}",
+      "compAddress": {
+        "street": "{{parameters.street}}",
+        "city": "{{ifempty(parameters.city, undefined)}}",
+        "state": "{{ifempty(parameters.state, undefined)}}",
+        "zip": "{{ifempty(parameters.zip, undefined)}}"
+      }
+    },
+    "options": {
+      "take": "{{ifempty(parameters.take, 25)}}"
+    }
+  },
+  "response": {
+    "iterate": "{{body.result.investors}}",
+    "output": {
+      "{{...}}": "{{item}}",
+      "searchMeta": "{{body.result.meta.results}}",
+      "warnings": "{{body.result.warnings}}"
+    }
+  }
+}

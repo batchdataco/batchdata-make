@@ -1,0 +1,109 @@
+[
+  {
+    "name": "street",
+    "label": "Subject Property Street",
+    "required": true,
+    "help": "Street address with house number, for example 2800 N 24th St.",
+    "type": "text"
+  },
+  {
+    "name": "city",
+    "label": "Subject Property City",
+    "type": "text"
+  },
+  {
+    "name": "state",
+    "label": "Subject Property State",
+    "help": "Two-letter state code, for example AZ.",
+    "type": "text"
+  },
+  {
+    "name": "zip",
+    "label": "Subject Property ZIP Code",
+    "type": "text"
+  },
+  {
+    "name": "investor",
+    "type": "collection",
+    "label": "Investor",
+    "spec": [
+      {
+        "name": "classification",
+        "type": "collection",
+        "label": "Classification",
+        "spec": [
+          {
+            "name": "inList",
+            "label": "Investor Types",
+            "help": "For example FLIPPER, LANDLORD, CASH BUYER. Replaces the default (FLIPPER and LANDLORD).",
+            "type": "array",
+            "spec": {
+              "type": "text"
+            }
+          }
+        ]
+      },
+      {
+        "name": "ownership",
+        "label": "Ownership",
+        "help": "Which owners of a comparable property qualify. Default any.",
+        "type": "select",
+        "options": [
+          {
+            "label": "current",
+            "value": "current"
+          },
+          {
+            "label": "previous",
+            "value": "previous"
+          },
+          {
+            "label": "any",
+            "value": "any"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "intel",
+    "type": "collection",
+    "label": "Intel",
+    "spec": [
+      {
+        "name": "lastSoldDate",
+        "type": "collection",
+        "label": "Last Sold Date",
+        "spec": [
+          {
+            "name": "withinLastMonths",
+            "label": "Comparable Sales Within (Months)",
+            "help": "From 1 to 60. Default 12.",
+            "type": "integer",
+            "validate": {
+              "min": 1,
+              "max": 60
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "additionalCriteria",
+    "label": "Additional Criteria (JSON)",
+    "help": "Optional JSON object merged into the search criteria. The fields above win on conflict. Callback URL keys are ignored. Optional JSON object with extra filters, for example {\"general\":{\"propertyTypeCategory\":{\"equals\":\"Single Family\"}}}. Fields you fill in above take priority.",
+    "type": "text"
+  },
+  {
+    "name": "take",
+    "label": "Max Results",
+    "help": "Whole number from 1 to 100. Default 25.",
+    "type": "integer",
+    "default": 25,
+    "validate": {
+      "min": 1,
+      "max": 100
+    }
+  }
+]

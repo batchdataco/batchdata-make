@@ -1,0 +1,16 @@
+{
+  "street": "2806 N 24th St",
+  "city": "Phoenix",
+  "state": "AZ",
+  "zip": "85008",
+  "county": "Maricopa",
+  "latitude": 33.4787348,
+  "longitude": -112.0306996,
+  "types": [
+    "Street"
+  ],
+  "geoStatus": "Rooftop",
+  "meta": {
+    "error": false
+  }
+}

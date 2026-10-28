@@ -72,8 +72,8 @@
   },
   {
     "name": "body",
-    "type": "any",
+    "type": "text",
     "label": "Body",
-    "help": "JSON request body."
+    "help": "JSON request body, as text. Requests that contain a callback URL field are not sent."
   }
 ]

@@ -1,0 +1,26 @@
+[
+  {
+    "name": "phone",
+    "label": "Phone Number",
+    "help": "A US phone number. Fill in a phone number or an email address.",
+    "type": "text"
+  },
+  {
+    "name": "email",
+    "label": "Email Address",
+    "type": "text"
+  },
+  {
+    "name": "requestId",
+    "label": "Your Reference ID",
+    "help": "Optional. Echoed back in the result.",
+    "type": "text"
+  },
+  {
+    "name": "includeTcpaFlagged",
+    "label": "Include TCPA-Flagged Phones",
+    "help": "Off by default: phone numbers flagged as TCPA litigators are left out. Turn on only with a documented compliance basis. Flagged numbers carry \"tcpa\": true in the result.",
+    "type": "boolean",
+    "default": false
+  }
+]

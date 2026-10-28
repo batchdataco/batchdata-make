@@ -1,0 +1,49 @@
+[
+  {
+    "name": "id",
+    "type": "text",
+    "label": "Id"
+  },
+  {
+    "name": "searchCriteria",
+    "type": "collection",
+    "label": "Search criteria",
+    "spec": [
+      {
+        "name": "query",
+        "type": "text",
+        "label": "Query"
+      },
+      {
+        "name": "orQuickLists",
+        "type": "array",
+        "label": "Or quick lists",
+        "spec": {
+          "type": "text"
+        }
+      }
+    ]
+  },
+  {
+    "name": "deliveryConfig",
+    "type": "collection",
+    "label": "Delivery config",
+    "spec": [
+      {
+        "name": "type",
+        "type": "text",
+        "label": "Type"
+      },
+      {
+        "name": "streamName",
+        "type": "text",
+        "label": "Stream name"
+      },
+      {
+        "name": "region",
+        "type": "text",
+        "label": "Region"
+      }
+    ]
+  }
+]

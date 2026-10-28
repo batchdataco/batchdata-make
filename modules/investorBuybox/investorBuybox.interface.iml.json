@@ -1,0 +1,111 @@
+[
+  {
+    "name": "id",
+    "type": "text",
+    "label": "Id"
+  },
+  {
+    "name": "name",
+    "type": "text",
+    "label": "Name"
+  },
+  {
+    "name": "type",
+    "type": "text",
+    "label": "Type"
+  },
+  {
+    "name": "classification",
+    "type": "array",
+    "label": "Classification",
+    "spec": {
+      "type": "text"
+    }
+  },
+  {
+    "name": "currentHoldings",
+    "type": "collection",
+    "label": "Current holdings",
+    "spec": [
+      {
+        "name": "totalPropertyCount",
+        "type": "number",
+        "label": "Total property count"
+      }
+    ]
+  },
+  {
+    "name": "acquisitions",
+    "type": "collection",
+    "label": "Acquisitions",
+    "spec": [
+      {
+        "name": "totalAcquisitionCount",
+        "type": "number",
+        "label": "Total acquisition count"
+      }
+    ]
+  },
+  {
+    "name": "mailingAddresses",
+    "type": "array",
+    "label": "Mailing addresses",
+    "spec": [
+      {
+        "name": "street",
+        "type": "text",
+        "label": "Street"
+      },
+      {
+        "name": "city",
+        "type": "text",
+        "label": "City"
+      },
+      {
+        "name": "state",
+        "type": "text",
+        "label": "State"
+      },
+      {
+        "name": "zip",
+        "type": "text",
+        "label": "Zip"
+      },
+      {
+        "name": "propertyCount",
+        "type": "number",
+        "label": "Property count"
+      }
+    ]
+  },
+  {
+    "name": "matchedAsCurrentOwner",
+    "type": "boolean",
+    "label": "Matched as current owner"
+  },
+  {
+    "name": "searchMeta",
+    "type": "collection",
+    "label": "Search meta",
+    "spec": [
+      {
+        "name": "resultCount",
+        "type": "number",
+        "label": "Result count"
+      },
+      {
+        "name": "resultsFound",
+        "type": "number",
+        "label": "Results found"
+      }
+    ]
+  },
+  {
+    "name": "warnings",
+    "type": "array",
+    "label": "Warnings",
+    "spec": {
+      "type": "text"
+    }
+  }
+]

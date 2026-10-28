@@ -1,0 +1,22 @@
+{
+  "properties": [
+    {
+      "_id": "09201d3bd3134f9380704014781fb4c0",
+      "address": {
+        "street": "2800 N 24th St",
+        "city": "Phoenix",
+        "state": "AZ",
+        "zip": "85008",
+        "county": "Maricopa"
+      },
+      "general": {
+        "propertyTypeCategory": "Single Family"
+      },
+      "quickLists": {
+        "vacant": false
+      }
+    }
+  ],
+  "matchCount": 1,
+  "noMatchCount": 0
+}

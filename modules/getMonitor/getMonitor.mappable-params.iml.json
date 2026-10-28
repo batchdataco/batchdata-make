@@ -1,0 +1,10 @@
+[
+  {
+    "name": "id",
+    "label": "Monitor ID",
+    "required": true,
+    "help": "The ID of the monitor.",
+    "type": "select",
+    "options": "rpc://listMonitors"
+  }
+]

@@ -1,5 +1,5 @@
 {
-  "url": "/{{if(contains(lower(parameters.url), 'wallet'), 'blocked/not-available', trim(parameters.url))}}",
+  "url": "/{{if(contains(lower(parameters.url), 'wallet') || contains(lower(parameters.url), 'async') || contains(lower(parameters.url), '..') || contains(lower(parameters.url), '%') || contains(lower(parameters.url), '?') || contains(lower(parameters.url), '://') || contains(lower(ifempty(parameters.body, '')), 'webhook') || (contains(lower(parameters.url), 'property-subscription') && (parameters.method == 'POST' || parameters.method == 'PUT' || parameters.method == 'PATCH')), 'blocked/not-available', trim(parameters.url))}}",
   "method": "{{parameters.method}}",
   "headers": {
     "{{...}}": "{{toCollection(parameters.headers, 'key', 'value')}}"
@@ -7,7 +7,7 @@
   "qs": {
     "{{...}}": "{{toCollection(parameters.qs, 'key', 'value')}}"
   },
-  "body": "{{parameters.body}}",
+  "body": "{{if(length(ifempty(parameters.body, '')) > 0, parseJSON(parameters.body), undefined)}}",
   "type": "json",
   "response": {
     "output": {

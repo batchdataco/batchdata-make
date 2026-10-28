@@ -1,0 +1,64 @@
+[
+  {
+    "name": "street",
+    "type": "text",
+    "label": "Street"
+  },
+  {
+    "name": "city",
+    "type": "text",
+    "label": "City"
+  },
+  {
+    "name": "county",
+    "type": "text",
+    "label": "County"
+  },
+  {
+    "name": "state",
+    "type": "text",
+    "label": "State"
+  },
+  {
+    "name": "zip",
+    "type": "text",
+    "label": "Zip"
+  },
+  {
+    "name": "fullAddress",
+    "type": "text",
+    "label": "Full address"
+  },
+  {
+    "name": "latitude",
+    "type": "number",
+    "label": "Latitude"
+  },
+  {
+    "name": "longitude",
+    "type": "number",
+    "label": "Longitude"
+  },
+  {
+    "name": "geoStatus",
+    "type": "text",
+    "label": "Geo status"
+  },
+  {
+    "name": "meta",
+    "type": "collection",
+    "label": "Meta",
+    "spec": [
+      {
+        "name": "error",
+        "type": "boolean",
+        "label": "Error"
+      },
+      {
+        "name": "geocoded",
+        "type": "boolean",
+        "label": "Geocoded"
+      }
+    ]
+  }
+]

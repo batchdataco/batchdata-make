@@ -1,0 +1,7 @@
+{
+  "condition": "{{length(ifempty(body.eventId, '')) > 0}}",
+  "output": {
+    "{{...}}": "{{body}}",
+    "id": "{{body.eventId}}"
+  }
+}

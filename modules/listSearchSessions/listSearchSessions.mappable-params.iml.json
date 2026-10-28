@@ -1,0 +1,20 @@
+[
+  {
+    "name": "take",
+    "label": "Max Results",
+    "type": "integer",
+    "default": 50,
+    "validate": {
+      "min": 1,
+      "max": 100
+    }
+  },
+  {
+    "name": "skip",
+    "label": "Skip (Offset)",
+    "type": "integer",
+    "validate": {
+      "min": 0
+    }
+  }
+]
