@@ -3,7 +3,7 @@ import { root, write, toInterface } from './lib.mjs';
 import * as P from './params.mjs';
 import { catalogModules, catalogGroups, webhooks, rpcs } from './catalog-modules.mjs';
 
-const fx = (n) => JSON.parse(fs.readFileSync(`${root}/../fixtures/${n}.json`, 'utf8'));
+const fx = (n) => JSON.parse(fs.readFileSync(`${root}/test/fixtures/${n}.json`, 'utf8'));
 const ue = (e) => `ifempty(${e}, undefined)`;
 const u = (e) => `{{${ue(e)}}}`;
 
