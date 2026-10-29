@@ -60,3 +60,7 @@ Verified live (production API, 1 record per call, through the same request shape
 Mocked only: property monitors and the instant triggers. The token used gets 403 on the subscription endpoints, so create, list, delete and event delivery need a sandbox token (mock data, no cost, from app.batchdata.com) or a token with that ability.
 
 Offline tests (47) check the manifest, file links, copy rules (one support contact, billing text in every module, no callback fields) and the request body, query and output of every module against mocked responses. The offline IML evaluator is a subset of Make's engine, so Make itself has not run these modules; see `DEVELOPMENT.md` for the checks to run after import.
+
+## License
+
+The code in this repository is released under the MIT License (see `LICENSE`). The BatchData API and the data it returns are proprietary to BatchData (batchdata.io) and are subject to BatchData's terms of service; the MIT License does not cover them. Support: support@batchservice.com

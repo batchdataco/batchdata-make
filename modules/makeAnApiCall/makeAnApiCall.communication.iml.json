@@ -1,13 +1,13 @@
 {
-  "url": "/{{if(contains(lower(parameters.url), 'wallet') || contains(lower(parameters.url), 'async') || contains(lower(parameters.url), '..') || contains(lower(parameters.url), '%') || contains(lower(parameters.url), '?') || contains(lower(parameters.url), '://') || contains(lower(ifempty(parameters.body, '')), 'webhook') || (contains(lower(parameters.url), 'property-subscription') && (parameters.method == 'POST' || parameters.method == 'PUT' || parameters.method == 'PATCH')), 'blocked/not-available', trim(parameters.url))}}",
+  "url": "/{{if(contains(lower(parameters.url), 'wallet') || contains(lower(parameters.url), 'async') || contains(lower(parameters.url), '..') || contains(lower(parameters.url), '%') || contains(lower(parameters.url), '?') || contains(lower(parameters.url), '://') || contains(lower(ifempty(parameters.body, '')), 'webhook') || contains(lower(ifempty(parameters.body, '')), 'u00') || contains(lower(parameters.url), '//') || contains(lower(parameters.url), '#') || (contains(lower(parameters.url), 'property-subscription') && (parameters.method == 'POST' || parameters.method == 'PUT' || parameters.method == 'PATCH')), 'blocked/not-available', trim(parameters.url))}}",
   "method": "{{parameters.method}}",
   "headers": {
     "{{...}}": "{{toCollection(parameters.headers, 'key', 'value')}}"
   },
   "qs": {
-    "{{...}}": "{{toCollection(parameters.qs, 'key', 'value')}}"
+    "{{...}}": "{{if(contains(lower(parameters.url), 'wallet') || contains(lower(parameters.url), 'async') || contains(lower(parameters.url), '..') || contains(lower(parameters.url), '%') || contains(lower(parameters.url), '?') || contains(lower(parameters.url), '://') || contains(lower(ifempty(parameters.body, '')), 'webhook') || contains(lower(ifempty(parameters.body, '')), 'u00') || contains(lower(parameters.url), '//') || contains(lower(parameters.url), '#') || (contains(lower(parameters.url), 'property-subscription') && (parameters.method == 'POST' || parameters.method == 'PUT' || parameters.method == 'PATCH')), undefined, toCollection(parameters.qs, 'key', 'value'))}}"
   },
-  "body": "{{if(length(ifempty(parameters.body, '')) > 0, parseJSON(parameters.body), undefined)}}",
+  "body": "{{if(contains(lower(parameters.url), 'wallet') || contains(lower(parameters.url), 'async') || contains(lower(parameters.url), '..') || contains(lower(parameters.url), '%') || contains(lower(parameters.url), '?') || contains(lower(parameters.url), '://') || contains(lower(ifempty(parameters.body, '')), 'webhook') || contains(lower(ifempty(parameters.body, '')), 'u00') || contains(lower(parameters.url), '//') || contains(lower(parameters.url), '#') || (contains(lower(parameters.url), 'property-subscription') && (parameters.method == 'POST' || parameters.method == 'PUT' || parameters.method == 'PATCH')) || length(ifempty(parameters.body, '')) == 0, undefined, parseJSON(parameters.body))}}",
   "type": "json",
   "response": {
     "output": {

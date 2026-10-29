@@ -39,6 +39,9 @@ Not verified, needs a Make account and a BatchData test token (a sandbox token r
 - The `{{...}}` spread in the Search Properties output (adds `searchMeta` next to each property).
 - Make an API Call: the wallet guard redirects any path containing `wallet` to a non-existent path. IML cannot raise a validation error, so this is best effort. Decide whether to keep the module.
 
+- Webhook dedupe. The webhook sets `uid` to `body.eventId`; confirm in Make that a repeated event does not start a second run.
+- Callback keys. IML cannot strip keys recursively. Make an API Call blocks (sends nothing) any body that contains `webhook` or a JSON unicode escape (`u00`). The Additional Criteria JSON fields on search, session and monitor modules are not stripped; BatchData's synchronous endpoints ignore callback keys, and the monitor and trigger modules fix `deliveryConfig` themselves. A Make custom function that strips the keys would close this gap.
+
 ## Decisions
 
 - Triggers: the instant triggers use a BatchData webhook subscription (`deliveryConfig {type: "webhook"}`) created on attach and deleted on detach; the hook URL is the scenario's own and is never entered by the user. Polling triggers cover new search sessions and new properties in a session (billed, opt-in by choosing that module). Billed property hydration is a separate module so the default instant trigger never bills a lookup. There is no new-monitor polling trigger (no date or ordered ID).

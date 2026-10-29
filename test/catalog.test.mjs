@@ -248,7 +248,15 @@ test('generic API call: wallet, async, path tricks and monitor creation are bloc
     assert.equal(url(bad, 'POST'), '/blocked/not-available', bad);
   }
   for (const m of ['POST', 'PUT', 'PATCH']) assert.equal(url('v2/property-subscription', m), '/blocked/not-available', m);
-  for (const body of ['{"webhook":"x"}', '{"a":{"errorWebhookUrl":"x"}}', '{"WebhookUrl":"x"}']) {
+  for (const body of ['{"web\\u0068ookUrl":"x"}', '{"webhook":"x"}', '{"a":{"errorWebhookUrl":"x"}}', '{"WebhookUrl":"x"}']) {
     assert.equal(render(c.url, { parameters: { url: 'v1/property/search', method: 'POST', body } }), '/blocked/not-available', body);
   }
+});
+
+test('blocked API calls send no body or query; the webhook dedupes on eventId', () => {
+  const c = comm('makeAnApiCall');
+  const scope = { parameters: { url: 'v1/wallet', method: 'POST', body: '{"a":1}', qs: [{ key: 'x', value: '1' }] } };
+  assert.equal(render(c.body, scope), undefined);
+  assert.deepEqual(render(c.qs, scope), {});
+  assert.equal(JSON.parse(fs.readFileSync(path.join(root, 'webhooks/monitorEvents/monitorEvents.communication.iml.json'), 'utf8')).uid, '{{body.eventId}}');
 });

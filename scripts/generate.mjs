@@ -51,6 +51,9 @@ const API_GUARD = [
   `contains(${lc}, '?')`,
   `contains(${lc}, '://')`,
   `contains(lower(ifempty(parameters.body, '')), 'webhook')`,
+  `contains(lower(ifempty(parameters.body, '')), 'u00')`,
+  `contains(${lc}, '//')`,
+  `contains(${lc}, '#')`,
   `(contains(${lc}, 'property-subscription') && (parameters.method == 'POST' || parameters.method == 'PUT' || parameters.method == 'PATCH'))`,
 ].join(' || ');
 
@@ -181,8 +184,8 @@ const modules = {
       url: `/{{if(${API_GUARD}, 'blocked/not-available', trim(parameters.url))}}`,
       method: '{{parameters.method}}',
       headers: { '{{...}}': "{{toCollection(parameters.headers, 'key', 'value')}}" },
-      qs: { '{{...}}': "{{toCollection(parameters.qs, 'key', 'value')}}" },
-      body: "{{if(length(ifempty(parameters.body, '')) > 0, parseJSON(parameters.body), undefined)}}",
+      qs: { '{{...}}': `{{if(${API_GUARD}, undefined, toCollection(parameters.qs, 'key', 'value'))}}` },
+      body: `{{if(${API_GUARD} || length(ifempty(parameters.body, '')) == 0, undefined, parseJSON(parameters.body))}}`,
       type: 'json',
       response: { output: { statusCode: '{{statusCode}}', headers: '{{headers}}', body: '{{body}}' } },
     },

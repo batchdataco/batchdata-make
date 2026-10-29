@@ -325,6 +325,7 @@ export const webhooks = {
     webhookType: 'web',
     communication: {
       condition: "{{length(ifempty(body.eventId, '')) > 0}}",
+      uid: '{{body.eventId}}',
       output: { '{{...}}': '{{body}}', id: '{{body.eventId}}' },
     },
     params: webhookParams,
