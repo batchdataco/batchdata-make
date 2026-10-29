@@ -1,0 +1,77 @@
+[
+  {
+    "label": "Properties",
+    "modules": [
+      "searchProperties",
+      "lookupProperty",
+      "batchLookupProperty",
+      "getPermits"
+    ]
+  },
+  {
+    "label": "Owner contact",
+    "modules": [
+      "skipTraceV1",
+      "skipTraceV3",
+      "reverseSkipTrace",
+      "batchSkipTrace"
+    ]
+  },
+  {
+    "label": "Addresses",
+    "modules": [
+      "verifyAddress",
+      "autocompleteAddress",
+      "geocodeAddress",
+      "reverseGeocode",
+      "batchVerifyAddress"
+    ]
+  },
+  {
+    "label": "Phone numbers",
+    "modules": [
+      "verifyPhones",
+      "checkDnc",
+      "checkTcpa"
+    ]
+  },
+  {
+    "label": "Investors",
+    "modules": [
+      "investorBuybox",
+      "investorProperties"
+    ]
+  },
+  {
+    "label": "Search sessions",
+    "modules": [
+      "createSearchSession",
+      "listSearchSessions",
+      "deleteSearchSession"
+    ]
+  },
+  {
+    "label": "Property monitors",
+    "modules": [
+      "createMonitor",
+      "listMonitors",
+      "getMonitor",
+      "deleteMonitor"
+    ]
+  },
+  {
+    "label": "Triggers",
+    "modules": [
+      "watchSearchSessions",
+      "watchSessionProperties",
+      "watchMonitorEvents",
+      "watchMonitorEventsWithProperty"
+    ]
+  },
+  {
+    "label": "Other",
+    "modules": [
+      "makeAnApiCall"
+    ]
+  }
+]

@@ -1,0 +1,89 @@
+[
+  {
+    "name": "results",
+    "type": "array",
+    "label": "Results",
+    "spec": [
+      {
+        "name": "input",
+        "type": "collection",
+        "label": "Input",
+        "spec": [
+          {
+            "name": "requestId",
+            "type": "text",
+            "label": "Request id"
+          }
+        ]
+      },
+      {
+        "name": "persons",
+        "type": "array",
+        "label": "Persons",
+        "spec": [
+          {
+            "name": "name",
+            "type": "collection",
+            "label": "Name",
+            "spec": [
+              {
+                "name": "first",
+                "type": "text",
+                "label": "First"
+              },
+              {
+                "name": "last",
+                "type": "text",
+                "label": "Last"
+              }
+            ]
+          },
+          {
+            "name": "phoneNumbers",
+            "type": "array",
+            "label": "Phone numbers",
+            "spec": [
+              {
+                "name": "number",
+                "type": "text",
+                "label": "Number"
+              },
+              {
+                "name": "type",
+                "type": "text",
+                "label": "Type"
+              },
+              {
+                "name": "tcpa",
+                "type": "boolean",
+                "label": "Tcpa"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "meta",
+        "type": "collection",
+        "label": "Meta",
+        "spec": [
+          {
+            "name": "matched",
+            "type": "boolean",
+            "label": "Matched"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "matchCount",
+    "type": "number",
+    "label": "Match count"
+  },
+  {
+    "name": "requestCount",
+    "type": "number",
+    "label": "Request count"
+  }
+]

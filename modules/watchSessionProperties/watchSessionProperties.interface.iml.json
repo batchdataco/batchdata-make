@@ -1,0 +1,80 @@
+[
+  {
+    "name": "id",
+    "type": "text",
+    "label": "Id"
+  },
+  {
+    "name": "_id",
+    "type": "text",
+    "label": "Id"
+  },
+  {
+    "name": "address",
+    "type": "collection",
+    "label": "Address",
+    "spec": [
+      {
+        "name": "street",
+        "type": "text",
+        "label": "Street"
+      },
+      {
+        "name": "city",
+        "type": "text",
+        "label": "City"
+      },
+      {
+        "name": "state",
+        "type": "text",
+        "label": "State"
+      },
+      {
+        "name": "zip",
+        "type": "text",
+        "label": "Zip"
+      },
+      {
+        "name": "county",
+        "type": "text",
+        "label": "County"
+      }
+    ]
+  },
+  {
+    "name": "general",
+    "type": "collection",
+    "label": "General",
+    "spec": [
+      {
+        "name": "propertyTypeCategory",
+        "type": "text",
+        "label": "Property type category"
+      }
+    ]
+  },
+  {
+    "name": "quickLists",
+    "type": "collection",
+    "label": "Quick lists",
+    "spec": [
+      {
+        "name": "vacant",
+        "type": "boolean",
+        "label": "Vacant"
+      }
+    ]
+  },
+  {
+    "name": "searchMeta",
+    "type": "collection",
+    "label": "Search meta",
+    "spec": [
+      {
+        "name": "totalCount",
+        "type": "number",
+        "label": "Total count"
+      }
+    ]
+  }
+]

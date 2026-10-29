@@ -1,0 +1,10 @@
+[
+  {
+    "name": "id",
+    "label": "Session ID",
+    "required": true,
+    "help": "The ID of the session to delete.",
+    "type": "select",
+    "options": "rpc://listSearchSessions"
+  }
+]

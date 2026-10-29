@@ -1,0 +1,19 @@
+[
+  {
+    "name": "latitude",
+    "label": "Latitude",
+    "required": true,
+    "type": "number"
+  },
+  {
+    "name": "longitude",
+    "label": "Longitude",
+    "required": true,
+    "type": "number"
+  },
+  {
+    "name": "propertyOnly",
+    "label": "Property Addresses Only",
+    "type": "boolean"
+  }
+]

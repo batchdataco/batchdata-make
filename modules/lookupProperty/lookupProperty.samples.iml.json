@@ -1,0 +1,537 @@
+{
+  "_id": "76ef71f2bc0c999e87592cd8302c5d32",
+  "address": {
+    "houseNumber": "26823",
+    "street": "26823 N 31st Dr",
+    "city": "Phoenix",
+    "cityAliases": [
+      "phoenix"
+    ],
+    "county": "Maricopa",
+    "state": "AZ",
+    "zip": "85083",
+    "zipPlus4": "5837",
+    "formattedStreet": "N 31st Dr",
+    "streetNoUnit": "26823 N 31st Dr",
+    "localities": [
+      "arizona hillcrest"
+    ],
+    "latitude": 33.728785,
+    "longitude": -112.126019,
+    "countyFipsCode": "04013",
+    "hash": "fae16e6adfaf0bb0f306ba89bf7b4c1e",
+    "normalized": true,
+    "geoStatus": "Rooftop",
+    "geoStatusCode": "A"
+  },
+  "assessment": {
+    "assessedImprovementValue": 27730,
+    "assessedLandValue": 6930,
+    "totalAssessedValue": 43300,
+    "assessmentYear": 2024,
+    "improvementMarketValue": 346400,
+    "landMarketValue": 86600,
+    "totalMarketValue": 433000,
+    "marketValueYear": 2024
+  },
+  "building": {
+    "totalBuildingAreaSquareFeet": 1761,
+    "totalBuildingAreaCode": "B",
+    "totalBuildingAreaCodeDescription": "Living Area",
+    "livingAreaSquareFeet": 1761,
+    "grossBuildingAreaSquareFeet": 2480,
+    "adjustedBuildingAreaSquareFeet": 2100,
+    "yearBuilt": 2001,
+    "effectiveYearBuilt": 2001,
+    "buildingCount": 1,
+    "roomCount": 6,
+    "unitCount": 1,
+    "calculatedBathroomCount": 2,
+    "fullBathroomCount": 2,
+    "bathroomCount": 2,
+    "bathFixtureCount": 7,
+    "storyCount": 1,
+    "garageParkingSpaceCount": 2,
+    "residentialUnitCount": 1,
+    "features": [
+      "Air Conditioning",
+      "Refrigeration Air Conditioning",
+      "Sauna/Steam Room",
+      "Koi Pond",
+      "Mobile Home Hookup",
+      "Patio",
+      "Garage",
+      "Pool",
+      "Elevator"
+    ],
+    "airConditioningSourceCode": "J",
+    "airConditioningSource": "Refrigeration",
+    "buildingConditionCode": "F",
+    "buildingCondition": "Average",
+    "buildingQualityCode": "D",
+    "buildingQuality": "B",
+    "constructionTypeCode": "C",
+    "constructionType": "Frame",
+    "exteriorWallsCode": "S",
+    "exteriorWalls": "Stucco",
+    "garageCode": "I",
+    "garage": "Garage",
+    "heatSourceCode": "X",
+    "heatSource": "Yes",
+    "patioCode": "A",
+    "patio": "Patio",
+    "poolCode": "H",
+    "pool": "Pool - Yes",
+    "roofCoverCode": "I",
+    "roofCover": "Concrete",
+    "fireplaceCount": 0
+  },
+  "deedHistory": [
+    {
+      "buyers": [
+        "KB HOME SALES PHOENIX INC"
+      ],
+      "sellers": [
+        "KB HOME PHOENIX INC",
+        "KAUFMAN & BROAD OF ARIZONA INC"
+      ],
+      "recordingDate": "2001-07-30T00:00:00.000Z",
+      "saleDate": "2001-07-20T00:00:00.000Z",
+      "documentNumber": "2001-0688814",
+      "documentTypeCode": "Z",
+      "documentType": "Corporation Deed",
+      "salePrice": 0,
+      "salePriceCode": "Full Consideration",
+      "transferTax": 412,
+      "ownerRelationshipType": "Arm's Length",
+      "multipleOwners": false
+    },
+    {
+      "buyers": [
+        "CHENEY RHONDA"
+      ],
+      "sellers": [
+        "NUNEZ JR ROBERTO"
+      ],
+      "recordingDate": "2002-08-30T00:00:00.000Z",
+      "saleDate": "2002-08-19T00:00:00.000Z",
+      "documentNumber": "2002-0890956",
+      "documentTypeCode": "BF",
+      "documentType": "Quit Claim Deed",
+      "salePrice": 0
+    },
+    {
+      "buyers": [
+        "ANDERSON RHONDA K"
+      ],
+      "sellers": [
+        "ANDERSON KYLE DOUGLAS"
+      ],
+      "recordingDate": "2005-01-20T00:00:00.000Z",
+      "saleDate": "2005-01-14T00:00:00.000Z",
+      "documentNumber": "2005-0080877",
+      "documentTypeCode": "AQ",
+      "documentType": "Intra-Family Transfer",
+      "salePrice": 0,
+      "interFamily": true
+    },
+    {
+      "buyers": [
+        "ANDERSON RHONDA K"
+      ],
+      "sellers": [
+        "ANDERSON RHONDA K",
+        "CHENEY RHONDA"
+      ],
+      "recordingDate": "2005-01-20T00:00:00.000Z",
+      "saleDate": "2005-01-14T00:00:00.000Z",
+      "documentNumber": "2005-0080876",
+      "documentTypeCode": "AQ",
+      "documentType": "Intra-Family Transfer",
+      "salePrice": 0,
+      "interFamily": true
+    },
+    {
+      "buyers": [
+        "ANDERSON KYLE",
+        "ANDERSON RHONDA K"
+      ],
+      "sellers": [],
+      "recordingDate": "2006-12-29T00:00:00.000Z",
+      "saleDate": "2006-12-11T00:00:00.000Z",
+      "documentNumber": "2006-1700576",
+      "documentTypeCode": "DN",
+      "documentType": "Stand Alone Mortgage"
+    },
+    {
+      "buyers": [
+        "ANDRESON RHONDA K",
+        "ANDERSON KYLE"
+      ],
+      "sellers": [
+        "ANDRESON RHONDA K",
+        "ANDRESON KYLE"
+      ],
+      "recordingDate": "2013-01-18T00:00:00.000Z",
+      "saleDate": "2012-11-13T00:00:00.000Z",
+      "documentNumber": "2013-0056003",
+      "documentTypeCode": "AQ",
+      "documentType": "Intra-Family Transfer",
+      "salePrice": 0,
+      "interFamily": true
+    }
+  ],
+  "demographics": {
+    "age": 52,
+    "emailDomain": "gmail.com",
+    "householdSize": 3,
+    "income": 95000,
+    "netWorth": 425000,
+    "discretionaryIncome": 38000,
+    "homeownerRenterCode": "O",
+    "homeownerRenter": "Home Owner",
+    "genderCode": "M",
+    "gender": "Male",
+    "maritalStatusCode": "M",
+    "maritalStatus": "Married",
+    "childCount": 2,
+    "hasChildren": true,
+    "investments": [
+      "Real Estate",
+      "Personal"
+    ],
+    "individualEducationCode": "BA",
+    "individualEducation": "Bachelor's Degree",
+    "individualOccupationCode": "PRO",
+    "individualOccupation": "Professional",
+    "businessOwnerCode": "A",
+    "businessOwner": "Real Estate",
+    "petOwner": true,
+    "millionaire": false,
+    "recentlyDivorced": false,
+    "singleParent": false,
+    "smoker": false,
+    "religious": true,
+    "religiousAffiliationCode": "C",
+    "religiousAffiliation": "Catholic",
+    "recentlyMoved": false,
+    "estimatedAreaCreditRating": "B"
+  },
+  "foreclosure": {},
+  "permit": {
+    "permitCount": 3,
+    "earliestDate": "2015-04-10",
+    "latestDate": "2022-08-22",
+    "totalJobValue": 48500,
+    "allTags": [
+      "roofing",
+      "solar",
+      "electrical"
+    ],
+    "tags": {
+      "addition": false,
+      "adu": false,
+      "bathroom": false,
+      "battery": false,
+      "demolition": false,
+      "electrical": true,
+      "electricMeter": false,
+      "evCharger": false,
+      "fireSprinkler": false,
+      "gas": false,
+      "generator": false,
+      "grading": false,
+      "heatPump": false,
+      "hvac": false,
+      "inspectionPassed": true,
+      "kitchen": false,
+      "newConstruction": false,
+      "plumbing": false,
+      "poolAndHotTub": false,
+      "remodel": false,
+      "roofing": true,
+      "solar": true,
+      "waterHeater": false,
+      "windowDoor": false
+    }
+  },
+  "general": {
+    "carrierRoute": "R087",
+    "vacant": false,
+    "mailingAddressVacant": false,
+    "vacantDate": "2021-05-14",
+    "mobileHome": false,
+    "standardizedLandUseCode": "R2",
+    "propertyTypeCategory": "Residential",
+    "propertyTypeDetail": "Single Family",
+    "congressionalDistrict": "8",
+    "timeZone": "Mountain",
+    "utcOffset": -7,
+    "daylightSavingsTime": false,
+    "censusTract": "040136119.001008",
+    "primaryParcel": true,
+    "parcelCount": 1
+  },
+  "ids": {
+    "addressHash": "fae16e6adfaf0bb0f306ba89bf7b4c1e",
+    "apn": "205-03-224",
+    "oldApn": "205032242",
+    "fipsCode": "04013"
+  },
+  "legal": {
+    "assessorsMapReference": "MB 51824",
+    "cityTownshipMunicipality": "Phoenix",
+    "legalDescription": "ARIZONA HILLCREST MCR 518-24",
+    "lotCode": "S",
+    "lotNumber": "199",
+    "sectionTownshipRangeMeridian": "SEC 35 TWN 5N RNG 2E",
+    "subdivisionName": "ARIZONA HILLCREST",
+    "tractNumber": "ARIZONA HILLCREST"
+  },
+  "lot": {
+    "lotSizeAcres": 0.14637281910009184,
+    "lotSizeSquareFeet": 6376,
+    "zoningCode": "R-8"
+  },
+  "mortgageHistory": [
+    {
+      "borrowers": [
+        "CHENEY RHONDA"
+      ],
+      "saleDate": "2002-08-19T00:00:00.000Z",
+      "recordingDate": "2002-08-30T00:00:00.000Z",
+      "dueDate": "2032-09-01T00:00:00.000Z",
+      "lenderName": "CAPITOL COMMERCE MTG CO",
+      "lenderType": "Mortgage Company",
+      "lenderTypeCode": "M",
+      "loanAmount": 160500,
+      "loanTermMonths": 360,
+      "interestRate": "6.43"
+    },
+    {
+      "borrowers": [
+        "ANDERSON RHONDA K"
+      ],
+      "saleDate": "2005-01-14T00:00:00.000Z",
+      "recordingDate": "2005-01-20T00:00:00.000Z",
+      "dueDate": "2035-02-01T00:00:00.000Z",
+      "lenderName": "JPMORGAN CHASE BANK NA",
+      "lenderType": "Bank",
+      "lenderTypeCode": "B",
+      "loanTypeCode": "AH",
+      "loanType": "Unknown (DEFAULT)",
+      "loanAmount": 156800,
+      "loanTermMonths": 360,
+      "interestRate": "5.67"
+    },
+    {
+      "borrowers": [
+        "ANDERSON RHONDA K"
+      ],
+      "saleDate": "2005-01-14T00:00:00.000Z",
+      "recordingDate": "2005-01-20T00:00:00.000Z",
+      "dueDate": "2035-01-28T00:00:00.000Z",
+      "lenderName": "JPMORGAN CHASE BANK NA",
+      "lenderType": "Bank",
+      "lenderTypeCode": "B",
+      "loanTypeCode": "K",
+      "loanType": "Credit Line (Revolving)",
+      "loanAmount": 19000,
+      "loanTermMonths": 360,
+      "interestRate": "5.67"
+    },
+    {
+      "borrowers": [
+        "ANDERSON KYLE",
+        "ANDERSON RHONDA K"
+      ],
+      "saleDate": "2006-12-11T00:00:00.000Z",
+      "recordingDate": "2006-12-29T00:00:00.000Z",
+      "dueDate": "2026-12-19T00:00:00.000Z",
+      "lenderName": "USAA FSB",
+      "lenderType": "Bank",
+      "lenderTypeCode": "B",
+      "loanTypeCode": "K",
+      "loanType": "Credit Line (Revolving)",
+      "loanAmount": 75299,
+      "loanTermMonths": 240,
+      "interestRate": "6.33"
+    },
+    {
+      "borrowers": [
+        "ANDRESON RHONDA K",
+        "ANDERSON KYLE"
+      ],
+      "saleDate": "2012-11-13T00:00:00.000Z",
+      "recordingDate": "2013-01-18T00:00:00.000Z",
+      "dueDate": "2027-12-01T00:00:00.000Z",
+      "lenderName": "USAA FSB",
+      "lenderType": "Bank",
+      "lenderTypeCode": "B",
+      "loanTypeCode": "U",
+      "loanType": "New Conventional",
+      "loanAmount": 112000,
+      "loanTermMonths": 180,
+      "interestRate": "3.31"
+    }
+  ],
+  "openLien": {
+    "allLoanTypes": [],
+    "juniorLoanTypes": [],
+    "totalOpenLienCount": 1,
+    "mortgages": [
+      {
+        "lenderName": "CAPITOL COMMERCE MTG CO",
+        "lenderType": "Mortgage Company",
+        "loanAmount": 160500,
+        "loanTermMonths": 360,
+        "interestRate": 6.43,
+        "loanType": "New Conventional",
+        "subordinateLoanFlag": false,
+        "equityFlag": false,
+        "helocFlag": false,
+        "pudRider": false,
+        "condoRider": false,
+        "multiFamilyRider": false,
+        "assumable": false,
+        "privateLender": false,
+        "secondHomeRider": false,
+        "sellerCarryBack": false,
+        "balloonRider": false
+      }
+    ]
+  },
+  "owner": {
+    "fullName": "Kyle Anderson; Rhonda K Anderson",
+    "mailingAddress": {
+      "houseNumber": "26823",
+      "street": "26823 N 31st Dr",
+      "city": "Phoenix",
+      "county": "Maricopa",
+      "state": "AZ",
+      "zip": "85083",
+      "zipPlus4": "5837",
+      "formattedStreet": "N 31st Dr",
+      "streetNoUnit": "26823 N 31st Dr",
+      "hash": "fae16e6adfaf0bb0f306ba89bf7b4c1e"
+    },
+    "names": [
+      {
+        "first": "Kyle",
+        "last": "Anderson",
+        "full": "Kyle Anderson"
+      },
+      {
+        "first": "Rhonda",
+        "middle": "K",
+        "last": "Anderson",
+        "full": "Rhonda K Anderson"
+      }
+    ],
+    "ownerOccupied": true,
+    "mailingOptOut": false,
+    "hasLandline": true,
+    "ownerStatusTypeCode": "B",
+    "ownerStatusType": "Individual",
+    "ownershipRightsCode": "AT",
+    "ownershipRights": "Joint Tenants"
+  },
+  "propertyOwnerProfile": {
+    "averageYearBuilt": 2001,
+    "propertiesCount": 1,
+    "propertiesTotalEquity": 449821,
+    "propertiesTotalEstimatedValue": 449821
+  },
+  "quickLists": {
+    "absenteeOwner": false,
+    "absenteeOwnerInState": false,
+    "absenteeOwnerOutOfState": false,
+    "activeListing": false,
+    "activeAuction": false,
+    "cashBuyer": false,
+    "corporateOwned": false,
+    "expiredListing": false,
+    "freeAndClear": true,
+    "highEquity": true,
+    "inherited": false,
+    "listedBelowMarketPrice": false,
+    "lowEquity": false,
+    "mailingAddressVacant": false,
+    "onMarket": false,
+    "outOfStateOwner": false,
+    "ownerOccupied": true,
+    "pendingListing": false,
+    "preforeclosure": false,
+    "recentlySold": false,
+    "samePropertyAndMailingAddress": true,
+    "taxDefault": false,
+    "tiredLandlord": false,
+    "unknownEquity": false,
+    "vacant": false,
+    "hasHoa": true,
+    "hasHoaFees": true,
+    "canceledListing": false,
+    "noticeOfSale": false,
+    "noticeOfDefault": false,
+    "noticeOfLisPendens": false
+  },
+  "sale": {
+    "lastTransfer": {
+      "documentNumber": "2013-0056003",
+      "documentType": "Intra-Family Transfer",
+      "priceCodeDescription": "Transfer Tax on document indicated as EXEMPT.",
+      "priceCode": "Z",
+      "recordingDate": "2013-01-18T00:00:00.000Z",
+      "saleDate": "2012-11-13T00:00:00.000Z"
+    },
+    "lastSale": {
+      "saleBuyers": [
+        "Michael R Torres"
+      ],
+      "saleSellers": [
+        "BlueSky Holdings LLC"
+      ],
+      "salePriceIsEstimated": false
+    },
+    "flipLength": 0,
+    "flipLengthCategory": 0,
+    "flipProfit": 0,
+    "priorTransfer": {
+      "documentNumber": "2005-0080877",
+      "documentType": "Intra-Family Transfer",
+      "priceCodeDescription": "Non-arms length transaction.",
+      "priceCode": "N",
+      "salePriceIsEstimated": false
+    },
+    "priorSale": {
+      "recordingDate": "2005-01-20T00:00:00.000Z",
+      "saleBuyers": [
+        "BlueSky Holdings LLC"
+      ],
+      "saleSellers": [
+        "Estate Of Dorothy J Miller"
+      ],
+      "salePriceIsEstimated": false
+    }
+  },
+  "tax": {
+    "taxAmount": 19,
+    "taxYear": 2023,
+    "taxDelinquentYear": 2022,
+    "taxRateCodeArea": "971300"
+  },
+  "valuation": {
+    "estimatedValue": 449821,
+    "priceRangeMin": 382348,
+    "priceRangeMax": 517294,
+    "standardDeviation": 12,
+    "confidenceScore": 88,
+    "asOfDate": "2024-02-28T00:00:00.000Z",
+    "equityCurrentEstimatedBalance": 449821,
+    "ltv": 0,
+    "equityPercent": 100
+  },
+  "meta": {
+    "propertyDateModified": "2024-04-11T09:54:59.574Z"
+  }
+}

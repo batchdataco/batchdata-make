@@ -1,0 +1,64 @@
+[
+  {
+    "name": "carrier",
+    "type": "text",
+    "label": "Carrier"
+  },
+  {
+    "name": "dnc",
+    "type": "boolean",
+    "label": "Dnc"
+  },
+  {
+    "name": "notFound",
+    "type": "boolean",
+    "label": "Not found"
+  },
+  {
+    "name": "number",
+    "type": "text",
+    "label": "Number"
+  },
+  {
+    "name": "reachable",
+    "type": "boolean",
+    "label": "Reachable"
+  },
+  {
+    "name": "state",
+    "type": "text",
+    "label": "State"
+  },
+  {
+    "name": "tcpa",
+    "type": "boolean",
+    "label": "Tcpa"
+  },
+  {
+    "name": "tested",
+    "type": "boolean",
+    "label": "Tested"
+  },
+  {
+    "name": "type",
+    "type": "text",
+    "label": "Type"
+  },
+  {
+    "name": "meta",
+    "type": "collection",
+    "label": "Meta",
+    "spec": [
+      {
+        "name": "error",
+        "type": "boolean",
+        "label": "Error"
+      },
+      {
+        "name": "matched",
+        "type": "boolean",
+        "label": "Matched"
+      }
+    ]
+  }
+]

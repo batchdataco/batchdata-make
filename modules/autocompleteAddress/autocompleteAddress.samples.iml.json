@@ -1,0 +1,13 @@
+{
+  "propertyId": "09201d3bd3134f9380704014781fb4c0",
+  "name": "2800 N 24th St, Phoenix, AZ 85008",
+  "type": "address",
+  "address": "2800 n 24th st",
+  "city": "Phoenix",
+  "state": "AZ",
+  "zip": "85008",
+  "latitude": 33.478332,
+  "longitude": -112.030474,
+  "propertyCount": 1,
+  "uspsVerified": true
+}

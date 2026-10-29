@@ -1,0 +1,13 @@
+{
+  "name": "batchdata-make",
+  "version": "0.2.0",
+  "private": true,
+  "description": "BatchData custom app for Make",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "generate": "node scripts/generate.mjs",
+    "test": "node --test \"test/*.test.mjs\""
+  },
+  "engines": { "node": ">=20" }
+}

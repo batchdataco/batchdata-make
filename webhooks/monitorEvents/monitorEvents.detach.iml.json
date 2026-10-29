@@ -1,0 +1,4 @@
+{
+  "url": "/v2/property-subscription/{{webhook.externalHookId}}",
+  "method": "DELETE"
+}

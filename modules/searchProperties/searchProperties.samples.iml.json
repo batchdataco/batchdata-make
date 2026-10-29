@@ -1,0 +1,575 @@
+{
+  "_id": "5c2b4e5fdca9199c5e2a041c2e8166e1",
+  "address": {
+    "addressValidity": "Valid",
+    "houseNumber": "4522",
+    "street": "4522 W Ravina Ln",
+    "city": "Phoenix",
+    "county": "Maricopa",
+    "state": "AZ",
+    "zip": "85086",
+    "zipPlus4": "1431",
+    "latitude": 33.867445,
+    "longitude": -112.157639,
+    "countyFipsCode": "04013",
+    "hash": "94d976d3a42b939e67c4015ee1a95f44"
+  },
+  "deedHistory": [
+    {
+      "buyers": [
+        "TOUSA HOMES INC",
+        "ENGLE HOMES"
+      ],
+      "sellers": [
+        "ACACIA CREDIT FUND 8-A LLC"
+      ],
+      "recordingDate": "2005-03-10T00:00:00.000Z",
+      "saleDate": "2005-03-04T00:00:00.000Z",
+      "documentNumber": "2005.294894",
+      "documentTypeCode": "S",
+      "documentType": "Cash Sale Deed",
+      "salePrice": 252492,
+      "salePriceCode": "Full Consideration",
+      "transferTax": 412,
+      "ownerRelationshipType": "Arm's Length",
+      "multipleOwners": false,
+      "transactionType": "Arms-length residential transactions (purchase/resales)",
+      "transactionTypeCode": "B",
+      "mailingAddress": {
+        "street": "3150 S 48th St Ste 100",
+        "city": "Phoenix",
+        "state": "AZ",
+        "zip": "85040",
+        "hash": "9612f33c41b36a5e163072df7d8535c1"
+      }
+    },
+    {
+      "buyers": [
+        "BARNES DAVID",
+        "BARNES TRISHA N"
+      ],
+      "sellers": [
+        "ENGLE/SUNBELT LLC"
+      ],
+      "recordingDate": "2005-11-17T00:00:00.000Z",
+      "saleDate": "2005-11-14T00:00:00.000Z",
+      "documentNumber": "2005-1744001",
+      "documentTypeCode": "BZ",
+      "documentType": "Warranty Deed",
+      "salePrice": 422475,
+      "newConstruction": true,
+      "transactionType": "New construction residential transactions",
+      "transactionTypeCode": "C",
+      "mailingAddress": {
+        "street": "4522 W Ravina Ln",
+        "city": "Phoenix",
+        "state": "AZ",
+        "zip": "85086",
+        "hash": "94d976d3a42b939e67c4015ee1a95f44"
+      }
+    },
+    {
+      "buyers": [
+        "BARNES DAVID"
+      ],
+      "sellers": [
+        "BARNES DAVID",
+        "BARNES TRISHA N"
+      ],
+      "recordingDate": "2006-02-21T00:00:00.000Z",
+      "saleDate": "2006-02-13T00:00:00.000Z",
+      "documentNumber": "2006-0236246",
+      "documentTypeCode": "AQ",
+      "documentType": "Intra-Family Transfer",
+      "salePrice": 0,
+      "interFamily": true,
+      "transactionType": "Non-arms length transactions with valid title company name (no accomodations)",
+      "transactionTypeCode": "A",
+      "mailingAddress": {
+        "street": "4522 W Ravina Ln",
+        "city": "Phoenix",
+        "state": "AZ",
+        "zip": "85086",
+        "hash": "94d976d3a42b939e67c4015ee1a95f44"
+      }
+    },
+    {
+      "buyers": [
+        "ROMERO MARIA ESTELA",
+        "ROMERO OCTAVIO R"
+      ],
+      "sellers": [
+        "BARNES DAVID"
+      ],
+      "recordingDate": "2010-10-27T00:00:00.000Z",
+      "saleDate": "2010-09-03T00:00:00.000Z",
+      "documentNumber": "2010-0941098",
+      "documentTypeCode": "BZ",
+      "documentType": "Warranty Deed",
+      "salePrice": 154000,
+      "transactionType": "Arms-length residential transactions (purchase/resales)",
+      "transactionTypeCode": "B",
+      "mailingAddress": {
+        "street": "4522 W Ravina Ln",
+        "city": "Phoenix",
+        "state": "AZ",
+        "zip": "85086",
+        "hash": "94d976d3a42b939e67c4015ee1a95f44"
+      }
+    },
+    {
+      "buyers": [
+        "THE FIVE CLUB TRUST"
+      ],
+      "sellers": [
+        "ROMERO OCTAVIO RIMOLDI",
+        "ROMERO MARIA ESTELA"
+      ],
+      "recordingDate": "2015-10-23T00:00:00.000Z",
+      "saleDate": "2015-09-09T00:00:00.000Z",
+      "documentNumber": "2015-0764207",
+      "documentTypeCode": "Q",
+      "documentType": "Beneficiary Deed (Buyer ID = BE)",
+      "salePrice": 0,
+      "transactionType": "Non-arms length transactions with valid title company name (no accomodations)",
+      "transactionTypeCode": "A"
+    },
+    {
+      "buyers": [
+        "MADISON NATHAN S",
+        "MADISON MARY L"
+      ],
+      "sellers": [
+        "ROMERO OCTAVIO RIMOLDI",
+        "ROMERO MARIA ESTELA"
+      ],
+      "recordingDate": "2020-08-11T00:00:00.000Z",
+      "saleDate": "2020-08-06T00:00:00.000Z",
+      "documentNumber": "2020.732181",
+      "documentTypeCode": "BZ",
+      "documentType": "Warranty Deed",
+      "salePrice": 389900,
+      "transactionType": "Arms-length residential transactions (purchase/resales)",
+      "transactionTypeCode": "B",
+      "mailingAddress": {
+        "street": "4522 W Ravina Ln",
+        "city": "Phoenix",
+        "state": "AZ",
+        "zip": "85086",
+        "hash": "94d976d3a42b939e67c4015ee1a95f44"
+      }
+    },
+    {
+      "buyers": [
+        "YUET P AND I-JUNG K POON FAMILY TRUST"
+      ],
+      "sellers": [
+        "MADISON NATHAN S",
+        "MADISON MARY L"
+      ],
+      "recordingDate": "2022-04-11T00:00:00.000Z",
+      "saleDate": "2022-03-31T00:00:00.000Z",
+      "documentNumber": "2022.316997",
+      "documentTypeCode": "BZ",
+      "documentType": "Warranty Deed",
+      "salePrice": 570000,
+      "transactionType": "Arms-length residential transactions (purchase/resales)",
+      "transactionTypeCode": "B",
+      "mailingAddress": {
+        "street": "19675 La Mar Dr",
+        "city": "Cupertino",
+        "state": "CA",
+        "zip": "95014",
+        "hash": "f3b3f6919555dd565a3a8eeee61b15b4"
+      }
+    },
+    {
+      "buyers": [
+        "4522 W RAVINA LLC"
+      ],
+      "sellers": [
+        "YUET P AND I-JUNG K POON FAMILY TRUST"
+      ],
+      "recordingDate": "2023-02-09T00:00:00.000Z",
+      "saleDate": "2023-02-09T00:00:00.000Z",
+      "documentNumber": "2023.67061",
+      "documentTypeCode": "BZ",
+      "documentType": "Warranty Deed",
+      "salePrice": 0,
+      "transactionType": "Non-arms length transactions with valid title company name (no accomodations)",
+      "transactionTypeCode": "A",
+      "mailingAddress": {
+        "street": "3225 McLeod Dr # 777",
+        "city": "Las Vegas",
+        "state": "NV",
+        "zip": "89121",
+        "hash": "45ba83fc378f6c2ee5a655f19dd58860"
+      }
+    }
+  ],
+  "demographics": {
+    "age": 60,
+    "emailDomain": "gmail.com",
+    "householdSize": 1,
+    "income": 170000,
+    "netWorth": 437000,
+    "discretionaryIncome": 64750,
+    "homeownerRenterCode": "O",
+    "homeownerRenter": "Home Owner",
+    "genderCode": "F",
+    "gender": "Female",
+    "maritalStatusCode": "S",
+    "maritalStatus": "Single",
+    "religious": true,
+    "religiousAffiliationCode": "P",
+    "religiousAffiliation": "Protestant",
+    "individualEducationCode": "E",
+    "individualEducation": "Attended College",
+    "individualOccupation": "Professional / Technical",
+    "individualOccupationCode": "1",
+    "estimatedAreaCreditRating": "A"
+  },
+  "foreclosure": {
+    "statusCode": "E",
+    "status": "Rescission Recording",
+    "recordingDate": "2010-11-12T00:00:00.000Z",
+    "filingDate": "2010-11-12T00:00:00.000Z",
+    "documentNumber": "2010-0991603",
+    "documentTypeCode": "L",
+    "documentType": "Notice of Rescission",
+    "releaseDate": "2010-11-12T00:00:00.000Z"
+  },
+  "ids": {
+    "apn": "203-04-206"
+  },
+  "intel": {
+    "salePropensity": 12.8,
+    "salePropensityStatus": "Available",
+    "salePropensityCategory": "Medium"
+  },
+  "involuntaryLien": {
+    "liens": [
+      {
+        "documentNumber": "225074972",
+        "documentType": "Financing Statement",
+        "documentTypeCode": "ED",
+        "lienType": "Economic Lien",
+        "lienTypeCode": "B",
+        "recordingDate": "2025-07-02T00:00:00.000Z"
+      }
+    ]
+  },
+  "listing": {
+    "status": "Off Market",
+    "price": 2700,
+    "rental": false,
+    "originalListingDate": "2025-04-29T00:00:00.000Z",
+    "maxListPrice": 570000,
+    "maxListPriceDate": "2022-04-11T00:00:00.000Z",
+    "minListPrice": 2450,
+    "minListPriceDate": "2020-06-04T00:00:00.000Z",
+    "soldPrice": 570000,
+    "soldDate": "2022-04-11T00:00:00.000Z",
+    "failedListingDate": "2025-05-01T00:00:00.000Z",
+    "bedroomCount": 5,
+    "bathroomCount": 3,
+    "totalBuildingAreaSquareFeet": 2906,
+    "lotSizeSquareFeet": 6969,
+    "propertyType": "Single Family",
+    "yearBuilt": 2005,
+    "appliances": [
+      "Dishwasher",
+      "Dryer",
+      "Garbage disposal",
+      "Microwave",
+      "Refrigerator",
+      "Washer"
+    ],
+    "roofTypes": [
+      "Tile"
+    ],
+    "coolingTypes": [
+      "Other"
+    ],
+    "heatingTypes": [
+      "Forced air",
+      "Gas"
+    ],
+    "newConstruction": false,
+    "listingUrl": "https://www.zillow.com/homedetails/4522-W-Ravina-Ln-Anthem-AZ-85086/67774980_zpid/",
+    "livingArea": 2906,
+    "taxes": [
+      {
+        "amount": 2263.56,
+        "year": 2024
+      },
+      {
+        "amount": 2732.26,
+        "year": 2023
+      },
+      {
+        "amount": 2684.5,
+        "year": 2022
+      },
+      {
+        "amount": 2708,
+        "year": 2021
+      },
+      {
+        "amount": 2629.9,
+        "year": 2020
+      },
+      {
+        "amount": 2547.14,
+        "year": 2019
+      },
+      {
+        "amount": 2547.14,
+        "year": 2018
+      },
+      {
+        "amount": 2464.6,
+        "year": 2017
+      },
+      {
+        "amount": 2095.58,
+        "year": 2016
+      },
+      {
+        "amount": 2095.58,
+        "year": 2015
+      },
+      {
+        "year": 2014
+      },
+      {
+        "year": 2013
+      },
+      {
+        "year": 2012
+      },
+      {
+        "year": 2008
+      },
+      {
+        "year": 2007
+      },
+      {
+        "year": 2006
+      },
+      {
+        "year": 2005
+      }
+    ],
+    "salePriceIsEstimated": false
+  },
+  "mortgageHistory": [
+    {
+      "borrowers": [
+        "BARNES DAVID"
+      ],
+      "saleDate": "2006-02-10T00:00:00.000Z",
+      "recordingDate": "2006-02-21T00:00:00.000Z",
+      "dueDate": "2021-02-15T00:00:00.000Z",
+      "lenderName": "GREENPOINT MORTGAGE FUNDING INC",
+      "lenderType": "Mortgage Company",
+      "lenderTypeCode": "M",
+      "loanTypeCode": "K",
+      "loanType": "Credit Line (Revolving)",
+      "loanAmount": 42000,
+      "loanTermMonths": 180,
+      "interestRate": "6.15",
+      "transactionType": "HELOCS - both purchase money and non-purchase money HELOCS",
+      "transactionTypeCode": "F",
+      "documentDate": "2006-02-10T00:00:00.000Z"
+    },
+    {
+      "borrowers": [
+        "MADISON NATHAN S",
+        "MADISON MARY L"
+      ],
+      "saleDate": "2021-10-04T00:00:00.000Z",
+      "recordingDate": "2021-10-08T00:00:00.000Z",
+      "dueDate": "2051-11-01T00:00:00.000Z",
+      "lenderName": "ON Q FINANCIAL INC",
+      "lenderType": "Mortgage Company",
+      "lenderTypeCode": "M",
+      "loanTypeCode": "U",
+      "loanType": "New Conventional",
+      "loanAmount": 345000,
+      "loanTermMonths": 360,
+      "interestRate": "2.8",
+      "transactionType": "Refi loans and 2nd trust deeds (purchase and non-purchase money trust deeds)",
+      "transactionTypeCode": "G",
+      "documentDate": "2021-10-04T00:00:00.000Z"
+    }
+  ],
+  "openLien": {
+    "totalOpenLienCount": 1,
+    "mortgages": [
+      {
+        "lenderName": "CAPITOL COMMERCE MTG CO",
+        "lenderType": "Mortgage Company",
+        "loanAmount": 160500,
+        "loanTermMonths": 360,
+        "interestRate": 6.43,
+        "loanType": "New Conventional",
+        "subordinateLoanFlag": false,
+        "equityFlag": false,
+        "helocFlag": false,
+        "pudRider": false,
+        "condoRider": false,
+        "multiFamilyRider": false,
+        "assumable": false,
+        "privateLender": false,
+        "secondHomeRider": false,
+        "sellerCarryBack": false,
+        "balloonRider": false
+      }
+    ]
+  },
+  "owner": {
+    "fullName": "4522 W RAVINA LLC",
+    "mailingAddress": {
+      "addressValidity": "Partially Valid",
+      "street": "3225 McLeod Dr # 777",
+      "city": "Las Vegas",
+      "county": "Clark",
+      "state": "NV",
+      "zip": "89121",
+      "zipPlus4": "2257",
+      "hash": "45ba83fc378f6c2ee5a655f19dd58860",
+      "deliveryPointCode": "256",
+      "dpvMatchCode": "S",
+      "dpvFootnotes": "AABBCC"
+    },
+    "names": [
+      {
+        "last": "4522 W RAVINA LLC",
+        "full": "4522 W RAVINA LLC"
+      }
+    ],
+    "mailingOptOut": false,
+    "hasLandline": true
+  },
+  "permit": {
+    "permitCount": 2,
+    "earliestDate": "2018-06-14",
+    "latestDate": "2021-09-03",
+    "totalJobValue": 22750,
+    "allTags": [
+      "hvac",
+      "electrical"
+    ],
+    "tags": {
+      "addition": false,
+      "adu": false,
+      "bathroom": false,
+      "battery": false,
+      "demolition": false,
+      "electrical": true,
+      "electricMeter": false,
+      "evCharger": false,
+      "fireSprinkler": false,
+      "gas": false,
+      "generator": false,
+      "grading": false,
+      "heatPump": false,
+      "hvac": true,
+      "inspectionPassed": true,
+      "kitchen": false,
+      "newConstruction": false,
+      "plumbing": false,
+      "poolAndHotTub": false,
+      "remodel": false,
+      "roofing": false,
+      "solar": false,
+      "waterHeater": false,
+      "windowDoor": false
+    }
+  },
+  "propertyOwnerProfile": {
+    "averageYearBuilt": 1983,
+    "propertiesCount": 8614,
+    "mortgagesTotalBalance": 1647737268,
+    "mortgagesCount": 4325,
+    "mortgagesAverageBalance": 380980
+  },
+  "quickLists": {
+    "absenteeOwner": true,
+    "absenteeOwnerInState": false,
+    "absenteeOwnerOutOfState": true,
+    "activeListing": false,
+    "activeAuction": false,
+    "cashBuyer": true,
+    "corporateOwned": true,
+    "expiredListing": false,
+    "failedListing": true,
+    "freeAndClear": true,
+    "fixAndFlip": false,
+    "forSaleByOwner": false,
+    "highEquity": true,
+    "inherited": false,
+    "involuntaryLien": false,
+    "listedBelowMarketPrice": true,
+    "lowEquity": false,
+    "mailingAddressVacant": false,
+    "onMarket": false,
+    "outOfStateOwner": true,
+    "ownerOccupied": false,
+    "pendingListing": false,
+    "preforeclosure": false,
+    "recentlySold": false,
+    "samePropertyAndMailingAddress": false,
+    "seniorOwner": false,
+    "taxDefault": false,
+    "tiredLandlord": false,
+    "unknownEquity": false,
+    "vacant": false,
+    "vacantLot": false,
+    "hasHoa": true,
+    "hasHoaFees": true,
+    "canceledListing": false,
+    "noticeOfSale": false,
+    "noticeOfDefault": false,
+    "noticeOfLisPendens": false
+  },
+  "sale": {
+    "priorSale": {
+      "mortgages": [
+        {
+          "documentNumber": "20200732182",
+          "pageNumber": null,
+          "bookNumber": null,
+          "recordingDate": "2020-08-11T00:00:00.000Z",
+          "loanAmount": 311920,
+          "loanTypeCode": "U",
+          "loanType": "New Conventional",
+          "financingTypeCode": null,
+          "financingType": null,
+          "interestRate": 3.1,
+          "dueDate": "2050-09-01T00:00:00.000Z",
+          "lenderName": "ON Q FINANCIAL INC",
+          "lenderType": "Mortgage Company",
+          "lenderTypeCode": "M",
+          "loanTerm": "360"
+        }
+      ]
+    }
+  },
+  "valuation": {
+    "estimatedValue": 567493,
+    "priceRangeMin": 482369,
+    "priceRangeMax": 652617,
+    "standardDeviation": 6,
+    "confidenceScore": 94,
+    "asOfDate": "2025-07-09T00:00:00.000Z",
+    "equityCurrentEstimatedBalance": 567493,
+    "ltv": 0,
+    "equityPercent": 100
+  },
+  "searchMeta": {
+    "resultCount": 1,
+    "resultsFound": 435641
+  }
+}

@@ -1,0 +1,29 @@
+[
+  {
+    "name": "number",
+    "type": "text",
+    "label": "Number"
+  },
+  {
+    "name": "dnc",
+    "type": "boolean",
+    "label": "Dnc"
+  },
+  {
+    "name": "meta",
+    "type": "collection",
+    "label": "Meta",
+    "spec": [
+      {
+        "name": "error",
+        "type": "boolean",
+        "label": "Error"
+      },
+      {
+        "name": "matched",
+        "type": "boolean",
+        "label": "Matched"
+      }
+    ]
+  }
+]

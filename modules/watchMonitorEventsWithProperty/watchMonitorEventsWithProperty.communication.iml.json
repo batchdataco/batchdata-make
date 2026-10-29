@@ -1,0 +1,17 @@
+{
+  "url": "/v1/property/lookup/all-attributes",
+  "method": "POST",
+  "body": {
+    "requests": [
+      {
+        "propertyId": "{{payload.propertyId}}"
+      }
+    ]
+  },
+  "response": {
+    "output": {
+      "{{...}}": "{{payload}}",
+      "property": "{{first(body.results.properties)}}"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "url": "/v1/address/geocode",
+  "method": "POST",
+  "body": {
+    "requests": [
+      {
+        "address": "{{parameters.address}}",
+        "requestId": "{{ifempty(parameters.requestId, undefined)}}"
+      }
+    ]
+  },
+  "response": {
+    "iterate": "{{body.result.addresses}}",
+    "output": "{{item}}"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "url": "/v1/address/verify",
+  "method": "POST",
+  "body": {
+    "requests": [
+      {
+        "street": "{{parameters.street}}",
+        "city": "{{ifempty(parameters.city, undefined)}}",
+        "state": "{{ifempty(parameters.state, undefined)}}",
+        "zip": "{{ifempty(parameters.zip, undefined)}}"
+      }
+    ]
+  },
+  "response": {
+    "output": "{{first(body.results.addresses)}}"
+  }
+}

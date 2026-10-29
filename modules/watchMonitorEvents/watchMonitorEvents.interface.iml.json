@@ -1,0 +1,53 @@
+[
+  {
+    "name": "id",
+    "type": "text",
+    "label": "Id"
+  },
+  {
+    "name": "eventId",
+    "type": "text",
+    "label": "Event id"
+  },
+  {
+    "name": "propertyId",
+    "type": "text",
+    "label": "Property id"
+  },
+  {
+    "name": "parcelHash",
+    "type": "text",
+    "label": "Parcel hash"
+  },
+  {
+    "name": "addressHash",
+    "type": "text",
+    "label": "Address hash"
+  },
+  {
+    "name": "addedToSubscriptionIds",
+    "type": "array",
+    "label": "Added to subscription ids",
+    "spec": {
+      "type": "text"
+    }
+  },
+  {
+    "name": "removedFromSubscriptionIds",
+    "type": "array",
+    "label": "Removed from subscription ids",
+    "spec": {
+      "type": "text"
+    }
+  },
+  {
+    "name": "propertyChangedAt",
+    "type": "text",
+    "label": "Property changed at"
+  },
+  {
+    "name": "sentAt",
+    "type": "text",
+    "label": "Sent at"
+  }
+]

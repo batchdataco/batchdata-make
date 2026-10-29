@@ -1,0 +1,33 @@
+{
+  "url": "/v1/property/search",
+  "method": "POST",
+  "body": {
+    "searchCriteria": {
+      "{{...}}": "{{if(parameters.additionalCriteria, parseJSON(parameters.additionalCriteria), undefined)}}",
+      "query": "{{ifempty(parameters.query, undefined)}}",
+      "quickLists": "{{if(length(parameters.quickLists) > 0, parameters.quickLists, undefined)}}",
+      "orQuickLists": "{{if(length(parameters.orQuickLists) > 0, parameters.orQuickLists, undefined)}}"
+    },
+    "options": {
+      "searchSession": {
+        "id": "{{parameters.sessionId}}"
+      },
+      "take": "{{ifempty(parameters.take, 25)}}",
+      "useCursorPagination": true
+    }
+  },
+  "response": {
+    "iterate": "{{body.results.properties}}",
+    "output": {
+      "{{...}}": "{{item}}",
+      "id": "{{item._id}}",
+      "searchMeta": "{{body.results.meta.results}}"
+    },
+    "trigger": {
+      "type": "date",
+      "date": "{{now}}",
+      "id": "{{item._id}}",
+      "order": "unordered"
+    }
+  }
+}

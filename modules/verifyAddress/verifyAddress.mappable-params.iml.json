@@ -1,0 +1,23 @@
+[
+  {
+    "name": "street",
+    "type": "text",
+    "label": "Street",
+    "required": true
+  },
+  {
+    "name": "city",
+    "type": "text",
+    "label": "City"
+  },
+  {
+    "name": "state",
+    "type": "text",
+    "label": "State"
+  },
+  {
+    "name": "zip",
+    "type": "text",
+    "label": "ZIP code"
+  }
+]

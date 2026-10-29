@@ -1,0 +1,1423 @@
+[
+  {
+    "name": "_id",
+    "type": "text",
+    "label": "Id"
+  },
+  {
+    "name": "address",
+    "type": "collection",
+    "label": "Address",
+    "spec": [
+      {
+        "name": "addressValidity",
+        "type": "text",
+        "label": "Address validity"
+      },
+      {
+        "name": "houseNumber",
+        "type": "text",
+        "label": "House number"
+      },
+      {
+        "name": "street",
+        "type": "text",
+        "label": "Street"
+      },
+      {
+        "name": "city",
+        "type": "text",
+        "label": "City"
+      },
+      {
+        "name": "county",
+        "type": "text",
+        "label": "County"
+      },
+      {
+        "name": "state",
+        "type": "text",
+        "label": "State"
+      },
+      {
+        "name": "zip",
+        "type": "text",
+        "label": "Zip"
+      },
+      {
+        "name": "zipPlus4",
+        "type": "text",
+        "label": "Zip plus4"
+      },
+      {
+        "name": "latitude",
+        "type": "number",
+        "label": "Latitude"
+      },
+      {
+        "name": "longitude",
+        "type": "number",
+        "label": "Longitude"
+      },
+      {
+        "name": "countyFipsCode",
+        "type": "text",
+        "label": "County fips code"
+      },
+      {
+        "name": "hash",
+        "type": "text",
+        "label": "Hash"
+      }
+    ]
+  },
+  {
+    "name": "deedHistory",
+    "type": "array",
+    "label": "Deed history",
+    "spec": [
+      {
+        "name": "buyers",
+        "type": "array",
+        "label": "Buyers",
+        "spec": {
+          "type": "text"
+        }
+      },
+      {
+        "name": "sellers",
+        "type": "array",
+        "label": "Sellers",
+        "spec": {
+          "type": "text"
+        }
+      },
+      {
+        "name": "recordingDate",
+        "type": "text",
+        "label": "Recording date"
+      },
+      {
+        "name": "saleDate",
+        "type": "text",
+        "label": "Sale date"
+      },
+      {
+        "name": "documentNumber",
+        "type": "text",
+        "label": "Document number"
+      },
+      {
+        "name": "documentTypeCode",
+        "type": "text",
+        "label": "Document type code"
+      },
+      {
+        "name": "documentType",
+        "type": "text",
+        "label": "Document type"
+      },
+      {
+        "name": "salePrice",
+        "type": "number",
+        "label": "Sale price"
+      },
+      {
+        "name": "salePriceCode",
+        "type": "text",
+        "label": "Sale price code"
+      },
+      {
+        "name": "transferTax",
+        "type": "number",
+        "label": "Transfer tax"
+      },
+      {
+        "name": "ownerRelationshipType",
+        "type": "text",
+        "label": "Owner relationship type"
+      },
+      {
+        "name": "multipleOwners",
+        "type": "boolean",
+        "label": "Multiple owners"
+      },
+      {
+        "name": "transactionType",
+        "type": "text",
+        "label": "Transaction type"
+      },
+      {
+        "name": "transactionTypeCode",
+        "type": "text",
+        "label": "Transaction type code"
+      },
+      {
+        "name": "mailingAddress",
+        "type": "collection",
+        "label": "Mailing address",
+        "spec": [
+          {
+            "name": "street",
+            "type": "text",
+            "label": "Street"
+          },
+          {
+            "name": "city",
+            "type": "text",
+            "label": "City"
+          },
+          {
+            "name": "state",
+            "type": "text",
+            "label": "State"
+          },
+          {
+            "name": "zip",
+            "type": "text",
+            "label": "Zip"
+          },
+          {
+            "name": "hash",
+            "type": "text",
+            "label": "Hash"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "demographics",
+    "type": "collection",
+    "label": "Demographics",
+    "spec": [
+      {
+        "name": "age",
+        "type": "number",
+        "label": "Age"
+      },
+      {
+        "name": "emailDomain",
+        "type": "text",
+        "label": "Email domain"
+      },
+      {
+        "name": "householdSize",
+        "type": "number",
+        "label": "Household size"
+      },
+      {
+        "name": "income",
+        "type": "number",
+        "label": "Income"
+      },
+      {
+        "name": "netWorth",
+        "type": "number",
+        "label": "Net worth"
+      },
+      {
+        "name": "discretionaryIncome",
+        "type": "number",
+        "label": "Discretionary income"
+      },
+      {
+        "name": "homeownerRenterCode",
+        "type": "text",
+        "label": "Homeowner renter code"
+      },
+      {
+        "name": "homeownerRenter",
+        "type": "text",
+        "label": "Homeowner renter"
+      },
+      {
+        "name": "genderCode",
+        "type": "text",
+        "label": "Gender code"
+      },
+      {
+        "name": "gender",
+        "type": "text",
+        "label": "Gender"
+      },
+      {
+        "name": "maritalStatusCode",
+        "type": "text",
+        "label": "Marital status code"
+      },
+      {
+        "name": "maritalStatus",
+        "type": "text",
+        "label": "Marital status"
+      },
+      {
+        "name": "religious",
+        "type": "boolean",
+        "label": "Religious"
+      },
+      {
+        "name": "religiousAffiliationCode",
+        "type": "text",
+        "label": "Religious affiliation code"
+      },
+      {
+        "name": "religiousAffiliation",
+        "type": "text",
+        "label": "Religious affiliation"
+      },
+      {
+        "name": "individualEducationCode",
+        "type": "text",
+        "label": "Individual education code"
+      },
+      {
+        "name": "individualEducation",
+        "type": "text",
+        "label": "Individual education"
+      },
+      {
+        "name": "individualOccupation",
+        "type": "text",
+        "label": "Individual occupation"
+      },
+      {
+        "name": "individualOccupationCode",
+        "type": "text",
+        "label": "Individual occupation code"
+      },
+      {
+        "name": "estimatedAreaCreditRating",
+        "type": "text",
+        "label": "Estimated area credit rating"
+      }
+    ]
+  },
+  {
+    "name": "foreclosure",
+    "type": "collection",
+    "label": "Foreclosure",
+    "spec": [
+      {
+        "name": "statusCode",
+        "type": "text",
+        "label": "Status code"
+      },
+      {
+        "name": "status",
+        "type": "text",
+        "label": "Status"
+      },
+      {
+        "name": "recordingDate",
+        "type": "text",
+        "label": "Recording date"
+      },
+      {
+        "name": "filingDate",
+        "type": "text",
+        "label": "Filing date"
+      },
+      {
+        "name": "documentNumber",
+        "type": "text",
+        "label": "Document number"
+      },
+      {
+        "name": "documentTypeCode",
+        "type": "text",
+        "label": "Document type code"
+      },
+      {
+        "name": "documentType",
+        "type": "text",
+        "label": "Document type"
+      },
+      {
+        "name": "releaseDate",
+        "type": "text",
+        "label": "Release date"
+      }
+    ]
+  },
+  {
+    "name": "ids",
+    "type": "collection",
+    "label": "Ids",
+    "spec": [
+      {
+        "name": "apn",
+        "type": "text",
+        "label": "Apn"
+      }
+    ]
+  },
+  {
+    "name": "intel",
+    "type": "collection",
+    "label": "Intel",
+    "spec": [
+      {
+        "name": "salePropensity",
+        "type": "number",
+        "label": "Sale propensity"
+      },
+      {
+        "name": "salePropensityStatus",
+        "type": "text",
+        "label": "Sale propensity status"
+      },
+      {
+        "name": "salePropensityCategory",
+        "type": "text",
+        "label": "Sale propensity category"
+      }
+    ]
+  },
+  {
+    "name": "involuntaryLien",
+    "type": "collection",
+    "label": "Involuntary lien",
+    "spec": [
+      {
+        "name": "liens",
+        "type": "array",
+        "label": "Liens",
+        "spec": [
+          {
+            "name": "documentNumber",
+            "type": "text",
+            "label": "Document number"
+          },
+          {
+            "name": "documentType",
+            "type": "text",
+            "label": "Document type"
+          },
+          {
+            "name": "documentTypeCode",
+            "type": "text",
+            "label": "Document type code"
+          },
+          {
+            "name": "lienType",
+            "type": "text",
+            "label": "Lien type"
+          },
+          {
+            "name": "lienTypeCode",
+            "type": "text",
+            "label": "Lien type code"
+          },
+          {
+            "name": "recordingDate",
+            "type": "text",
+            "label": "Recording date"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "listing",
+    "type": "collection",
+    "label": "Listing",
+    "spec": [
+      {
+        "name": "status",
+        "type": "text",
+        "label": "Status"
+      },
+      {
+        "name": "price",
+        "type": "number",
+        "label": "Price"
+      },
+      {
+        "name": "rental",
+        "type": "boolean",
+        "label": "Rental"
+      },
+      {
+        "name": "originalListingDate",
+        "type": "text",
+        "label": "Original listing date"
+      },
+      {
+        "name": "maxListPrice",
+        "type": "number",
+        "label": "Max list price"
+      },
+      {
+        "name": "maxListPriceDate",
+        "type": "text",
+        "label": "Max list price date"
+      },
+      {
+        "name": "minListPrice",
+        "type": "number",
+        "label": "Min list price"
+      },
+      {
+        "name": "minListPriceDate",
+        "type": "text",
+        "label": "Min list price date"
+      },
+      {
+        "name": "soldPrice",
+        "type": "number",
+        "label": "Sold price"
+      },
+      {
+        "name": "soldDate",
+        "type": "text",
+        "label": "Sold date"
+      },
+      {
+        "name": "failedListingDate",
+        "type": "text",
+        "label": "Failed listing date"
+      },
+      {
+        "name": "bedroomCount",
+        "type": "number",
+        "label": "Bedroom count"
+      },
+      {
+        "name": "bathroomCount",
+        "type": "number",
+        "label": "Bathroom count"
+      },
+      {
+        "name": "totalBuildingAreaSquareFeet",
+        "type": "number",
+        "label": "Total building area square feet"
+      },
+      {
+        "name": "lotSizeSquareFeet",
+        "type": "number",
+        "label": "Lot size square feet"
+      },
+      {
+        "name": "propertyType",
+        "type": "text",
+        "label": "Property type"
+      },
+      {
+        "name": "yearBuilt",
+        "type": "number",
+        "label": "Year built"
+      },
+      {
+        "name": "appliances",
+        "type": "array",
+        "label": "Appliances",
+        "spec": {
+          "type": "text"
+        }
+      },
+      {
+        "name": "roofTypes",
+        "type": "array",
+        "label": "Roof types",
+        "spec": {
+          "type": "text"
+        }
+      },
+      {
+        "name": "coolingTypes",
+        "type": "array",
+        "label": "Cooling types",
+        "spec": {
+          "type": "text"
+        }
+      },
+      {
+        "name": "heatingTypes",
+        "type": "array",
+        "label": "Heating types",
+        "spec": {
+          "type": "text"
+        }
+      },
+      {
+        "name": "newConstruction",
+        "type": "boolean",
+        "label": "New construction"
+      },
+      {
+        "name": "listingUrl",
+        "type": "text",
+        "label": "Listing url"
+      },
+      {
+        "name": "livingArea",
+        "type": "number",
+        "label": "Living area"
+      },
+      {
+        "name": "taxes",
+        "type": "array",
+        "label": "Taxes",
+        "spec": [
+          {
+            "name": "amount",
+            "type": "number",
+            "label": "Amount"
+          },
+          {
+            "name": "year",
+            "type": "number",
+            "label": "Year"
+          }
+        ]
+      },
+      {
+        "name": "salePriceIsEstimated",
+        "type": "boolean",
+        "label": "Sale price is estimated"
+      }
+    ]
+  },
+  {
+    "name": "mortgageHistory",
+    "type": "array",
+    "label": "Mortgage history",
+    "spec": [
+      {
+        "name": "borrowers",
+        "type": "array",
+        "label": "Borrowers",
+        "spec": {
+          "type": "text"
+        }
+      },
+      {
+        "name": "saleDate",
+        "type": "text",
+        "label": "Sale date"
+      },
+      {
+        "name": "recordingDate",
+        "type": "text",
+        "label": "Recording date"
+      },
+      {
+        "name": "dueDate",
+        "type": "text",
+        "label": "Due date"
+      },
+      {
+        "name": "lenderName",
+        "type": "text",
+        "label": "Lender name"
+      },
+      {
+        "name": "lenderType",
+        "type": "text",
+        "label": "Lender type"
+      },
+      {
+        "name": "lenderTypeCode",
+        "type": "text",
+        "label": "Lender type code"
+      },
+      {
+        "name": "loanTypeCode",
+        "type": "text",
+        "label": "Loan type code"
+      },
+      {
+        "name": "loanType",
+        "type": "text",
+        "label": "Loan type"
+      },
+      {
+        "name": "loanAmount",
+        "type": "number",
+        "label": "Loan amount"
+      },
+      {
+        "name": "loanTermMonths",
+        "type": "number",
+        "label": "Loan term months"
+      },
+      {
+        "name": "interestRate",
+        "type": "text",
+        "label": "Interest rate"
+      },
+      {
+        "name": "transactionType",
+        "type": "text",
+        "label": "Transaction type"
+      },
+      {
+        "name": "transactionTypeCode",
+        "type": "text",
+        "label": "Transaction type code"
+      },
+      {
+        "name": "documentDate",
+        "type": "text",
+        "label": "Document date"
+      }
+    ]
+  },
+  {
+    "name": "openLien",
+    "type": "collection",
+    "label": "Open lien",
+    "spec": [
+      {
+        "name": "totalOpenLienCount",
+        "type": "number",
+        "label": "Total open lien count"
+      },
+      {
+        "name": "mortgages",
+        "type": "array",
+        "label": "Mortgages",
+        "spec": [
+          {
+            "name": "lenderName",
+            "type": "text",
+            "label": "Lender name"
+          },
+          {
+            "name": "lenderType",
+            "type": "text",
+            "label": "Lender type"
+          },
+          {
+            "name": "loanAmount",
+            "type": "number",
+            "label": "Loan amount"
+          },
+          {
+            "name": "loanTermMonths",
+            "type": "number",
+            "label": "Loan term months"
+          },
+          {
+            "name": "interestRate",
+            "type": "number",
+            "label": "Interest rate"
+          },
+          {
+            "name": "loanType",
+            "type": "text",
+            "label": "Loan type"
+          },
+          {
+            "name": "subordinateLoanFlag",
+            "type": "boolean",
+            "label": "Subordinate loan flag"
+          },
+          {
+            "name": "equityFlag",
+            "type": "boolean",
+            "label": "Equity flag"
+          },
+          {
+            "name": "helocFlag",
+            "type": "boolean",
+            "label": "Heloc flag"
+          },
+          {
+            "name": "pudRider",
+            "type": "boolean",
+            "label": "Pud rider"
+          },
+          {
+            "name": "condoRider",
+            "type": "boolean",
+            "label": "Condo rider"
+          },
+          {
+            "name": "multiFamilyRider",
+            "type": "boolean",
+            "label": "Multi family rider"
+          },
+          {
+            "name": "assumable",
+            "type": "boolean",
+            "label": "Assumable"
+          },
+          {
+            "name": "privateLender",
+            "type": "boolean",
+            "label": "Private lender"
+          },
+          {
+            "name": "secondHomeRider",
+            "type": "boolean",
+            "label": "Second home rider"
+          },
+          {
+            "name": "sellerCarryBack",
+            "type": "boolean",
+            "label": "Seller carry back"
+          },
+          {
+            "name": "balloonRider",
+            "type": "boolean",
+            "label": "Balloon rider"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "owner",
+    "type": "collection",
+    "label": "Owner",
+    "spec": [
+      {
+        "name": "fullName",
+        "type": "text",
+        "label": "Full name"
+      },
+      {
+        "name": "mailingAddress",
+        "type": "collection",
+        "label": "Mailing address",
+        "spec": [
+          {
+            "name": "addressValidity",
+            "type": "text",
+            "label": "Address validity"
+          },
+          {
+            "name": "street",
+            "type": "text",
+            "label": "Street"
+          },
+          {
+            "name": "city",
+            "type": "text",
+            "label": "City"
+          },
+          {
+            "name": "county",
+            "type": "text",
+            "label": "County"
+          },
+          {
+            "name": "state",
+            "type": "text",
+            "label": "State"
+          },
+          {
+            "name": "zip",
+            "type": "text",
+            "label": "Zip"
+          },
+          {
+            "name": "zipPlus4",
+            "type": "text",
+            "label": "Zip plus4"
+          },
+          {
+            "name": "hash",
+            "type": "text",
+            "label": "Hash"
+          },
+          {
+            "name": "deliveryPointCode",
+            "type": "text",
+            "label": "Delivery point code"
+          },
+          {
+            "name": "dpvMatchCode",
+            "type": "text",
+            "label": "Dpv match code"
+          },
+          {
+            "name": "dpvFootnotes",
+            "type": "text",
+            "label": "Dpv footnotes"
+          }
+        ]
+      },
+      {
+        "name": "names",
+        "type": "array",
+        "label": "Names",
+        "spec": [
+          {
+            "name": "last",
+            "type": "text",
+            "label": "Last"
+          },
+          {
+            "name": "full",
+            "type": "text",
+            "label": "Full"
+          }
+        ]
+      },
+      {
+        "name": "mailingOptOut",
+        "type": "boolean",
+        "label": "Mailing opt out"
+      },
+      {
+        "name": "hasLandline",
+        "type": "boolean",
+        "label": "Has landline"
+      }
+    ]
+  },
+  {
+    "name": "permit",
+    "type": "collection",
+    "label": "Permit",
+    "spec": [
+      {
+        "name": "permitCount",
+        "type": "number",
+        "label": "Permit count"
+      },
+      {
+        "name": "earliestDate",
+        "type": "text",
+        "label": "Earliest date"
+      },
+      {
+        "name": "latestDate",
+        "type": "text",
+        "label": "Latest date"
+      },
+      {
+        "name": "totalJobValue",
+        "type": "number",
+        "label": "Total job value"
+      },
+      {
+        "name": "allTags",
+        "type": "array",
+        "label": "All tags",
+        "spec": {
+          "type": "text"
+        }
+      },
+      {
+        "name": "tags",
+        "type": "collection",
+        "label": "Tags",
+        "spec": [
+          {
+            "name": "addition",
+            "type": "boolean",
+            "label": "Addition"
+          },
+          {
+            "name": "adu",
+            "type": "boolean",
+            "label": "Adu"
+          },
+          {
+            "name": "bathroom",
+            "type": "boolean",
+            "label": "Bathroom"
+          },
+          {
+            "name": "battery",
+            "type": "boolean",
+            "label": "Battery"
+          },
+          {
+            "name": "demolition",
+            "type": "boolean",
+            "label": "Demolition"
+          },
+          {
+            "name": "electrical",
+            "type": "boolean",
+            "label": "Electrical"
+          },
+          {
+            "name": "electricMeter",
+            "type": "boolean",
+            "label": "Electric meter"
+          },
+          {
+            "name": "evCharger",
+            "type": "boolean",
+            "label": "Ev charger"
+          },
+          {
+            "name": "fireSprinkler",
+            "type": "boolean",
+            "label": "Fire sprinkler"
+          },
+          {
+            "name": "gas",
+            "type": "boolean",
+            "label": "Gas"
+          },
+          {
+            "name": "generator",
+            "type": "boolean",
+            "label": "Generator"
+          },
+          {
+            "name": "grading",
+            "type": "boolean",
+            "label": "Grading"
+          },
+          {
+            "name": "heatPump",
+            "type": "boolean",
+            "label": "Heat pump"
+          },
+          {
+            "name": "hvac",
+            "type": "boolean",
+            "label": "Hvac"
+          },
+          {
+            "name": "inspectionPassed",
+            "type": "boolean",
+            "label": "Inspection passed"
+          },
+          {
+            "name": "kitchen",
+            "type": "boolean",
+            "label": "Kitchen"
+          },
+          {
+            "name": "newConstruction",
+            "type": "boolean",
+            "label": "New construction"
+          },
+          {
+            "name": "plumbing",
+            "type": "boolean",
+            "label": "Plumbing"
+          },
+          {
+            "name": "poolAndHotTub",
+            "type": "boolean",
+            "label": "Pool and hot tub"
+          },
+          {
+            "name": "remodel",
+            "type": "boolean",
+            "label": "Remodel"
+          },
+          {
+            "name": "roofing",
+            "type": "boolean",
+            "label": "Roofing"
+          },
+          {
+            "name": "solar",
+            "type": "boolean",
+            "label": "Solar"
+          },
+          {
+            "name": "waterHeater",
+            "type": "boolean",
+            "label": "Water heater"
+          },
+          {
+            "name": "windowDoor",
+            "type": "boolean",
+            "label": "Window door"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "propertyOwnerProfile",
+    "type": "collection",
+    "label": "Property owner profile",
+    "spec": [
+      {
+        "name": "averageYearBuilt",
+        "type": "number",
+        "label": "Average year built"
+      },
+      {
+        "name": "propertiesCount",
+        "type": "number",
+        "label": "Properties count"
+      },
+      {
+        "name": "mortgagesTotalBalance",
+        "type": "number",
+        "label": "Mortgages total balance"
+      },
+      {
+        "name": "mortgagesCount",
+        "type": "number",
+        "label": "Mortgages count"
+      },
+      {
+        "name": "mortgagesAverageBalance",
+        "type": "number",
+        "label": "Mortgages average balance"
+      }
+    ]
+  },
+  {
+    "name": "quickLists",
+    "type": "collection",
+    "label": "Quick lists",
+    "spec": [
+      {
+        "name": "absenteeOwner",
+        "type": "boolean",
+        "label": "Absentee owner"
+      },
+      {
+        "name": "absenteeOwnerInState",
+        "type": "boolean",
+        "label": "Absentee owner in state"
+      },
+      {
+        "name": "absenteeOwnerOutOfState",
+        "type": "boolean",
+        "label": "Absentee owner out of state"
+      },
+      {
+        "name": "activeListing",
+        "type": "boolean",
+        "label": "Active listing"
+      },
+      {
+        "name": "activeAuction",
+        "type": "boolean",
+        "label": "Active auction"
+      },
+      {
+        "name": "cashBuyer",
+        "type": "boolean",
+        "label": "Cash buyer"
+      },
+      {
+        "name": "corporateOwned",
+        "type": "boolean",
+        "label": "Corporate owned"
+      },
+      {
+        "name": "expiredListing",
+        "type": "boolean",
+        "label": "Expired listing"
+      },
+      {
+        "name": "failedListing",
+        "type": "boolean",
+        "label": "Failed listing"
+      },
+      {
+        "name": "freeAndClear",
+        "type": "boolean",
+        "label": "Free and clear"
+      },
+      {
+        "name": "fixAndFlip",
+        "type": "boolean",
+        "label": "Fix and flip"
+      },
+      {
+        "name": "forSaleByOwner",
+        "type": "boolean",
+        "label": "For sale by owner"
+      },
+      {
+        "name": "highEquity",
+        "type": "boolean",
+        "label": "High equity"
+      },
+      {
+        "name": "inherited",
+        "type": "boolean",
+        "label": "Inherited"
+      },
+      {
+        "name": "involuntaryLien",
+        "type": "boolean",
+        "label": "Involuntary lien"
+      },
+      {
+        "name": "listedBelowMarketPrice",
+        "type": "boolean",
+        "label": "Listed below market price"
+      },
+      {
+        "name": "lowEquity",
+        "type": "boolean",
+        "label": "Low equity"
+      },
+      {
+        "name": "mailingAddressVacant",
+        "type": "boolean",
+        "label": "Mailing address vacant"
+      },
+      {
+        "name": "onMarket",
+        "type": "boolean",
+        "label": "On market"
+      },
+      {
+        "name": "outOfStateOwner",
+        "type": "boolean",
+        "label": "Out of state owner"
+      },
+      {
+        "name": "ownerOccupied",
+        "type": "boolean",
+        "label": "Owner occupied"
+      },
+      {
+        "name": "pendingListing",
+        "type": "boolean",
+        "label": "Pending listing"
+      },
+      {
+        "name": "preforeclosure",
+        "type": "boolean",
+        "label": "Preforeclosure"
+      },
+      {
+        "name": "recentlySold",
+        "type": "boolean",
+        "label": "Recently sold"
+      },
+      {
+        "name": "samePropertyAndMailingAddress",
+        "type": "boolean",
+        "label": "Same property and mailing address"
+      },
+      {
+        "name": "seniorOwner",
+        "type": "boolean",
+        "label": "Senior owner"
+      },
+      {
+        "name": "taxDefault",
+        "type": "boolean",
+        "label": "Tax default"
+      },
+      {
+        "name": "tiredLandlord",
+        "type": "boolean",
+        "label": "Tired landlord"
+      },
+      {
+        "name": "unknownEquity",
+        "type": "boolean",
+        "label": "Unknown equity"
+      },
+      {
+        "name": "vacant",
+        "type": "boolean",
+        "label": "Vacant"
+      },
+      {
+        "name": "vacantLot",
+        "type": "boolean",
+        "label": "Vacant lot"
+      },
+      {
+        "name": "hasHoa",
+        "type": "boolean",
+        "label": "Has hoa"
+      },
+      {
+        "name": "hasHoaFees",
+        "type": "boolean",
+        "label": "Has hoa fees"
+      },
+      {
+        "name": "canceledListing",
+        "type": "boolean",
+        "label": "Canceled listing"
+      },
+      {
+        "name": "noticeOfSale",
+        "type": "boolean",
+        "label": "Notice of sale"
+      },
+      {
+        "name": "noticeOfDefault",
+        "type": "boolean",
+        "label": "Notice of default"
+      },
+      {
+        "name": "noticeOfLisPendens",
+        "type": "boolean",
+        "label": "Notice of lis pendens"
+      }
+    ]
+  },
+  {
+    "name": "sale",
+    "type": "collection",
+    "label": "Sale",
+    "spec": [
+      {
+        "name": "priorSale",
+        "type": "collection",
+        "label": "Prior sale",
+        "spec": [
+          {
+            "name": "mortgages",
+            "type": "array",
+            "label": "Mortgages",
+            "spec": [
+              {
+                "name": "documentNumber",
+                "type": "text",
+                "label": "Document number"
+              },
+              {
+                "name": "pageNumber",
+                "type": "text",
+                "label": "Page number"
+              },
+              {
+                "name": "bookNumber",
+                "type": "text",
+                "label": "Book number"
+              },
+              {
+                "name": "recordingDate",
+                "type": "text",
+                "label": "Recording date"
+              },
+              {
+                "name": "loanAmount",
+                "type": "number",
+                "label": "Loan amount"
+              },
+              {
+                "name": "loanTypeCode",
+                "type": "text",
+                "label": "Loan type code"
+              },
+              {
+                "name": "loanType",
+                "type": "text",
+                "label": "Loan type"
+              },
+              {
+                "name": "financingTypeCode",
+                "type": "text",
+                "label": "Financing type code"
+              },
+              {
+                "name": "financingType",
+                "type": "text",
+                "label": "Financing type"
+              },
+              {
+                "name": "interestRate",
+                "type": "number",
+                "label": "Interest rate"
+              },
+              {
+                "name": "dueDate",
+                "type": "text",
+                "label": "Due date"
+              },
+              {
+                "name": "lenderName",
+                "type": "text",
+                "label": "Lender name"
+              },
+              {
+                "name": "lenderType",
+                "type": "text",
+                "label": "Lender type"
+              },
+              {
+                "name": "lenderTypeCode",
+                "type": "text",
+                "label": "Lender type code"
+              },
+              {
+                "name": "loanTerm",
+                "type": "text",
+                "label": "Loan term"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "valuation",
+    "type": "collection",
+    "label": "Valuation",
+    "spec": [
+      {
+        "name": "estimatedValue",
+        "type": "number",
+        "label": "Estimated value"
+      },
+      {
+        "name": "priceRangeMin",
+        "type": "number",
+        "label": "Price range min"
+      },
+      {
+        "name": "priceRangeMax",
+        "type": "number",
+        "label": "Price range max"
+      },
+      {
+        "name": "standardDeviation",
+        "type": "number",
+        "label": "Standard deviation"
+      },
+      {
+        "name": "confidenceScore",
+        "type": "number",
+        "label": "Confidence score"
+      },
+      {
+        "name": "asOfDate",
+        "type": "text",
+        "label": "As of date"
+      },
+      {
+        "name": "equityCurrentEstimatedBalance",
+        "type": "number",
+        "label": "Equity current estimated balance"
+      },
+      {
+        "name": "ltv",
+        "type": "number",
+        "label": "Ltv"
+      },
+      {
+        "name": "equityPercent",
+        "type": "number",
+        "label": "Equity percent"
+      }
+    ]
+  },
+  {
+    "name": "searchMeta",
+    "type": "collection",
+    "label": "Search meta",
+    "spec": [
+      {
+        "name": "resultCount",
+        "type": "number",
+        "label": "Result count"
+      },
+      {
+        "name": "resultsFound",
+        "type": "number",
+        "label": "Results found"
+      }
+    ]
+  }
+]

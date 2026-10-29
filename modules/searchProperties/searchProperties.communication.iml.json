@@ -1,0 +1,18 @@
+{
+  "url": "/v1/property/search",
+  "method": "POST",
+  "body": {
+    "searchCriteria": "{{omit(parameters, 'take', 'skip')}}",
+    "options": {
+      "take": "{{ifempty(parameters.take, 25)}}",
+      "skip": "{{ifempty(parameters.skip, undefined)}}"
+    }
+  },
+  "response": {
+    "iterate": "{{body.results.properties}}",
+    "output": {
+      "{{...}}": "{{item}}",
+      "searchMeta": "{{body.results.meta.results}}"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+[
+  {
+    "name": "addresses",
+    "label": "Addresses",
+    "required": true,
+    "help": "One row per address, up to 100.",
+    "type": "array",
+    "spec": [
+      {
+        "name": "street",
+        "type": "text",
+        "label": "Street"
+      },
+      {
+        "name": "city",
+        "type": "text",
+        "label": "City"
+      },
+      {
+        "name": "state",
+        "type": "text",
+        "label": "State"
+      },
+      {
+        "name": "zip",
+        "type": "text",
+        "label": "ZIP Code"
+      }
+    ]
+  }
+]

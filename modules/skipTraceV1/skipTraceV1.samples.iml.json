@@ -1,0 +1,97 @@
+{
+  "bankruptcy": {},
+  "dnc": {},
+  "emails": [
+    {
+      "email": "johndoe@gmail.net"
+    }
+  ],
+  "mailingAddress": {},
+  "name": {
+    "first": "john",
+    "last": "doe"
+  },
+  "phoneNumbers": [
+    {
+      "number": "1111111111",
+      "carrier": "OMNIPOINT COMMUNICATIONS- INC.",
+      "type": "Mobile",
+      "tested": true,
+      "reachable": true,
+      "score": 100
+    },
+    {
+      "number": "2222222222",
+      "carrier": "VERIZON NEW YORK- INC.",
+      "type": "Land Line",
+      "tested": false,
+      "reachable": false,
+      "score": 95
+    },
+    {
+      "number": "3333333333",
+      "carrier": "VERIZON NEW YORK- INC.",
+      "type": "Land Line",
+      "tested": true,
+      "reachable": true,
+      "score": 90
+    },
+    {
+      "number": "4444444444",
+      "carrier": "VERIZON NEW YORK- INC.",
+      "type": "Land Line",
+      "tested": true,
+      "reachable": true,
+      "score": 85
+    }
+  ],
+  "litigator": false,
+  "propertyAddress": {
+    "houseNumber": "1011",
+    "street": "1011 Rosegold St",
+    "city": "Franklin Square",
+    "county": "Nassau",
+    "state": "NY",
+    "zip": "11010",
+    "zipPlus4": "2507",
+    "formattedStreet": "Rosegold St",
+    "streetNoUnit": "1011 Rosegold St",
+    "hash": "b7bd4cea51b26af459febfbf822c99e2"
+  },
+  "property": {
+    "address": {
+      "houseNumber": "1011",
+      "street": "1011 Rosegold St",
+      "city": "Franklin Square",
+      "county": "Nassau",
+      "state": "NY",
+      "zip": "11010",
+      "zipPlus4": "2507",
+      "hash": "b7bd4cea51b26af459febfbf822c99e2",
+      "formattedStreet": "Rosegold St",
+      "streetNoUnit": "1011 Rosegold St"
+    },
+    "owner": {
+      "name": {
+        "first": "john",
+        "last": "doe"
+      },
+      "mailingAddress": {
+        "houseNumber": "1011",
+        "street": "1011 Rosegold St",
+        "city": "Franklin Square",
+        "county": "Nassau",
+        "state": "NY",
+        "zip": "11010",
+        "formattedStreet": "Rosegold St",
+        "streetNoUnit": "1011 Rosegold St",
+        "hash": "b7bd4cea51b26af459febfbf822c99e2",
+        "zipPlus4": "2507"
+      }
+    }
+  },
+  "meta": {
+    "matched": true,
+    "error": false
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "propertyId": "P-85053-0a1b2c",
+  "address": {
+    "street": "3802 W Evans Dr",
+    "city": "Phoenix",
+    "state": "AZ",
+    "zip": "85053",
+    "latitude": 33.6203,
+    "longitude": -112.1394
+  },
+  "fips": "04013",
+  "apn": "207-14-118",
+  "ownership": {
+    "isCurrentOwner": true,
+    "isPreviousOwner": false
+  },
+  "resultsFound": 48,
+  "nextPageCursor": "eyJwYWdlIjoyfQ"
+}

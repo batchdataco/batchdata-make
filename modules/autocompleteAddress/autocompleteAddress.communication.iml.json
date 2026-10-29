@@ -1,0 +1,17 @@
+{
+  "url": "/v1/address/autocomplete",
+  "method": "POST",
+  "body": {
+    "searchCriteria": {
+      "query": "{{parameters.query}}"
+    },
+    "options": {
+      "take": "{{ifempty(parameters.take, 5)}}",
+      "uspsVerifiedAddresses": "{{if(parameters.uspsVerifiedOnly == true, true, undefined)}}"
+    }
+  },
+  "response": {
+    "iterate": "{{body.result.suggestions}}",
+    "output": "{{item}}"
+  }
+}

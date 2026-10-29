@@ -1,0 +1,14 @@
+{
+  "id": "cjui0E2T1LKxWOD",
+  "searchCriteria": {
+    "query": "Phoenix, AZ",
+    "orQuickLists": [
+      "on-market"
+    ]
+  },
+  "deliveryConfig": {
+    "type": "kinesis",
+    "streamName": "my-stream",
+    "region": "us-west-2"
+  }
+}

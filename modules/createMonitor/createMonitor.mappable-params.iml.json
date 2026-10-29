@@ -1,0 +1,425 @@
+[
+  {
+    "name": "query",
+    "label": "Location Query",
+    "help": "City, county, ZIP code or address text, for example \"Phoenix, AZ\".",
+    "type": "text"
+  },
+  {
+    "name": "quickLists",
+    "label": "Quick Lists (Include)",
+    "help": "Properties must match ALL selected lists.",
+    "type": "array",
+    "spec": {
+      "type": "select",
+      "options": [
+        {
+          "label": "absentee-owner",
+          "value": "absentee-owner"
+        },
+        {
+          "label": "active-auction",
+          "value": "active-auction"
+        },
+        {
+          "label": "active-listing",
+          "value": "active-listing"
+        },
+        {
+          "label": "canceled-listing",
+          "value": "canceled-listing"
+        },
+        {
+          "label": "cash-buyer",
+          "value": "cash-buyer"
+        },
+        {
+          "label": "corporate-owned",
+          "value": "corporate-owned"
+        },
+        {
+          "label": "expired-listing",
+          "value": "expired-listing"
+        },
+        {
+          "label": "failed-listing",
+          "value": "failed-listing"
+        },
+        {
+          "label": "fix-and-flip",
+          "value": "fix-and-flip"
+        },
+        {
+          "label": "free-and-clear",
+          "value": "free-and-clear"
+        },
+        {
+          "label": "for-sale-by-owner",
+          "value": "for-sale-by-owner"
+        },
+        {
+          "label": "has-hoa",
+          "value": "has-hoa"
+        },
+        {
+          "label": "has-hoa-fees",
+          "value": "has-hoa-fees"
+        },
+        {
+          "label": "high-equity",
+          "value": "high-equity"
+        },
+        {
+          "label": "inherited",
+          "value": "inherited"
+        },
+        {
+          "label": "involuntary-lien",
+          "value": "involuntary-lien"
+        },
+        {
+          "label": "in-state-absentee-owner",
+          "value": "in-state-absentee-owner"
+        },
+        {
+          "label": "listed-below-market-price",
+          "value": "listed-below-market-price"
+        },
+        {
+          "label": "low-equity",
+          "value": "low-equity"
+        },
+        {
+          "label": "mailing-address-vacant",
+          "value": "mailing-address-vacant"
+        },
+        {
+          "label": "notice-of-default",
+          "value": "notice-of-default"
+        },
+        {
+          "label": "notice-of-lis-pendens",
+          "value": "notice-of-lis-pendens"
+        },
+        {
+          "label": "notice-of-sale",
+          "value": "notice-of-sale"
+        },
+        {
+          "label": "on-market",
+          "value": "on-market"
+        },
+        {
+          "label": "out-of-state-absentee-owner",
+          "value": "out-of-state-absentee-owner"
+        },
+        {
+          "label": "out-of-state-owner",
+          "value": "out-of-state-owner"
+        },
+        {
+          "label": "owner-occupied",
+          "value": "owner-occupied"
+        },
+        {
+          "label": "pending-listing",
+          "value": "pending-listing"
+        },
+        {
+          "label": "preforeclosure",
+          "value": "preforeclosure"
+        },
+        {
+          "label": "recently-sold",
+          "value": "recently-sold"
+        },
+        {
+          "label": "same-property-and-mailing-address",
+          "value": "same-property-and-mailing-address"
+        },
+        {
+          "label": "senior-owner",
+          "value": "senior-owner"
+        },
+        {
+          "label": "tax-default",
+          "value": "tax-default"
+        },
+        {
+          "label": "tired-landlord",
+          "value": "tired-landlord"
+        },
+        {
+          "label": "trust-owned",
+          "value": "trust-owned"
+        },
+        {
+          "label": "unknown-equity",
+          "value": "unknown-equity"
+        },
+        {
+          "label": "vacant",
+          "value": "vacant"
+        },
+        {
+          "label": "vacant-lot",
+          "value": "vacant-lot"
+        }
+      ]
+    }
+  },
+  {
+    "name": "orQuickLists",
+    "label": "Quick Lists (Match Any)",
+    "help": "Properties must match AT LEAST ONE selected list.",
+    "type": "array",
+    "spec": {
+      "type": "select",
+      "options": [
+        {
+          "label": "absentee-owner",
+          "value": "absentee-owner"
+        },
+        {
+          "label": "active-auction",
+          "value": "active-auction"
+        },
+        {
+          "label": "active-listing",
+          "value": "active-listing"
+        },
+        {
+          "label": "canceled-listing",
+          "value": "canceled-listing"
+        },
+        {
+          "label": "cash-buyer",
+          "value": "cash-buyer"
+        },
+        {
+          "label": "corporate-owned",
+          "value": "corporate-owned"
+        },
+        {
+          "label": "expired-listing",
+          "value": "expired-listing"
+        },
+        {
+          "label": "failed-listing",
+          "value": "failed-listing"
+        },
+        {
+          "label": "fix-and-flip",
+          "value": "fix-and-flip"
+        },
+        {
+          "label": "free-and-clear",
+          "value": "free-and-clear"
+        },
+        {
+          "label": "for-sale-by-owner",
+          "value": "for-sale-by-owner"
+        },
+        {
+          "label": "has-hoa",
+          "value": "has-hoa"
+        },
+        {
+          "label": "has-hoa-fees",
+          "value": "has-hoa-fees"
+        },
+        {
+          "label": "high-equity",
+          "value": "high-equity"
+        },
+        {
+          "label": "inherited",
+          "value": "inherited"
+        },
+        {
+          "label": "involuntary-lien",
+          "value": "involuntary-lien"
+        },
+        {
+          "label": "in-state-absentee-owner",
+          "value": "in-state-absentee-owner"
+        },
+        {
+          "label": "listed-below-market-price",
+          "value": "listed-below-market-price"
+        },
+        {
+          "label": "low-equity",
+          "value": "low-equity"
+        },
+        {
+          "label": "mailing-address-vacant",
+          "value": "mailing-address-vacant"
+        },
+        {
+          "label": "notice-of-default",
+          "value": "notice-of-default"
+        },
+        {
+          "label": "notice-of-lis-pendens",
+          "value": "notice-of-lis-pendens"
+        },
+        {
+          "label": "notice-of-sale",
+          "value": "notice-of-sale"
+        },
+        {
+          "label": "on-market",
+          "value": "on-market"
+        },
+        {
+          "label": "out-of-state-absentee-owner",
+          "value": "out-of-state-absentee-owner"
+        },
+        {
+          "label": "out-of-state-owner",
+          "value": "out-of-state-owner"
+        },
+        {
+          "label": "owner-occupied",
+          "value": "owner-occupied"
+        },
+        {
+          "label": "pending-listing",
+          "value": "pending-listing"
+        },
+        {
+          "label": "preforeclosure",
+          "value": "preforeclosure"
+        },
+        {
+          "label": "recently-sold",
+          "value": "recently-sold"
+        },
+        {
+          "label": "same-property-and-mailing-address",
+          "value": "same-property-and-mailing-address"
+        },
+        {
+          "label": "senior-owner",
+          "value": "senior-owner"
+        },
+        {
+          "label": "tax-default",
+          "value": "tax-default"
+        },
+        {
+          "label": "tired-landlord",
+          "value": "tired-landlord"
+        },
+        {
+          "label": "trust-owned",
+          "value": "trust-owned"
+        },
+        {
+          "label": "unknown-equity",
+          "value": "unknown-equity"
+        },
+        {
+          "label": "vacant",
+          "value": "vacant"
+        },
+        {
+          "label": "vacant-lot",
+          "value": "vacant-lot"
+        }
+      ]
+    }
+  },
+  {
+    "name": "additionalCriteria",
+    "label": "Additional Criteria (JSON)",
+    "help": "Optional JSON object merged into the search criteria. The fields above win on conflict. Callback URL keys are ignored. Optional JSON object with extra filters, for example {\"general\":{\"propertyTypeCategory\":{\"equals\":\"Single Family\"}}}. Fields you fill in above take priority.",
+    "type": "text"
+  },
+  {
+    "name": "deliveryType",
+    "label": "Delivery Type",
+    "required": true,
+    "type": "select",
+    "options": [
+      {
+        "label": "AWS Kinesis",
+        "value": "kinesis"
+      },
+      {
+        "label": "Azure Event Hub",
+        "value": "event-hub"
+      }
+    ],
+    "default": "kinesis"
+  },
+  {
+    "name": "kinesis",
+    "type": "collection",
+    "label": "AWS Kinesis settings",
+    "help": "Used when Delivery type is \"kinesis\".",
+    "spec": [
+      {
+        "name": "streamName",
+        "label": "Kinesis Stream Name",
+        "type": "text"
+      },
+      {
+        "name": "region",
+        "label": "Kinesis AWS Region",
+        "help": "For example us-west-2.",
+        "type": "text"
+      },
+      {
+        "name": "iamAccessKeyId",
+        "label": "Kinesis IAM Access Key ID",
+        "type": "text"
+      },
+      {
+        "name": "iamSecretAccessKey",
+        "label": "Kinesis IAM Secret Access Key",
+        "type": "password"
+      }
+    ]
+  },
+  {
+    "name": "eventHub",
+    "type": "collection",
+    "label": "Azure Event Hub settings",
+    "help": "Used when Delivery type is \"event-hub\".",
+    "spec": [
+      {
+        "name": "eventHubName",
+        "label": "Event Hub Name",
+        "type": "text"
+      },
+      {
+        "name": "connectionString",
+        "label": "Event Hub Connection String",
+        "help": "Use this, or the namespace and service principal fields below.",
+        "type": "password"
+      },
+      {
+        "name": "fullyQualifiedNamespace",
+        "label": "Event Hub Fully Qualified Namespace",
+        "type": "text"
+      },
+      {
+        "name": "clientId",
+        "label": "Event Hub Client ID",
+        "type": "text"
+      },
+      {
+        "name": "tenantId",
+        "label": "Event Hub Tenant ID",
+        "type": "text"
+      },
+      {
+        "name": "clientSecret",
+        "label": "Event Hub Client Secret",
+        "type": "password"
+      }
+    ]
+  }
+]

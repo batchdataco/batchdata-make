@@ -1,0 +1,57 @@
+[
+  {
+    "name": "propertyId",
+    "type": "text",
+    "label": "Property id"
+  },
+  {
+    "name": "name",
+    "type": "text",
+    "label": "Name"
+  },
+  {
+    "name": "type",
+    "type": "text",
+    "label": "Type"
+  },
+  {
+    "name": "address",
+    "type": "text",
+    "label": "Address"
+  },
+  {
+    "name": "city",
+    "type": "text",
+    "label": "City"
+  },
+  {
+    "name": "state",
+    "type": "text",
+    "label": "State"
+  },
+  {
+    "name": "zip",
+    "type": "text",
+    "label": "Zip"
+  },
+  {
+    "name": "latitude",
+    "type": "number",
+    "label": "Latitude"
+  },
+  {
+    "name": "longitude",
+    "type": "number",
+    "label": "Longitude"
+  },
+  {
+    "name": "propertyCount",
+    "type": "number",
+    "label": "Property count"
+  },
+  {
+    "name": "uspsVerified",
+    "type": "boolean",
+    "label": "Usps verified"
+  }
+]

@@ -1,0 +1,261 @@
+[
+  {
+    "name": "address",
+    "type": "collection",
+    "label": "Address",
+    "spec": [
+      {
+        "name": "street",
+        "label": "Street",
+        "help": "Street address with house number, for example 2800 N 24th St.",
+        "type": "text"
+      },
+      {
+        "name": "city",
+        "label": "City",
+        "type": "text"
+      },
+      {
+        "name": "state",
+        "label": "State",
+        "help": "Two-letter state code, for example AZ.",
+        "type": "text"
+      },
+      {
+        "name": "zip",
+        "label": "ZIP Code",
+        "type": "text"
+      }
+    ]
+  },
+  {
+    "name": "propertyId",
+    "label": "BatchData Property ID",
+    "type": "text"
+  },
+  {
+    "name": "apn",
+    "label": "APN",
+    "type": "text"
+  },
+  {
+    "name": "countyFipsCode",
+    "label": "County FIPS Code",
+    "help": "Use with APN.",
+    "type": "text"
+  },
+  {
+    "name": "status",
+    "type": "collection",
+    "label": "Status",
+    "spec": [
+      {
+        "name": "equals",
+        "label": "Permit Status",
+        "type": "select",
+        "options": [
+          {
+            "label": "active",
+            "value": "active"
+          },
+          {
+            "label": "final",
+            "value": "final"
+          },
+          {
+            "label": "in_review",
+            "value": "in_review"
+          },
+          {
+            "label": "inactive",
+            "value": "inactive"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "type",
+    "type": "collection",
+    "label": "Type",
+    "spec": [
+      {
+        "name": "contains",
+        "label": "Permit Type Contains",
+        "type": "text"
+      }
+    ]
+  },
+  {
+    "name": "description",
+    "type": "collection",
+    "label": "Description",
+    "spec": [
+      {
+        "name": "contains",
+        "label": "Description Contains",
+        "type": "text"
+      }
+    ]
+  },
+  {
+    "name": "allTags",
+    "type": "collection",
+    "label": "All Tags",
+    "spec": [
+      {
+        "name": "inList",
+        "label": "Permit Tags (Match Any)",
+        "type": "array",
+        "spec": {
+          "type": "select",
+          "options": [
+            {
+              "label": "addition",
+              "value": "addition"
+            },
+            {
+              "label": "adu",
+              "value": "adu"
+            },
+            {
+              "label": "bathroom",
+              "value": "bathroom"
+            },
+            {
+              "label": "battery",
+              "value": "battery"
+            },
+            {
+              "label": "demolition",
+              "value": "demolition"
+            },
+            {
+              "label": "electrical",
+              "value": "electrical"
+            },
+            {
+              "label": "electricMeter",
+              "value": "electricMeter"
+            },
+            {
+              "label": "evCharger",
+              "value": "evCharger"
+            },
+            {
+              "label": "fireSprinkler",
+              "value": "fireSprinkler"
+            },
+            {
+              "label": "gas",
+              "value": "gas"
+            },
+            {
+              "label": "generator",
+              "value": "generator"
+            },
+            {
+              "label": "grading",
+              "value": "grading"
+            },
+            {
+              "label": "heatPump",
+              "value": "heatPump"
+            },
+            {
+              "label": "hvac",
+              "value": "hvac"
+            },
+            {
+              "label": "inspectionPassed",
+              "value": "inspectionPassed"
+            },
+            {
+              "label": "kitchen",
+              "value": "kitchen"
+            },
+            {
+              "label": "newConstruction",
+              "value": "newConstruction"
+            },
+            {
+              "label": "plumbing",
+              "value": "plumbing"
+            },
+            {
+              "label": "poolAndHotTub",
+              "value": "poolAndHotTub"
+            },
+            {
+              "label": "remodel",
+              "value": "remodel"
+            },
+            {
+              "label": "roofing",
+              "value": "roofing"
+            },
+            {
+              "label": "solar",
+              "value": "solar"
+            },
+            {
+              "label": "waterHeater",
+              "value": "waterHeater"
+            },
+            {
+              "label": "windowDoor",
+              "value": "windowDoor"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "name": "issueDate",
+    "type": "collection",
+    "label": "Issue Date",
+    "spec": [
+      {
+        "name": "minDate",
+        "label": "Issued From (YYYY-MM-DD)",
+        "help": "Format YYYY-MM-DD.",
+        "type": "text"
+      },
+      {
+        "name": "maxDate",
+        "label": "Issued To (YYYY-MM-DD)",
+        "help": "Format YYYY-MM-DD.",
+        "type": "text"
+      }
+    ]
+  },
+  {
+    "name": "jobValue",
+    "type": "collection",
+    "label": "Job Value",
+    "spec": [
+      {
+        "name": "min",
+        "label": "Job Value (Min)",
+        "type": "number"
+      },
+      {
+        "name": "max",
+        "label": "Job Value (Max)",
+        "type": "number"
+      }
+    ]
+  },
+  {
+    "name": "take",
+    "label": "Max Results",
+    "help": "Whole number from 1 to 100. Default 25.",
+    "type": "integer",
+    "default": 25,
+    "validate": {
+      "min": 1,
+      "max": 100
+    }
+  }
+]

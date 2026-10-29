@@ -1,0 +1,110 @@
+[
+  {
+    "name": "addresses",
+    "label": "Addresses",
+    "required": true,
+    "help": "One row per property address, up to 100.",
+    "type": "array",
+    "spec": [
+      {
+        "name": "address",
+        "type": "collection",
+        "label": "Address",
+        "spec": [
+          {
+            "name": "street",
+            "type": "text",
+            "label": "Street"
+          },
+          {
+            "name": "city",
+            "type": "text",
+            "label": "City"
+          },
+          {
+            "name": "state",
+            "type": "text",
+            "label": "State"
+          },
+          {
+            "name": "zip",
+            "type": "text",
+            "label": "ZIP Code"
+          }
+        ]
+      },
+      {
+        "name": "requestId",
+        "type": "text",
+        "label": "Your Reference ID"
+      }
+    ]
+  },
+  {
+    "name": "datasets",
+    "label": "Datasets",
+    "help": "Optional. Limits the response to these datasets. \"basic\" and \"core\" cannot be combined.",
+    "type": "array",
+    "spec": {
+      "type": "select",
+      "options": [
+        {
+          "label": "basic",
+          "value": "basic"
+        },
+        {
+          "label": "comps",
+          "value": "comps"
+        },
+        {
+          "label": "batchrank",
+          "value": "batchrank"
+        },
+        {
+          "label": "contact",
+          "value": "contact"
+        },
+        {
+          "label": "core",
+          "value": "core"
+        },
+        {
+          "label": "deed",
+          "value": "deed"
+        },
+        {
+          "label": "demographic",
+          "value": "demographic"
+        },
+        {
+          "label": "foreclosure",
+          "value": "foreclosure"
+        },
+        {
+          "label": "listing",
+          "value": "listing"
+        },
+        {
+          "label": "mortgage-liens",
+          "value": "mortgage-liens"
+        },
+        {
+          "label": "owner",
+          "value": "owner"
+        },
+        {
+          "label": "permit",
+          "value": "permit"
+        },
+        {
+          "label": "quicklist",
+          "value": "quicklist"
+        },
+        {
+          "label": "valuation",
+          "value": "valuation"
+        }
+      ]
+    }
+  }
+]

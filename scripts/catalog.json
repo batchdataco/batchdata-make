@@ -1,0 +1,3084 @@
+{
+  "meta": {
+    "version": "0.2.0",
+    "supportEmail": "support@batchservice.com",
+    "quickLists": [
+      "absentee-owner",
+      "active-auction",
+      "active-listing",
+      "canceled-listing",
+      "cash-buyer",
+      "corporate-owned",
+      "expired-listing",
+      "failed-listing",
+      "fix-and-flip",
+      "free-and-clear",
+      "for-sale-by-owner",
+      "has-hoa",
+      "has-hoa-fees",
+      "high-equity",
+      "inherited",
+      "involuntary-lien",
+      "in-state-absentee-owner",
+      "listed-below-market-price",
+      "low-equity",
+      "mailing-address-vacant",
+      "notice-of-default",
+      "notice-of-lis-pendens",
+      "notice-of-sale",
+      "on-market",
+      "out-of-state-absentee-owner",
+      "out-of-state-owner",
+      "owner-occupied",
+      "pending-listing",
+      "preforeclosure",
+      "recently-sold",
+      "same-property-and-mailing-address",
+      "senior-owner",
+      "tax-default",
+      "tired-landlord",
+      "trust-owned",
+      "unknown-equity",
+      "vacant",
+      "vacant-lot"
+    ]
+  },
+  "ops": [
+    {
+      "key": "reverse_skip_trace",
+      "resource": "property",
+      "kind": "search",
+      "action": true,
+      "noun": "Reverse Skip Trace Result",
+      "label": "Reverse Skip Trace (Phone or Email)",
+      "description": "Finds the person (and associated property addresses) behind a phone number or an email address using the V3 reverse skip trace. Returns up to 3 persons. Billed per matched person; requests with no match are not billed. Results are data only. You are responsible for TCPA and Do Not Call compliance.",
+      "skipTraceLike": true,
+      "http": {
+        "method": "POST",
+        "path": "/api/v3/property/reverse-skip-trace"
+      },
+      "fields": [
+        {
+          "key": "phone",
+          "label": "Phone Number",
+          "type": "string",
+          "path": "requests.0.phone",
+          "help": "A US phone number. Fill in a phone number or an email address."
+        },
+        {
+          "key": "email",
+          "label": "Email Address",
+          "type": "string",
+          "path": "requests.0.email"
+        },
+        {
+          "key": "request_id",
+          "label": "Your Reference ID",
+          "type": "string",
+          "path": "requests.0.requestId",
+          "help": "Optional. Echoed back in the result."
+        },
+        {
+          "key": "include_tcpa_flagged",
+          "label": "Include TCPA-Flagged Phones",
+          "type": "boolean",
+          "path": "options.includeTCPABlacklistedPhones",
+          "emit": "always",
+          "default": false,
+          "help": "Off by default: phone numbers flagged as TCPA litigators are left out. Turn on only with a documented compliance basis. Flagged numbers carry \"tcpa\": true in the result."
+        }
+      ],
+      "requireOneOf": [
+        "phone",
+        "email"
+      ],
+      "result": {
+        "list": "result.data",
+        "filter": {
+          "path": "meta.matched",
+          "equals": true
+        }
+      },
+      "sample": {
+        "input": {
+          "phone": "6025550142",
+          "requestId": "ref-1"
+        },
+        "persons": [
+          {
+            "name": {
+              "first": "Dana",
+              "last": "Reyes",
+              "full": "Dana Reyes"
+            },
+            "phoneNumbers": [
+              {
+                "number": "6025550142",
+                "type": "Mobile",
+                "tcpa": false,
+                "dnc": false
+              }
+            ],
+            "emails": [
+              "dana@example.com"
+            ]
+          }
+        ],
+        "meta": {
+          "matched": true,
+          "error": false
+        }
+      }
+    },
+    {
+      "key": "get_permits",
+      "resource": "property",
+      "kind": "search",
+      "noun": "Permit",
+      "label": "Get Property Permits",
+      "description": "Returns building permits for one property, one result per permit. Identify the property by address, BatchData property ID, or APN with county FIPS code. Billed per property requested, however many permits come back.",
+      "http": {
+        "method": "POST",
+        "path": "/api/v2/property/get-property-permits"
+      },
+      "fields": [
+        {
+          "key": "street",
+          "label": "Street",
+          "type": "string",
+          "path": "request.address.street",
+          "help": "Street address with house number, for example 2800 N 24th St."
+        },
+        {
+          "key": "city",
+          "label": "City",
+          "type": "string",
+          "path": "request.address.city"
+        },
+        {
+          "key": "state",
+          "label": "State",
+          "type": "string",
+          "path": "request.address.state",
+          "help": "Two-letter state code, for example AZ."
+        },
+        {
+          "key": "zip",
+          "label": "ZIP Code",
+          "type": "string",
+          "path": "request.address.zip"
+        },
+        {
+          "key": "property_id",
+          "label": "BatchData Property ID",
+          "type": "string",
+          "path": "request.propertyId"
+        },
+        {
+          "key": "apn",
+          "label": "APN",
+          "type": "string",
+          "path": "request.apn"
+        },
+        {
+          "key": "county_fips_code",
+          "label": "County FIPS Code",
+          "type": "string",
+          "path": "request.countyFipsCode",
+          "help": "Use with APN."
+        },
+        {
+          "key": "permit_status",
+          "label": "Permit Status",
+          "type": "choice",
+          "path": "request.status.equals",
+          "choices": [
+            {
+              "value": "active",
+              "label": "active"
+            },
+            {
+              "value": "final",
+              "label": "final"
+            },
+            {
+              "value": "in_review",
+              "label": "in_review"
+            },
+            {
+              "value": "inactive",
+              "label": "inactive"
+            }
+          ]
+        },
+        {
+          "key": "permit_type",
+          "label": "Permit Type Contains",
+          "type": "string",
+          "path": "request.type.contains"
+        },
+        {
+          "key": "description_contains",
+          "label": "Description Contains",
+          "type": "string",
+          "path": "request.description.contains"
+        },
+        {
+          "key": "tags",
+          "label": "Permit Tags (Match Any)",
+          "type": "list",
+          "path": "request.allTags.inList",
+          "choices": [
+            {
+              "value": "addition",
+              "label": "addition"
+            },
+            {
+              "value": "adu",
+              "label": "adu"
+            },
+            {
+              "value": "bathroom",
+              "label": "bathroom"
+            },
+            {
+              "value": "battery",
+              "label": "battery"
+            },
+            {
+              "value": "demolition",
+              "label": "demolition"
+            },
+            {
+              "value": "electrical",
+              "label": "electrical"
+            },
+            {
+              "value": "electricMeter",
+              "label": "electricMeter"
+            },
+            {
+              "value": "evCharger",
+              "label": "evCharger"
+            },
+            {
+              "value": "fireSprinkler",
+              "label": "fireSprinkler"
+            },
+            {
+              "value": "gas",
+              "label": "gas"
+            },
+            {
+              "value": "generator",
+              "label": "generator"
+            },
+            {
+              "value": "grading",
+              "label": "grading"
+            },
+            {
+              "value": "heatPump",
+              "label": "heatPump"
+            },
+            {
+              "value": "hvac",
+              "label": "hvac"
+            },
+            {
+              "value": "inspectionPassed",
+              "label": "inspectionPassed"
+            },
+            {
+              "value": "kitchen",
+              "label": "kitchen"
+            },
+            {
+              "value": "newConstruction",
+              "label": "newConstruction"
+            },
+            {
+              "value": "plumbing",
+              "label": "plumbing"
+            },
+            {
+              "value": "poolAndHotTub",
+              "label": "poolAndHotTub"
+            },
+            {
+              "value": "remodel",
+              "label": "remodel"
+            },
+            {
+              "value": "roofing",
+              "label": "roofing"
+            },
+            {
+              "value": "solar",
+              "label": "solar"
+            },
+            {
+              "value": "waterHeater",
+              "label": "waterHeater"
+            },
+            {
+              "value": "windowDoor",
+              "label": "windowDoor"
+            }
+          ]
+        },
+        {
+          "key": "issued_from",
+          "label": "Issued From (YYYY-MM-DD)",
+          "type": "date",
+          "path": "request.issueDate.minDate"
+        },
+        {
+          "key": "issued_to",
+          "label": "Issued To (YYYY-MM-DD)",
+          "type": "date",
+          "path": "request.issueDate.maxDate"
+        },
+        {
+          "key": "job_value_min",
+          "label": "Job Value (Min)",
+          "type": "number",
+          "path": "request.jobValue.min"
+        },
+        {
+          "key": "job_value_max",
+          "label": "Job Value (Max)",
+          "type": "number",
+          "path": "request.jobValue.max"
+        },
+        {
+          "key": "take",
+          "label": "Max Results",
+          "type": "integer",
+          "path": "options.take",
+          "default": 25,
+          "min": 1,
+          "max": 100,
+          "help": "Whole number from 1 to 100. Default 25."
+        }
+      ],
+      "requireOneOf": [
+        "street",
+        "property_id",
+        "apn"
+      ],
+      "result": {
+        "list": "result.permits",
+        "attach": {
+          "property": "result.property",
+          "searchMeta": "result.meta.results"
+        }
+      },
+      "sample": {
+        "permitNumber": "BP-2026-004211",
+        "type": "Building",
+        "subtype": "Residential",
+        "status": "final",
+        "description": "Re-roof, composition shingle",
+        "issueDate": "2026-02-03",
+        "finalDate": "2026-02-20",
+        "jobValue": 14500,
+        "jurisdiction": "Phoenix",
+        "allTags": [
+          "roofing"
+        ],
+        "property": {
+          "address": {
+            "street": "2800 N 24th St",
+            "city": "Phoenix",
+            "state": "AZ",
+            "zip": "85008"
+          }
+        },
+        "searchMeta": {
+          "resultCount": 1,
+          "resultsFound": 1
+        }
+      }
+    },
+    {
+      "key": "batch_skip_trace",
+      "resource": "property",
+      "kind": "action",
+      "noun": "Batch Skip Trace",
+      "label": "Batch Skip Trace Properties (V3)",
+      "description": "Skip traces up to 100 properties in one call with the V3 skip trace. Returns one result per submitted property, each with a list of persons. Billed per property matched. Results are data only. You are responsible for TCPA and Do Not Call compliance.",
+      "skipTraceLike": true,
+      "http": {
+        "method": "POST",
+        "path": "/api/v3/property/skip-trace"
+      },
+      "fields": [
+        {
+          "key": "properties",
+          "label": "Properties",
+          "type": "rows",
+          "required": true,
+          "path": "requests",
+          "max": 100,
+          "help": "One row per property, up to 100. Billed per matched property.",
+          "rowFields": [
+            {
+              "key": "street",
+              "label": "Street",
+              "type": "string",
+              "path": "propertyAddress.street"
+            },
+            {
+              "key": "city",
+              "label": "City",
+              "type": "string",
+              "path": "propertyAddress.city"
+            },
+            {
+              "key": "state",
+              "label": "State",
+              "type": "string",
+              "path": "propertyAddress.state"
+            },
+            {
+              "key": "zip",
+              "label": "ZIP Code",
+              "type": "string",
+              "path": "propertyAddress.zip"
+            },
+            {
+              "key": "owner_first_name",
+              "label": "Owner First Name",
+              "type": "string",
+              "path": "name.first"
+            },
+            {
+              "key": "owner_last_name",
+              "label": "Owner Last Name",
+              "type": "string",
+              "path": "name.last"
+            },
+            {
+              "key": "request_id",
+              "label": "Your Reference ID",
+              "type": "string",
+              "path": "requestId"
+            }
+          ]
+        },
+        {
+          "key": "include_tcpa_flagged",
+          "label": "Include TCPA-Flagged Phones",
+          "type": "boolean",
+          "path": "options.includeTCPABlacklistedPhones",
+          "emit": "always",
+          "default": false,
+          "help": "Off by default: phone numbers flagged as TCPA litigators are left out. Turn on only with a documented compliance basis. Flagged numbers carry \"tcpa\": true in the result."
+        }
+      ],
+      "result": {
+        "compose": {
+          "results": "result.data",
+          "matchCount": "result.meta.results.matchCount",
+          "requestCount": "result.meta.results.requestCount"
+        }
+      },
+      "sample": {
+        "results": [
+          {
+            "input": {
+              "requestId": "row-1"
+            },
+            "persons": [
+              {
+                "name": {
+                  "first": "Dana",
+                  "last": "Reyes"
+                },
+                "phoneNumbers": [
+                  {
+                    "number": "6025550142",
+                    "type": "Mobile",
+                    "tcpa": false
+                  }
+                ]
+              }
+            ],
+            "meta": {
+              "matched": true
+            }
+          }
+        ],
+        "matchCount": 1,
+        "requestCount": 1
+      }
+    },
+    {
+      "key": "batch_lookup_property",
+      "resource": "property",
+      "kind": "action",
+      "noun": "Batch Property Lookup",
+      "label": "Batch Look Up Properties",
+      "description": "Returns full property records for up to 100 addresses in one call. Billed per property matched.",
+      "http": {
+        "method": "POST",
+        "path": "/api/v1/property/lookup/all-attributes"
+      },
+      "fields": [
+        {
+          "key": "addresses",
+          "label": "Addresses",
+          "type": "rows",
+          "required": true,
+          "path": "requests",
+          "max": 100,
+          "help": "One row per property address, up to 100.",
+          "rowFields": [
+            {
+              "key": "street",
+              "label": "Street",
+              "type": "string",
+              "path": "address.street"
+            },
+            {
+              "key": "city",
+              "label": "City",
+              "type": "string",
+              "path": "address.city"
+            },
+            {
+              "key": "state",
+              "label": "State",
+              "type": "string",
+              "path": "address.state"
+            },
+            {
+              "key": "zip",
+              "label": "ZIP Code",
+              "type": "string",
+              "path": "address.zip"
+            },
+            {
+              "key": "request_id",
+              "label": "Your Reference ID",
+              "type": "string",
+              "path": "requestId"
+            }
+          ]
+        },
+        {
+          "key": "datasets",
+          "label": "Datasets",
+          "type": "list",
+          "path": "options.datasets",
+          "choices": [
+            {
+              "value": "basic",
+              "label": "basic"
+            },
+            {
+              "value": "comps",
+              "label": "comps"
+            },
+            {
+              "value": "batchrank",
+              "label": "batchrank"
+            },
+            {
+              "value": "contact",
+              "label": "contact"
+            },
+            {
+              "value": "core",
+              "label": "core"
+            },
+            {
+              "value": "deed",
+              "label": "deed"
+            },
+            {
+              "value": "demographic",
+              "label": "demographic"
+            },
+            {
+              "value": "foreclosure",
+              "label": "foreclosure"
+            },
+            {
+              "value": "listing",
+              "label": "listing"
+            },
+            {
+              "value": "mortgage-liens",
+              "label": "mortgage-liens"
+            },
+            {
+              "value": "owner",
+              "label": "owner"
+            },
+            {
+              "value": "permit",
+              "label": "permit"
+            },
+            {
+              "value": "quicklist",
+              "label": "quicklist"
+            },
+            {
+              "value": "valuation",
+              "label": "valuation"
+            }
+          ],
+          "help": "Optional. Limits the response to these datasets. \"basic\" and \"core\" cannot be combined."
+        }
+      ],
+      "result": {
+        "compose": {
+          "properties": "results.properties",
+          "matchCount": "results.meta.results.matchCount",
+          "noMatchCount": "results.meta.results.noMatchCount"
+        }
+      },
+      "sample": {
+        "properties": [
+          {
+            "_id": "09201d3bd3134f9380704014781fb4c0",
+            "address": {
+              "street": "2800 N 24th St",
+              "city": "Phoenix",
+              "state": "AZ",
+              "zip": "85008",
+              "county": "Maricopa"
+            },
+            "general": {
+              "propertyTypeCategory": "Single Family"
+            },
+            "quickLists": {
+              "vacant": false
+            }
+          }
+        ],
+        "matchCount": 1,
+        "noMatchCount": 0
+      }
+    },
+    {
+      "key": "autocomplete_address",
+      "resource": "address",
+      "kind": "search",
+      "noun": "Address Suggestion",
+      "label": "Autocomplete Address",
+      "description": "Suggests addresses for partial text, one result per suggestion. Billed per call.",
+      "http": {
+        "method": "POST",
+        "path": "/api/v1/address/autocomplete"
+      },
+      "fields": [
+        {
+          "key": "query",
+          "label": "Partial Address",
+          "type": "string",
+          "required": true,
+          "path": "searchCriteria.query",
+          "help": "For example \"2800 N 24th\"."
+        },
+        {
+          "key": "take",
+          "label": "Max Results",
+          "type": "integer",
+          "path": "options.take",
+          "default": 5,
+          "min": 1,
+          "max": 20,
+          "help": "Whole number from 1 to 20. Default 5."
+        },
+        {
+          "key": "usps_verified_only",
+          "label": "USPS-Verified Addresses Only",
+          "type": "boolean",
+          "path": "options.uspsVerifiedAddresses"
+        }
+      ],
+      "result": {
+        "list": "result.suggestions"
+      },
+      "sample": {
+        "propertyId": "09201d3bd3134f9380704014781fb4c0",
+        "name": "2800 N 24th St, Phoenix, AZ 85008",
+        "type": "address",
+        "address": "2800 n 24th st",
+        "city": "Phoenix",
+        "state": "AZ",
+        "zip": "85008",
+        "latitude": 33.478332,
+        "longitude": -112.030474,
+        "propertyCount": 1,
+        "uspsVerified": true
+      }
+    },
+    {
+      "key": "geocode_address",
+      "resource": "address",
+      "kind": "search",
+      "noun": "Geocoded Address",
+      "label": "Geocode Address",
+      "description": "Returns latitude, longitude and the standardized form of one address. Billed per address submitted.",
+      "http": {
+        "method": "POST",
+        "path": "/api/v1/address/geocode"
+      },
+      "fields": [
+        {
+          "key": "address",
+          "label": "Address",
+          "type": "string",
+          "required": true,
+          "path": "requests.0.address",
+          "help": "One full address, for example 2800 N 24th St, Phoenix, AZ 85008."
+        },
+        {
+          "key": "request_id",
+          "label": "Your Reference ID",
+          "type": "string",
+          "path": "requests.0.requestId"
+        }
+      ],
+      "result": {
+        "list": "result.addresses"
+      },
+      "sample": {
+        "street": "2800 N 24th St",
+        "city": "Phoenix",
+        "county": "Maricopa",
+        "state": "AZ",
+        "zip": "85008",
+        "fullAddress": "2800 N 24th St, Phoenix, Maricopa, AZ, 85008",
+        "latitude": 33.478332,
+        "longitude": -112.030474,
+        "geoStatus": "Rooftop",
+        "meta": {
+          "error": false,
+          "geocoded": true
+        }
+      }
+    },
+    {
+      "key": "reverse_geocode",
+      "resource": "address",
+      "kind": "search",
+      "noun": "Nearby Address",
+      "label": "Reverse Geocode (Find Nearby Addresses)",
+      "description": "Returns the nearest addresses to a latitude and longitude, one result per address. Billed per geo-location submitted.",
+      "http": {
+        "method": "POST",
+        "path": "/api/v1/address/reverse-geocode"
+      },
+      "fields": [
+        {
+          "key": "latitude",
+          "label": "Latitude",
+          "type": "number",
+          "required": true,
+          "path": "request.latitude"
+        },
+        {
+          "key": "longitude",
+          "label": "Longitude",
+          "type": "number",
+          "required": true,
+          "path": "request.longitude"
+        },
+        {
+          "key": "property_only",
+          "label": "Property Addresses Only",
+          "type": "boolean",
+          "path": "options.showPropertyOnly"
+        }
+      ],
+      "result": {
+        "list": "result.addresses"
+      },
+      "sample": {
+        "street": "2806 N 24th St",
+        "city": "Phoenix",
+        "state": "AZ",
+        "zip": "85008",
+        "county": "Maricopa",
+        "latitude": 33.4787348,
+        "longitude": -112.0306996,
+        "types": [
+          "Street"
+        ],
+        "geoStatus": "Rooftop",
+        "meta": {
+          "error": false
+        }
+      }
+    },
+    {
+      "key": "batch_verify_address",
+      "resource": "address",
+      "kind": "action",
+      "noun": "Batch Address Verification",
+      "label": "Batch Verify Addresses",
+      "description": "Standardizes and validates up to 100 US addresses in one call. Billed per address submitted.",
+      "http": {
+        "method": "POST",
+        "path": "/api/v1/address/verify"
+      },
+      "fields": [
+        {
+          "key": "addresses",
+          "label": "Addresses",
+          "type": "rows",
+          "required": true,
+          "path": "requests",
+          "max": 100,
+          "help": "One row per address, up to 100.",
+          "rowFields": [
+            {
+              "key": "street",
+              "label": "Street",
+              "type": "string",
+              "path": "street"
+            },
+            {
+              "key": "city",
+              "label": "City",
+              "type": "string",
+              "path": "city"
+            },
+            {
+              "key": "state",
+              "label": "State",
+              "type": "string",
+              "path": "state"
+            },
+            {
+              "key": "zip",
+              "label": "ZIP Code",
+              "type": "string",
+              "path": "zip"
+            }
+          ]
+        }
+      ],
+      "result": {
+        "compose": {
+          "addresses": "results.addresses",
+          "requestCount": "results.meta.results.requestCount",
+          "normalizedCount": "results.meta.results.normalizedCount"
+        }
+      },
+      "sample": {
+        "addresses": [
+          {
+            "street": "2800 N 24th St",
+            "city": "Phoenix",
+            "state": "AZ",
+            "zip": "85008",
+            "county": "Maricopa",
+            "meta": {
+              "verified": true
+            }
+          }
+        ],
+        "requestCount": 1,
+        "normalizedCount": 1
+      }
+    },
+    {
+      "key": "investor_buybox",
+      "resource": "investor",
+      "kind": "search",
+      "noun": "Investor",
+      "label": "Find Investors (Buy Box)",
+      "description": "Finds likely real estate investors for a subject property from nearby comparable sales, one result per investor with holdings, acquisitions and contacts. Billed according to your BatchData plan; contact support@batchservice.com for pricing. Results are data only. You are responsible for TCPA and Do Not Call compliance.",
+      "http": {
+        "method": "POST",
+        "path": "/api/v2/investor/buybox"
+      },
+      "fields": [
+        {
+          "key": "street",
+          "label": "Subject Property Street",
+          "type": "string",
+          "path": "searchCriteria.compAddress.street",
+          "help": "Street address with house number, for example 2800 N 24th St.",
+          "required": true
+        },
+        {
+          "key": "city",
+          "label": "Subject Property City",
+          "type": "string",
+          "path": "searchCriteria.compAddress.city",
+          "required": false
+        },
+        {
+          "key": "state",
+          "label": "Subject Property State",
+          "type": "string",
+          "path": "searchCriteria.compAddress.state",
+          "help": "Two-letter state code, for example AZ.",
+          "required": false
+        },
+        {
+          "key": "zip",
+          "label": "Subject Property ZIP Code",
+          "type": "string",
+          "path": "searchCriteria.compAddress.zip",
+          "required": false
+        },
+        {
+          "key": "classification",
+          "label": "Investor Types",
+          "type": "list",
+          "path": "searchCriteria.investor.classification.inList",
+          "help": "For example FLIPPER, LANDLORD, CASH BUYER. Replaces the default (FLIPPER and LANDLORD)."
+        },
+        {
+          "key": "ownership",
+          "label": "Ownership",
+          "type": "choice",
+          "path": "searchCriteria.investor.ownership",
+          "choices": [
+            {
+              "value": "current",
+              "label": "current"
+            },
+            {
+              "value": "previous",
+              "label": "previous"
+            },
+            {
+              "value": "any",
+              "label": "any"
+            }
+          ],
+          "help": "Which owners of a comparable property qualify. Default any."
+        },
+        {
+          "key": "sold_within_months",
+          "label": "Comparable Sales Within (Months)",
+          "type": "integer",
+          "path": "searchCriteria.intel.lastSoldDate.withinLastMonths",
+          "min": 1,
+          "max": 60,
+          "help": "From 1 to 60. Default 12."
+        },
+        {
+          "key": "additional_criteria",
+          "label": "Additional Criteria (JSON)",
+          "type": "json",
+          "path": "searchCriteria",
+          "merge": true,
+          "first": true,
+          "help": "Optional JSON object merged into the search criteria. The fields above win on conflict. Callback URL keys are ignored."
+        },
+        {
+          "key": "take",
+          "label": "Max Results",
+          "type": "integer",
+          "path": "options.take",
+          "default": 25,
+          "min": 1,
+          "max": 100,
+          "help": "Whole number from 1 to 100. Default 25."
+        }
+      ],
+      "result": {
+        "list": "result.investors",
+        "attach": {
+          "searchMeta": "result.meta.results",
+          "warnings": "result.warnings"
+        }
+      },
+      "sample": {
+        "id": "inv_a1b2c3d4",
+        "name": "Evergreen Holdings LLC",
+        "type": "Company Owned",
+        "classification": [
+          "LANDLORD"
+        ],
+        "currentHoldings": {
+          "totalPropertyCount": 48
+        },
+        "acquisitions": {
+          "totalAcquisitionCount": 12
+        },
+        "mailingAddresses": [
+          {
+            "street": "1200 W Camelback Rd",
+            "city": "Phoenix",
+            "state": "AZ",
+            "zip": "85013",
+            "propertyCount": 48
+          }
+        ],
+        "matchedAsCurrentOwner": true,
+        "searchMeta": {
+          "resultCount": 25,
+          "resultsFound": 137
+        }
+      }
+    },
+    {
+      "key": "investor_properties",
+      "resource": "investor",
+      "kind": "search",
+      "noun": "Investor Property",
+      "label": "Get Investor Properties",
+      "description": "Returns the properties of one investor, one result per property. Get the investor ID from Find Investors (Buy Box). Use the \"nextPageCursor\" value of the last result as Page Cursor to read the next page. Billed per property row returned (take sets the maximum cost of a call).",
+      "http": {
+        "method": "POST",
+        "path": "/api/v2/investor/properties"
+      },
+      "fields": [
+        {
+          "key": "investor_id",
+          "label": "Investor ID",
+          "type": "string",
+          "required": true,
+          "path": "searchCriteria.investorId"
+        },
+        {
+          "key": "ownership",
+          "label": "Ownership",
+          "type": "choice",
+          "path": "searchCriteria.ownership",
+          "choices": [
+            {
+              "value": "current",
+              "label": "current"
+            },
+            {
+              "value": "previous",
+              "label": "previous"
+            },
+            {
+              "value": "any",
+              "label": "any"
+            }
+          ],
+          "help": "Default current. \"any\" can return many more rows."
+        },
+        {
+          "key": "include_child_entities",
+          "label": "Include Child Entities",
+          "type": "boolean",
+          "path": "searchCriteria.includeChildEntities"
+        },
+        {
+          "key": "take",
+          "label": "Max Results",
+          "type": "integer",
+          "path": "options.take",
+          "default": 25,
+          "min": 1,
+          "max": 100,
+          "help": "Whole number from 1 to 100. Default 25."
+        },
+        {
+          "key": "page_cursor",
+          "label": "Page Cursor",
+          "type": "string",
+          "path": "options.pageCursor",
+          "help": "Optional. The nextPageCursor from the previous page, used with the same criteria."
+        }
+      ],
+      "result": {
+        "list": "result.properties",
+        "attach": {
+          "resultsFound": "result.resultsFound",
+          "nextPageCursor": "result.nextPageCursor"
+        }
+      },
+      "sample": {
+        "propertyId": "P-85053-0a1b2c",
+        "address": {
+          "street": "3802 W Evans Dr",
+          "city": "Phoenix",
+          "state": "AZ",
+          "zip": "85053",
+          "latitude": 33.6203,
+          "longitude": -112.1394
+        },
+        "fips": "04013",
+        "apn": "207-14-118",
+        "ownership": {
+          "isCurrentOwner": true,
+          "isPreviousOwner": false
+        },
+        "resultsFound": 48
+      }
+    },
+    {
+      "key": "list_search_sessions",
+      "resource": "search_session",
+      "kind": "search",
+      "noun": "Search Session",
+      "label": "List Search Sessions",
+      "description": "Lists your team's search sessions, oldest first. Needs a token with the property search sessions permission. This call does not bill property records.",
+      "http": {
+        "method": "GET",
+        "path": "/api/v2/property/search-sessions"
+      },
+      "fields": [
+        {
+          "key": "take",
+          "label": "Max Results",
+          "type": "integer",
+          "in": "query",
+          "qs": "take",
+          "default": 50,
+          "min": 1,
+          "max": 100
+        },
+        {
+          "key": "skip",
+          "label": "Skip (Offset)",
+          "type": "integer",
+          "in": "query",
+          "qs": "skip",
+          "min": 0
+        }
+      ],
+      "result": {
+        "list": "results.sessions"
+      },
+      "sample": {
+        "id": "monthly-leads-az-85020",
+        "totalDelivered": 25,
+        "lastRequestAt": "2026-10-28T23:17:54.592Z",
+        "createdAt": "2026-10-01T16:02:11.120Z"
+      }
+    },
+    {
+      "key": "create_search_session",
+      "resource": "search_session",
+      "kind": "action",
+      "noun": "Search Session",
+      "label": "Create or Advance Search Session",
+      "description": "Runs a property search inside a persistent session and returns the next properties that session has not delivered yet. The first call creates the session; calling again with the same Session ID continues it. Billed per property record delivered; a session never delivers (or bills) the same property twice. Each call bills up to Max Results records.",
+      "billed": true,
+      "http": {
+        "method": "POST",
+        "path": "/api/v1/property/search"
+      },
+      "fixed": [
+        {
+          "path": "options.useCursorPagination",
+          "value": true
+        }
+      ],
+      "fields": [
+        {
+          "key": "session_id",
+          "label": "Session ID",
+          "type": "string",
+          "required": true,
+          "path": "options.searchSession.id",
+          "pattern": "^[A-Za-z0-9_-]{1,128}$",
+          "help": "Your own name for the session: letters, numbers, dash or underscore, up to 128 characters. Reusing the same ID continues the session, so you are never billed twice for the same property. A team can hold 100 sessions."
+        },
+        {
+          "key": "query",
+          "label": "Location Query",
+          "type": "string",
+          "path": "searchCriteria.query",
+          "help": "City, county, ZIP code or address text, for example \"Phoenix, AZ\"."
+        },
+        {
+          "key": "quick_lists",
+          "label": "Quick Lists (Include)",
+          "type": "list",
+          "path": "searchCriteria.quickLists",
+          "choices": [
+            {
+              "value": "absentee-owner",
+              "label": "absentee-owner"
+            },
+            {
+              "value": "active-auction",
+              "label": "active-auction"
+            },
+            {
+              "value": "active-listing",
+              "label": "active-listing"
+            },
+            {
+              "value": "canceled-listing",
+              "label": "canceled-listing"
+            },
+            {
+              "value": "cash-buyer",
+              "label": "cash-buyer"
+            },
+            {
+              "value": "corporate-owned",
+              "label": "corporate-owned"
+            },
+            {
+              "value": "expired-listing",
+              "label": "expired-listing"
+            },
+            {
+              "value": "failed-listing",
+              "label": "failed-listing"
+            },
+            {
+              "value": "fix-and-flip",
+              "label": "fix-and-flip"
+            },
+            {
+              "value": "free-and-clear",
+              "label": "free-and-clear"
+            },
+            {
+              "value": "for-sale-by-owner",
+              "label": "for-sale-by-owner"
+            },
+            {
+              "value": "has-hoa",
+              "label": "has-hoa"
+            },
+            {
+              "value": "has-hoa-fees",
+              "label": "has-hoa-fees"
+            },
+            {
+              "value": "high-equity",
+              "label": "high-equity"
+            },
+            {
+              "value": "inherited",
+              "label": "inherited"
+            },
+            {
+              "value": "involuntary-lien",
+              "label": "involuntary-lien"
+            },
+            {
+              "value": "in-state-absentee-owner",
+              "label": "in-state-absentee-owner"
+            },
+            {
+              "value": "listed-below-market-price",
+              "label": "listed-below-market-price"
+            },
+            {
+              "value": "low-equity",
+              "label": "low-equity"
+            },
+            {
+              "value": "mailing-address-vacant",
+              "label": "mailing-address-vacant"
+            },
+            {
+              "value": "notice-of-default",
+              "label": "notice-of-default"
+            },
+            {
+              "value": "notice-of-lis-pendens",
+              "label": "notice-of-lis-pendens"
+            },
+            {
+              "value": "notice-of-sale",
+              "label": "notice-of-sale"
+            },
+            {
+              "value": "on-market",
+              "label": "on-market"
+            },
+            {
+              "value": "out-of-state-absentee-owner",
+              "label": "out-of-state-absentee-owner"
+            },
+            {
+              "value": "out-of-state-owner",
+              "label": "out-of-state-owner"
+            },
+            {
+              "value": "owner-occupied",
+              "label": "owner-occupied"
+            },
+            {
+              "value": "pending-listing",
+              "label": "pending-listing"
+            },
+            {
+              "value": "preforeclosure",
+              "label": "preforeclosure"
+            },
+            {
+              "value": "recently-sold",
+              "label": "recently-sold"
+            },
+            {
+              "value": "same-property-and-mailing-address",
+              "label": "same-property-and-mailing-address"
+            },
+            {
+              "value": "senior-owner",
+              "label": "senior-owner"
+            },
+            {
+              "value": "tax-default",
+              "label": "tax-default"
+            },
+            {
+              "value": "tired-landlord",
+              "label": "tired-landlord"
+            },
+            {
+              "value": "trust-owned",
+              "label": "trust-owned"
+            },
+            {
+              "value": "unknown-equity",
+              "label": "unknown-equity"
+            },
+            {
+              "value": "vacant",
+              "label": "vacant"
+            },
+            {
+              "value": "vacant-lot",
+              "label": "vacant-lot"
+            }
+          ],
+          "help": "Properties must match ALL selected lists."
+        },
+        {
+          "key": "or_quick_lists",
+          "label": "Quick Lists (Match Any)",
+          "type": "list",
+          "path": "searchCriteria.orQuickLists",
+          "choices": [
+            {
+              "value": "absentee-owner",
+              "label": "absentee-owner"
+            },
+            {
+              "value": "active-auction",
+              "label": "active-auction"
+            },
+            {
+              "value": "active-listing",
+              "label": "active-listing"
+            },
+            {
+              "value": "canceled-listing",
+              "label": "canceled-listing"
+            },
+            {
+              "value": "cash-buyer",
+              "label": "cash-buyer"
+            },
+            {
+              "value": "corporate-owned",
+              "label": "corporate-owned"
+            },
+            {
+              "value": "expired-listing",
+              "label": "expired-listing"
+            },
+            {
+              "value": "failed-listing",
+              "label": "failed-listing"
+            },
+            {
+              "value": "fix-and-flip",
+              "label": "fix-and-flip"
+            },
+            {
+              "value": "free-and-clear",
+              "label": "free-and-clear"
+            },
+            {
+              "value": "for-sale-by-owner",
+              "label": "for-sale-by-owner"
+            },
+            {
+              "value": "has-hoa",
+              "label": "has-hoa"
+            },
+            {
+              "value": "has-hoa-fees",
+              "label": "has-hoa-fees"
+            },
+            {
+              "value": "high-equity",
+              "label": "high-equity"
+            },
+            {
+              "value": "inherited",
+              "label": "inherited"
+            },
+            {
+              "value": "involuntary-lien",
+              "label": "involuntary-lien"
+            },
+            {
+              "value": "in-state-absentee-owner",
+              "label": "in-state-absentee-owner"
+            },
+            {
+              "value": "listed-below-market-price",
+              "label": "listed-below-market-price"
+            },
+            {
+              "value": "low-equity",
+              "label": "low-equity"
+            },
+            {
+              "value": "mailing-address-vacant",
+              "label": "mailing-address-vacant"
+            },
+            {
+              "value": "notice-of-default",
+              "label": "notice-of-default"
+            },
+            {
+              "value": "notice-of-lis-pendens",
+              "label": "notice-of-lis-pendens"
+            },
+            {
+              "value": "notice-of-sale",
+              "label": "notice-of-sale"
+            },
+            {
+              "value": "on-market",
+              "label": "on-market"
+            },
+            {
+              "value": "out-of-state-absentee-owner",
+              "label": "out-of-state-absentee-owner"
+            },
+            {
+              "value": "out-of-state-owner",
+              "label": "out-of-state-owner"
+            },
+            {
+              "value": "owner-occupied",
+              "label": "owner-occupied"
+            },
+            {
+              "value": "pending-listing",
+              "label": "pending-listing"
+            },
+            {
+              "value": "preforeclosure",
+              "label": "preforeclosure"
+            },
+            {
+              "value": "recently-sold",
+              "label": "recently-sold"
+            },
+            {
+              "value": "same-property-and-mailing-address",
+              "label": "same-property-and-mailing-address"
+            },
+            {
+              "value": "senior-owner",
+              "label": "senior-owner"
+            },
+            {
+              "value": "tax-default",
+              "label": "tax-default"
+            },
+            {
+              "value": "tired-landlord",
+              "label": "tired-landlord"
+            },
+            {
+              "value": "trust-owned",
+              "label": "trust-owned"
+            },
+            {
+              "value": "unknown-equity",
+              "label": "unknown-equity"
+            },
+            {
+              "value": "vacant",
+              "label": "vacant"
+            },
+            {
+              "value": "vacant-lot",
+              "label": "vacant-lot"
+            }
+          ],
+          "help": "Properties must match AT LEAST ONE selected list."
+        },
+        {
+          "key": "additional_criteria",
+          "label": "Additional Criteria (JSON)",
+          "type": "json",
+          "path": "searchCriteria",
+          "merge": true,
+          "first": true,
+          "help": "Optional JSON object merged into the search criteria. The fields above win on conflict. Callback URL keys are ignored."
+        },
+        {
+          "key": "take",
+          "label": "Max Results",
+          "type": "integer",
+          "path": "options.take",
+          "default": 1,
+          "min": 1,
+          "max": 100,
+          "help": "Whole number from 1 to 100. Default 1. You are billed per record delivered."
+        }
+      ],
+      "result": {
+        "compose": {
+          "properties": "results.properties",
+          "session": "results.searchSessionMeta",
+          "searchMeta": "results.meta.results"
+        }
+      },
+      "sample": {
+        "properties": [
+          {
+            "_id": "09201d3bd3134f9380704014781fb4c0",
+            "address": {
+              "street": "2800 N 24th St",
+              "city": "Phoenix",
+              "state": "AZ",
+              "zip": "85008",
+              "county": "Maricopa"
+            },
+            "general": {
+              "propertyTypeCategory": "Single Family"
+            },
+            "quickLists": {
+              "vacant": false
+            }
+          }
+        ],
+        "session": {
+          "totalDelivered": 1,
+          "isNewSession": true
+        },
+        "searchMeta": {
+          "resultCount": 1,
+          "resultsFound": 1
+        }
+      }
+    },
+    {
+      "key": "delete_search_session",
+      "resource": "search_session",
+      "kind": "action",
+      "noun": "Search Session",
+      "label": "Delete Search Session",
+      "description": "Deletes a search session to free one of your 100 session slots. Deleting a session starts delivery over if you use the same ID again. This call does not bill property records.",
+      "destructive": true,
+      "http": {
+        "method": "DELETE",
+        "path": "/api/v2/property/search-sessions/{id}"
+      },
+      "fields": [
+        {
+          "key": "id",
+          "label": "Session ID",
+          "type": "string",
+          "required": true,
+          "in": "path",
+          "help": "The ID of the session to delete."
+        }
+      ],
+      "dynamic": "new_search_session",
+      "result": {
+        "compose": {
+          "deleted": "results.deleted",
+          "id": "results.id"
+        }
+      },
+      "sample": {
+        "deleted": true,
+        "id": "monthly-leads-az-85020"
+      }
+    },
+    {
+      "key": "list_monitors",
+      "resource": "monitor",
+      "kind": "search",
+      "noun": "Property Monitor",
+      "label": "List Property Monitors",
+      "description": "Lists your property monitors. Needs a token with the property subscription permission. Monitors and the events they deliver are billed according to your BatchData plan; contact support@batchservice.com for pricing. Limits: up to 5 monitors per team, a monitor cannot be edited after it is created (delete and recreate it), a new monitor can take up to 7 days to start delivering, and delivery is best effort (4 attempts per event).",
+      "mockedOnly": true,
+      "noZapier": true,
+      "http": {
+        "method": "GET",
+        "path": "/api/v2/property-subscription"
+      },
+      "fields": [],
+      "result": {
+        "list": "results.subscriptions"
+      },
+      "sample": {
+        "id": "cjui0E2T1LKxWOD",
+        "searchCriteria": {
+          "query": "Phoenix, AZ",
+          "orQuickLists": [
+            "on-market"
+          ]
+        },
+        "deliveryConfig": {
+          "type": "kinesis",
+          "streamName": "my-stream",
+          "region": "us-west-2"
+        }
+      }
+    },
+    {
+      "key": "get_monitor",
+      "resource": "monitor",
+      "kind": "search",
+      "noun": "Property Monitor",
+      "label": "Get Property Monitor",
+      "description": "Returns one property monitor with its search criteria and delivery settings (secrets are masked). Monitors and the events they deliver are billed according to your BatchData plan; contact support@batchservice.com for pricing. Limits: up to 5 monitors per team, a monitor cannot be edited after it is created (delete and recreate it), a new monitor can take up to 7 days to start delivering, and delivery is best effort (4 attempts per event).",
+      "mockedOnly": true,
+      "http": {
+        "method": "GET",
+        "path": "/api/v2/property-subscription/{id}"
+      },
+      "fields": [
+        {
+          "key": "id",
+          "label": "Monitor ID",
+          "type": "string",
+          "required": true,
+          "in": "path",
+          "help": "The ID of the monitor."
+        }
+      ],
+      "dynamic": "new_monitor",
+      "result": {
+        "item": "result"
+      },
+      "sample": {
+        "id": "cjui0E2T1LKxWOD",
+        "searchCriteria": {
+          "query": "Phoenix, AZ",
+          "orQuickLists": [
+            "on-market"
+          ]
+        },
+        "deliveryConfig": {
+          "type": "kinesis",
+          "streamName": "my-stream",
+          "region": "us-west-2"
+        }
+      }
+    },
+    {
+      "key": "create_monitor",
+      "resource": "monitor",
+      "kind": "action",
+      "noun": "Property Monitor",
+      "label": "Create Property Monitor (Stream Delivery)",
+      "description": "Creates a property monitor that streams changes for matching properties to your own AWS Kinesis stream or Azure Event Hub. For webhook delivery use the \"New Property Monitor Event\" trigger, which sets up and removes its own monitor. Monitors and the events they deliver are billed according to your BatchData plan; contact support@batchservice.com for pricing. Limits: up to 5 monitors per team, a monitor cannot be edited after it is created (delete and recreate it), a new monitor can take up to 7 days to start delivering, and delivery is best effort (4 attempts per event).",
+      "mockedOnly": true,
+      "http": {
+        "method": "POST",
+        "path": "/api/v2/property-subscription"
+      },
+      "fields": [
+        {
+          "key": "query",
+          "label": "Location Query",
+          "type": "string",
+          "path": "searchCriteria.query",
+          "help": "City, county, ZIP code or address text, for example \"Phoenix, AZ\"."
+        },
+        {
+          "key": "quick_lists",
+          "label": "Quick Lists (Include)",
+          "type": "list",
+          "path": "searchCriteria.quickLists",
+          "choices": [
+            {
+              "value": "absentee-owner",
+              "label": "absentee-owner"
+            },
+            {
+              "value": "active-auction",
+              "label": "active-auction"
+            },
+            {
+              "value": "active-listing",
+              "label": "active-listing"
+            },
+            {
+              "value": "canceled-listing",
+              "label": "canceled-listing"
+            },
+            {
+              "value": "cash-buyer",
+              "label": "cash-buyer"
+            },
+            {
+              "value": "corporate-owned",
+              "label": "corporate-owned"
+            },
+            {
+              "value": "expired-listing",
+              "label": "expired-listing"
+            },
+            {
+              "value": "failed-listing",
+              "label": "failed-listing"
+            },
+            {
+              "value": "fix-and-flip",
+              "label": "fix-and-flip"
+            },
+            {
+              "value": "free-and-clear",
+              "label": "free-and-clear"
+            },
+            {
+              "value": "for-sale-by-owner",
+              "label": "for-sale-by-owner"
+            },
+            {
+              "value": "has-hoa",
+              "label": "has-hoa"
+            },
+            {
+              "value": "has-hoa-fees",
+              "label": "has-hoa-fees"
+            },
+            {
+              "value": "high-equity",
+              "label": "high-equity"
+            },
+            {
+              "value": "inherited",
+              "label": "inherited"
+            },
+            {
+              "value": "involuntary-lien",
+              "label": "involuntary-lien"
+            },
+            {
+              "value": "in-state-absentee-owner",
+              "label": "in-state-absentee-owner"
+            },
+            {
+              "value": "listed-below-market-price",
+              "label": "listed-below-market-price"
+            },
+            {
+              "value": "low-equity",
+              "label": "low-equity"
+            },
+            {
+              "value": "mailing-address-vacant",
+              "label": "mailing-address-vacant"
+            },
+            {
+              "value": "notice-of-default",
+              "label": "notice-of-default"
+            },
+            {
+              "value": "notice-of-lis-pendens",
+              "label": "notice-of-lis-pendens"
+            },
+            {
+              "value": "notice-of-sale",
+              "label": "notice-of-sale"
+            },
+            {
+              "value": "on-market",
+              "label": "on-market"
+            },
+            {
+              "value": "out-of-state-absentee-owner",
+              "label": "out-of-state-absentee-owner"
+            },
+            {
+              "value": "out-of-state-owner",
+              "label": "out-of-state-owner"
+            },
+            {
+              "value": "owner-occupied",
+              "label": "owner-occupied"
+            },
+            {
+              "value": "pending-listing",
+              "label": "pending-listing"
+            },
+            {
+              "value": "preforeclosure",
+              "label": "preforeclosure"
+            },
+            {
+              "value": "recently-sold",
+              "label": "recently-sold"
+            },
+            {
+              "value": "same-property-and-mailing-address",
+              "label": "same-property-and-mailing-address"
+            },
+            {
+              "value": "senior-owner",
+              "label": "senior-owner"
+            },
+            {
+              "value": "tax-default",
+              "label": "tax-default"
+            },
+            {
+              "value": "tired-landlord",
+              "label": "tired-landlord"
+            },
+            {
+              "value": "trust-owned",
+              "label": "trust-owned"
+            },
+            {
+              "value": "unknown-equity",
+              "label": "unknown-equity"
+            },
+            {
+              "value": "vacant",
+              "label": "vacant"
+            },
+            {
+              "value": "vacant-lot",
+              "label": "vacant-lot"
+            }
+          ],
+          "help": "Properties must match ALL selected lists."
+        },
+        {
+          "key": "or_quick_lists",
+          "label": "Quick Lists (Match Any)",
+          "type": "list",
+          "path": "searchCriteria.orQuickLists",
+          "choices": [
+            {
+              "value": "absentee-owner",
+              "label": "absentee-owner"
+            },
+            {
+              "value": "active-auction",
+              "label": "active-auction"
+            },
+            {
+              "value": "active-listing",
+              "label": "active-listing"
+            },
+            {
+              "value": "canceled-listing",
+              "label": "canceled-listing"
+            },
+            {
+              "value": "cash-buyer",
+              "label": "cash-buyer"
+            },
+            {
+              "value": "corporate-owned",
+              "label": "corporate-owned"
+            },
+            {
+              "value": "expired-listing",
+              "label": "expired-listing"
+            },
+            {
+              "value": "failed-listing",
+              "label": "failed-listing"
+            },
+            {
+              "value": "fix-and-flip",
+              "label": "fix-and-flip"
+            },
+            {
+              "value": "free-and-clear",
+              "label": "free-and-clear"
+            },
+            {
+              "value": "for-sale-by-owner",
+              "label": "for-sale-by-owner"
+            },
+            {
+              "value": "has-hoa",
+              "label": "has-hoa"
+            },
+            {
+              "value": "has-hoa-fees",
+              "label": "has-hoa-fees"
+            },
+            {
+              "value": "high-equity",
+              "label": "high-equity"
+            },
+            {
+              "value": "inherited",
+              "label": "inherited"
+            },
+            {
+              "value": "involuntary-lien",
+              "label": "involuntary-lien"
+            },
+            {
+              "value": "in-state-absentee-owner",
+              "label": "in-state-absentee-owner"
+            },
+            {
+              "value": "listed-below-market-price",
+              "label": "listed-below-market-price"
+            },
+            {
+              "value": "low-equity",
+              "label": "low-equity"
+            },
+            {
+              "value": "mailing-address-vacant",
+              "label": "mailing-address-vacant"
+            },
+            {
+              "value": "notice-of-default",
+              "label": "notice-of-default"
+            },
+            {
+              "value": "notice-of-lis-pendens",
+              "label": "notice-of-lis-pendens"
+            },
+            {
+              "value": "notice-of-sale",
+              "label": "notice-of-sale"
+            },
+            {
+              "value": "on-market",
+              "label": "on-market"
+            },
+            {
+              "value": "out-of-state-absentee-owner",
+              "label": "out-of-state-absentee-owner"
+            },
+            {
+              "value": "out-of-state-owner",
+              "label": "out-of-state-owner"
+            },
+            {
+              "value": "owner-occupied",
+              "label": "owner-occupied"
+            },
+            {
+              "value": "pending-listing",
+              "label": "pending-listing"
+            },
+            {
+              "value": "preforeclosure",
+              "label": "preforeclosure"
+            },
+            {
+              "value": "recently-sold",
+              "label": "recently-sold"
+            },
+            {
+              "value": "same-property-and-mailing-address",
+              "label": "same-property-and-mailing-address"
+            },
+            {
+              "value": "senior-owner",
+              "label": "senior-owner"
+            },
+            {
+              "value": "tax-default",
+              "label": "tax-default"
+            },
+            {
+              "value": "tired-landlord",
+              "label": "tired-landlord"
+            },
+            {
+              "value": "trust-owned",
+              "label": "trust-owned"
+            },
+            {
+              "value": "unknown-equity",
+              "label": "unknown-equity"
+            },
+            {
+              "value": "vacant",
+              "label": "vacant"
+            },
+            {
+              "value": "vacant-lot",
+              "label": "vacant-lot"
+            }
+          ],
+          "help": "Properties must match AT LEAST ONE selected list."
+        },
+        {
+          "key": "additional_criteria",
+          "label": "Additional Criteria (JSON)",
+          "type": "json",
+          "path": "searchCriteria",
+          "merge": true,
+          "first": true,
+          "help": "Optional JSON object merged into the search criteria. The fields above win on conflict. Callback URL keys are ignored."
+        },
+        {
+          "key": "delivery_type",
+          "label": "Delivery Type",
+          "type": "choice",
+          "required": true,
+          "path": "deliveryConfig.type",
+          "choices": [
+            {
+              "value": "kinesis",
+              "label": "AWS Kinesis"
+            },
+            {
+              "value": "event-hub",
+              "label": "Azure Event Hub"
+            }
+          ],
+          "default": "kinesis"
+        },
+        {
+          "key": "kinesis_stream_name",
+          "label": "Kinesis Stream Name",
+          "type": "string",
+          "path": "deliveryConfig.streamName",
+          "when": {
+            "field": "delivery_type",
+            "equals": "kinesis"
+          }
+        },
+        {
+          "key": "kinesis_region",
+          "label": "Kinesis AWS Region",
+          "type": "string",
+          "path": "deliveryConfig.region",
+          "when": {
+            "field": "delivery_type",
+            "equals": "kinesis"
+          },
+          "help": "For example us-west-2."
+        },
+        {
+          "key": "kinesis_access_key_id",
+          "label": "Kinesis IAM Access Key ID",
+          "type": "string",
+          "path": "deliveryConfig.iamAccessKeyId",
+          "when": {
+            "field": "delivery_type",
+            "equals": "kinesis"
+          }
+        },
+        {
+          "key": "kinesis_secret_access_key",
+          "label": "Kinesis IAM Secret Access Key",
+          "type": "password",
+          "path": "deliveryConfig.iamSecretAccessKey",
+          "when": {
+            "field": "delivery_type",
+            "equals": "kinesis"
+          }
+        },
+        {
+          "key": "event_hub_name",
+          "label": "Event Hub Name",
+          "type": "string",
+          "path": "deliveryConfig.eventHub.eventHubName",
+          "when": {
+            "field": "delivery_type",
+            "equals": "event-hub"
+          }
+        },
+        {
+          "key": "event_hub_connection_string",
+          "label": "Event Hub Connection String",
+          "type": "password",
+          "path": "deliveryConfig.eventHub.connectionString",
+          "when": {
+            "field": "delivery_type",
+            "equals": "event-hub"
+          },
+          "help": "Use this, or the namespace and service principal fields below."
+        },
+        {
+          "key": "event_hub_namespace",
+          "label": "Event Hub Fully Qualified Namespace",
+          "type": "string",
+          "path": "deliveryConfig.eventHub.fullyQualifiedNamespace",
+          "when": {
+            "field": "delivery_type",
+            "equals": "event-hub"
+          }
+        },
+        {
+          "key": "event_hub_client_id",
+          "label": "Event Hub Client ID",
+          "type": "string",
+          "path": "deliveryConfig.eventHub.clientId",
+          "when": {
+            "field": "delivery_type",
+            "equals": "event-hub"
+          }
+        },
+        {
+          "key": "event_hub_tenant_id",
+          "label": "Event Hub Tenant ID",
+          "type": "string",
+          "path": "deliveryConfig.eventHub.tenantId",
+          "when": {
+            "field": "delivery_type",
+            "equals": "event-hub"
+          }
+        },
+        {
+          "key": "event_hub_client_secret",
+          "label": "Event Hub Client Secret",
+          "type": "password",
+          "path": "deliveryConfig.eventHub.clientSecret",
+          "when": {
+            "field": "delivery_type",
+            "equals": "event-hub"
+          }
+        }
+      ],
+      "result": {
+        "compose": {
+          "subscriptionId": "result.subscriptionId"
+        }
+      },
+      "sample": {
+        "subscriptionId": "FXeLSlemePGGhvt"
+      }
+    },
+    {
+      "key": "delete_monitor",
+      "resource": "monitor",
+      "kind": "action",
+      "noun": "Property Monitor",
+      "label": "Delete Property Monitor",
+      "description": "Deletes a property monitor so it stops delivering events. Monitors and the events they deliver are billed according to your BatchData plan; contact support@batchservice.com for pricing. Limits: up to 5 monitors per team, a monitor cannot be edited after it is created (delete and recreate it), a new monitor can take up to 7 days to start delivering, and delivery is best effort (4 attempts per event).",
+      "destructive": true,
+      "mockedOnly": true,
+      "http": {
+        "method": "DELETE",
+        "path": "/api/v2/property-subscription/{id}"
+      },
+      "fields": [
+        {
+          "key": "id",
+          "label": "Monitor ID",
+          "type": "string",
+          "required": true,
+          "in": "path",
+          "help": "The ID of the monitor to delete."
+        }
+      ],
+      "dynamic": "new_monitor",
+      "result": {
+        "static": {
+          "deleted": true
+        },
+        "echo": {
+          "id": "id"
+        }
+      },
+      "sample": {
+        "deleted": true,
+        "id": "FXeLSlemePGGhvt"
+      }
+    }
+  ],
+  "triggers": [
+    {
+      "key": "new_search_session",
+      "mode": "poll",
+      "noun": "Search Session",
+      "label": "New Search Session",
+      "description": "Triggers when a new search session appears on your team. Needs a token with the property search sessions permission. This call does not bill property records.",
+      "http": {
+        "method": "GET",
+        "path": "/api/v2/property/search-sessions"
+      },
+      "fixedQuery": {
+        "take": 100
+      },
+      "fields": [],
+      "result": {
+        "list": "results.sessions"
+      },
+      "dedupe": "id",
+      "sortDesc": "createdAt",
+      "sample": {
+        "id": "monthly-leads-az-85020",
+        "totalDelivered": 25,
+        "lastRequestAt": "2026-10-28T23:17:54.592Z",
+        "createdAt": "2026-10-01T16:02:11.120Z"
+      }
+    },
+    {
+      "key": "new_monitor",
+      "mode": "poll",
+      "noun": "Property Monitor",
+      "label": "New Property Monitor",
+      "description": "Triggers when a new property monitor is created on your team. Needs a token with the property subscription permission. Monitors and the events they deliver are billed according to your BatchData plan; contact support@batchservice.com for pricing. Limits: up to 5 monitors per team, a monitor cannot be edited after it is created (delete and recreate it), a new monitor can take up to 7 days to start delivering, and delivery is best effort (4 attempts per event).",
+      "mockedOnly": true,
+      "http": {
+        "method": "GET",
+        "path": "/api/v2/property-subscription"
+      },
+      "fields": [],
+      "result": {
+        "list": "results.subscriptions"
+      },
+      "dedupe": "id",
+      "sample": {
+        "id": "cjui0E2T1LKxWOD",
+        "searchCriteria": {
+          "query": "Phoenix, AZ",
+          "orQuickLists": [
+            "on-market"
+          ]
+        },
+        "deliveryConfig": {
+          "type": "kinesis",
+          "streamName": "my-stream",
+          "region": "us-west-2"
+        }
+      }
+    },
+    {
+      "key": "new_session_property",
+      "mode": "poll",
+      "billed": true,
+      "noun": "Session Property",
+      "label": "New Property in Search Session (Billed)",
+      "description": "Triggers when a search session delivers a property that it has not delivered before. Every check runs the search and bills each property delivered, up to Max Results per check, and a property is never billed twice within the same Session ID. Billed per property record delivered; a session never delivers (or bills) the same property twice. Use a low Max Results while you test.",
+      "http": {
+        "method": "POST",
+        "path": "/api/v1/property/search"
+      },
+      "fixed": [
+        {
+          "path": "options.useCursorPagination",
+          "value": true
+        }
+      ],
+      "fields": [
+        {
+          "key": "session_id",
+          "label": "Session ID",
+          "type": "string",
+          "required": true,
+          "path": "options.searchSession.id",
+          "pattern": "^[A-Za-z0-9_-]{1,128}$",
+          "help": "Your own name for the session: letters, numbers, dash or underscore, up to 128 characters. Reusing the same ID continues the session, so you are never billed twice for the same property. A team can hold 100 sessions."
+        },
+        {
+          "key": "query",
+          "label": "Location Query",
+          "type": "string",
+          "path": "searchCriteria.query",
+          "help": "City, county, ZIP code or address text, for example \"Phoenix, AZ\"."
+        },
+        {
+          "key": "quick_lists",
+          "label": "Quick Lists (Include)",
+          "type": "list",
+          "path": "searchCriteria.quickLists",
+          "choices": [
+            {
+              "value": "absentee-owner",
+              "label": "absentee-owner"
+            },
+            {
+              "value": "active-auction",
+              "label": "active-auction"
+            },
+            {
+              "value": "active-listing",
+              "label": "active-listing"
+            },
+            {
+              "value": "canceled-listing",
+              "label": "canceled-listing"
+            },
+            {
+              "value": "cash-buyer",
+              "label": "cash-buyer"
+            },
+            {
+              "value": "corporate-owned",
+              "label": "corporate-owned"
+            },
+            {
+              "value": "expired-listing",
+              "label": "expired-listing"
+            },
+            {
+              "value": "failed-listing",
+              "label": "failed-listing"
+            },
+            {
+              "value": "fix-and-flip",
+              "label": "fix-and-flip"
+            },
+            {
+              "value": "free-and-clear",
+              "label": "free-and-clear"
+            },
+            {
+              "value": "for-sale-by-owner",
+              "label": "for-sale-by-owner"
+            },
+            {
+              "value": "has-hoa",
+              "label": "has-hoa"
+            },
+            {
+              "value": "has-hoa-fees",
+              "label": "has-hoa-fees"
+            },
+            {
+              "value": "high-equity",
+              "label": "high-equity"
+            },
+            {
+              "value": "inherited",
+              "label": "inherited"
+            },
+            {
+              "value": "involuntary-lien",
+              "label": "involuntary-lien"
+            },
+            {
+              "value": "in-state-absentee-owner",
+              "label": "in-state-absentee-owner"
+            },
+            {
+              "value": "listed-below-market-price",
+              "label": "listed-below-market-price"
+            },
+            {
+              "value": "low-equity",
+              "label": "low-equity"
+            },
+            {
+              "value": "mailing-address-vacant",
+              "label": "mailing-address-vacant"
+            },
+            {
+              "value": "notice-of-default",
+              "label": "notice-of-default"
+            },
+            {
+              "value": "notice-of-lis-pendens",
+              "label": "notice-of-lis-pendens"
+            },
+            {
+              "value": "notice-of-sale",
+              "label": "notice-of-sale"
+            },
+            {
+              "value": "on-market",
+              "label": "on-market"
+            },
+            {
+              "value": "out-of-state-absentee-owner",
+              "label": "out-of-state-absentee-owner"
+            },
+            {
+              "value": "out-of-state-owner",
+              "label": "out-of-state-owner"
+            },
+            {
+              "value": "owner-occupied",
+              "label": "owner-occupied"
+            },
+            {
+              "value": "pending-listing",
+              "label": "pending-listing"
+            },
+            {
+              "value": "preforeclosure",
+              "label": "preforeclosure"
+            },
+            {
+              "value": "recently-sold",
+              "label": "recently-sold"
+            },
+            {
+              "value": "same-property-and-mailing-address",
+              "label": "same-property-and-mailing-address"
+            },
+            {
+              "value": "senior-owner",
+              "label": "senior-owner"
+            },
+            {
+              "value": "tax-default",
+              "label": "tax-default"
+            },
+            {
+              "value": "tired-landlord",
+              "label": "tired-landlord"
+            },
+            {
+              "value": "trust-owned",
+              "label": "trust-owned"
+            },
+            {
+              "value": "unknown-equity",
+              "label": "unknown-equity"
+            },
+            {
+              "value": "vacant",
+              "label": "vacant"
+            },
+            {
+              "value": "vacant-lot",
+              "label": "vacant-lot"
+            }
+          ],
+          "help": "Properties must match ALL selected lists."
+        },
+        {
+          "key": "or_quick_lists",
+          "label": "Quick Lists (Match Any)",
+          "type": "list",
+          "path": "searchCriteria.orQuickLists",
+          "choices": [
+            {
+              "value": "absentee-owner",
+              "label": "absentee-owner"
+            },
+            {
+              "value": "active-auction",
+              "label": "active-auction"
+            },
+            {
+              "value": "active-listing",
+              "label": "active-listing"
+            },
+            {
+              "value": "canceled-listing",
+              "label": "canceled-listing"
+            },
+            {
+              "value": "cash-buyer",
+              "label": "cash-buyer"
+            },
+            {
+              "value": "corporate-owned",
+              "label": "corporate-owned"
+            },
+            {
+              "value": "expired-listing",
+              "label": "expired-listing"
+            },
+            {
+              "value": "failed-listing",
+              "label": "failed-listing"
+            },
+            {
+              "value": "fix-and-flip",
+              "label": "fix-and-flip"
+            },
+            {
+              "value": "free-and-clear",
+              "label": "free-and-clear"
+            },
+            {
+              "value": "for-sale-by-owner",
+              "label": "for-sale-by-owner"
+            },
+            {
+              "value": "has-hoa",
+              "label": "has-hoa"
+            },
+            {
+              "value": "has-hoa-fees",
+              "label": "has-hoa-fees"
+            },
+            {
+              "value": "high-equity",
+              "label": "high-equity"
+            },
+            {
+              "value": "inherited",
+              "label": "inherited"
+            },
+            {
+              "value": "involuntary-lien",
+              "label": "involuntary-lien"
+            },
+            {
+              "value": "in-state-absentee-owner",
+              "label": "in-state-absentee-owner"
+            },
+            {
+              "value": "listed-below-market-price",
+              "label": "listed-below-market-price"
+            },
+            {
+              "value": "low-equity",
+              "label": "low-equity"
+            },
+            {
+              "value": "mailing-address-vacant",
+              "label": "mailing-address-vacant"
+            },
+            {
+              "value": "notice-of-default",
+              "label": "notice-of-default"
+            },
+            {
+              "value": "notice-of-lis-pendens",
+              "label": "notice-of-lis-pendens"
+            },
+            {
+              "value": "notice-of-sale",
+              "label": "notice-of-sale"
+            },
+            {
+              "value": "on-market",
+              "label": "on-market"
+            },
+            {
+              "value": "out-of-state-absentee-owner",
+              "label": "out-of-state-absentee-owner"
+            },
+            {
+              "value": "out-of-state-owner",
+              "label": "out-of-state-owner"
+            },
+            {
+              "value": "owner-occupied",
+              "label": "owner-occupied"
+            },
+            {
+              "value": "pending-listing",
+              "label": "pending-listing"
+            },
+            {
+              "value": "preforeclosure",
+              "label": "preforeclosure"
+            },
+            {
+              "value": "recently-sold",
+              "label": "recently-sold"
+            },
+            {
+              "value": "same-property-and-mailing-address",
+              "label": "same-property-and-mailing-address"
+            },
+            {
+              "value": "senior-owner",
+              "label": "senior-owner"
+            },
+            {
+              "value": "tax-default",
+              "label": "tax-default"
+            },
+            {
+              "value": "tired-landlord",
+              "label": "tired-landlord"
+            },
+            {
+              "value": "trust-owned",
+              "label": "trust-owned"
+            },
+            {
+              "value": "unknown-equity",
+              "label": "unknown-equity"
+            },
+            {
+              "value": "vacant",
+              "label": "vacant"
+            },
+            {
+              "value": "vacant-lot",
+              "label": "vacant-lot"
+            }
+          ],
+          "help": "Properties must match AT LEAST ONE selected list."
+        },
+        {
+          "key": "additional_criteria",
+          "label": "Additional Criteria (JSON)",
+          "type": "json",
+          "path": "searchCriteria",
+          "merge": true,
+          "first": true,
+          "help": "Optional JSON object merged into the search criteria. The fields above win on conflict. Callback URL keys are ignored."
+        },
+        {
+          "key": "take",
+          "label": "Max Results",
+          "type": "integer",
+          "path": "options.take",
+          "default": 25,
+          "min": 1,
+          "max": 100,
+          "help": "Whole number from 1 to 100. Default 25. You are billed per property delivered on each check."
+        }
+      ],
+      "result": {
+        "list": "results.properties",
+        "idFrom": {
+          "id": "_id"
+        },
+        "attach": {
+          "searchMeta": "results.meta.results"
+        }
+      },
+      "dedupe": "id",
+      "sample": {
+        "id": "09201d3bd3134f9380704014781fb4c0",
+        "_id": "09201d3bd3134f9380704014781fb4c0",
+        "address": {
+          "street": "2800 N 24th St",
+          "city": "Phoenix",
+          "state": "AZ",
+          "zip": "85008",
+          "county": "Maricopa"
+        },
+        "general": {
+          "propertyTypeCategory": "Single Family"
+        },
+        "quickLists": {
+          "vacant": false
+        }
+      }
+    },
+    {
+      "key": "monitor_event",
+      "mode": "hook",
+      "noun": "Property Monitor Event",
+      "label": "New Property Monitor Event",
+      "description": "Triggers when BatchData reports that a property matching your criteria was added to or removed from a monitor, or changed (instant). Turning the Zap or scenario on creates a monitor that delivers to this trigger's own hook URL; turning it off deletes that monitor. Each event carries the property ID and change details; turn on \"Include Property Record\" to also look up the full property record. Monitors and the events they deliver are billed according to your BatchData plan; contact support@batchservice.com for pricing. Limits: up to 5 monitors per team, a monitor cannot be edited after it is created (delete and recreate it), a new monitor can take up to 7 days to start delivering, and delivery is best effort (4 attempts per event). The optional property lookup is billed per event, per matched property.",
+      "mockedOnly": true,
+      "http": {
+        "method": "POST",
+        "path": "/api/v2/property-subscription",
+        "deletePath": "/api/v2/property-subscription/{id}",
+        "idPath": "result.subscriptionId"
+      },
+      "deliveryType": "webhook",
+      "hydrate": {
+        "path": "/api/v1/property/lookup/all-attributes",
+        "idField": "propertyId",
+        "listPath": "results.properties",
+        "into": "property"
+      },
+      "fields": [
+        {
+          "key": "query",
+          "label": "Location Query",
+          "type": "string",
+          "path": "searchCriteria.query",
+          "help": "City, county, ZIP code or address text, for example \"Phoenix, AZ\"."
+        },
+        {
+          "key": "quick_lists",
+          "label": "Quick Lists (Include)",
+          "type": "list",
+          "path": "searchCriteria.quickLists",
+          "choices": [
+            {
+              "value": "absentee-owner",
+              "label": "absentee-owner"
+            },
+            {
+              "value": "active-auction",
+              "label": "active-auction"
+            },
+            {
+              "value": "active-listing",
+              "label": "active-listing"
+            },
+            {
+              "value": "canceled-listing",
+              "label": "canceled-listing"
+            },
+            {
+              "value": "cash-buyer",
+              "label": "cash-buyer"
+            },
+            {
+              "value": "corporate-owned",
+              "label": "corporate-owned"
+            },
+            {
+              "value": "expired-listing",
+              "label": "expired-listing"
+            },
+            {
+              "value": "failed-listing",
+              "label": "failed-listing"
+            },
+            {
+              "value": "fix-and-flip",
+              "label": "fix-and-flip"
+            },
+            {
+              "value": "free-and-clear",
+              "label": "free-and-clear"
+            },
+            {
+              "value": "for-sale-by-owner",
+              "label": "for-sale-by-owner"
+            },
+            {
+              "value": "has-hoa",
+              "label": "has-hoa"
+            },
+            {
+              "value": "has-hoa-fees",
+              "label": "has-hoa-fees"
+            },
+            {
+              "value": "high-equity",
+              "label": "high-equity"
+            },
+            {
+              "value": "inherited",
+              "label": "inherited"
+            },
+            {
+              "value": "involuntary-lien",
+              "label": "involuntary-lien"
+            },
+            {
+              "value": "in-state-absentee-owner",
+              "label": "in-state-absentee-owner"
+            },
+            {
+              "value": "listed-below-market-price",
+              "label": "listed-below-market-price"
+            },
+            {
+              "value": "low-equity",
+              "label": "low-equity"
+            },
+            {
+              "value": "mailing-address-vacant",
+              "label": "mailing-address-vacant"
+            },
+            {
+              "value": "notice-of-default",
+              "label": "notice-of-default"
+            },
+            {
+              "value": "notice-of-lis-pendens",
+              "label": "notice-of-lis-pendens"
+            },
+            {
+              "value": "notice-of-sale",
+              "label": "notice-of-sale"
+            },
+            {
+              "value": "on-market",
+              "label": "on-market"
+            },
+            {
+              "value": "out-of-state-absentee-owner",
+              "label": "out-of-state-absentee-owner"
+            },
+            {
+              "value": "out-of-state-owner",
+              "label": "out-of-state-owner"
+            },
+            {
+              "value": "owner-occupied",
+              "label": "owner-occupied"
+            },
+            {
+              "value": "pending-listing",
+              "label": "pending-listing"
+            },
+            {
+              "value": "preforeclosure",
+              "label": "preforeclosure"
+            },
+            {
+              "value": "recently-sold",
+              "label": "recently-sold"
+            },
+            {
+              "value": "same-property-and-mailing-address",
+              "label": "same-property-and-mailing-address"
+            },
+            {
+              "value": "senior-owner",
+              "label": "senior-owner"
+            },
+            {
+              "value": "tax-default",
+              "label": "tax-default"
+            },
+            {
+              "value": "tired-landlord",
+              "label": "tired-landlord"
+            },
+            {
+              "value": "trust-owned",
+              "label": "trust-owned"
+            },
+            {
+              "value": "unknown-equity",
+              "label": "unknown-equity"
+            },
+            {
+              "value": "vacant",
+              "label": "vacant"
+            },
+            {
+              "value": "vacant-lot",
+              "label": "vacant-lot"
+            }
+          ],
+          "help": "Properties must match ALL selected lists."
+        },
+        {
+          "key": "or_quick_lists",
+          "label": "Quick Lists (Match Any)",
+          "type": "list",
+          "path": "searchCriteria.orQuickLists",
+          "choices": [
+            {
+              "value": "absentee-owner",
+              "label": "absentee-owner"
+            },
+            {
+              "value": "active-auction",
+              "label": "active-auction"
+            },
+            {
+              "value": "active-listing",
+              "label": "active-listing"
+            },
+            {
+              "value": "canceled-listing",
+              "label": "canceled-listing"
+            },
+            {
+              "value": "cash-buyer",
+              "label": "cash-buyer"
+            },
+            {
+              "value": "corporate-owned",
+              "label": "corporate-owned"
+            },
+            {
+              "value": "expired-listing",
+              "label": "expired-listing"
+            },
+            {
+              "value": "failed-listing",
+              "label": "failed-listing"
+            },
+            {
+              "value": "fix-and-flip",
+              "label": "fix-and-flip"
+            },
+            {
+              "value": "free-and-clear",
+              "label": "free-and-clear"
+            },
+            {
+              "value": "for-sale-by-owner",
+              "label": "for-sale-by-owner"
+            },
+            {
+              "value": "has-hoa",
+              "label": "has-hoa"
+            },
+            {
+              "value": "has-hoa-fees",
+              "label": "has-hoa-fees"
+            },
+            {
+              "value": "high-equity",
+              "label": "high-equity"
+            },
+            {
+              "value": "inherited",
+              "label": "inherited"
+            },
+            {
+              "value": "involuntary-lien",
+              "label": "involuntary-lien"
+            },
+            {
+              "value": "in-state-absentee-owner",
+              "label": "in-state-absentee-owner"
+            },
+            {
+              "value": "listed-below-market-price",
+              "label": "listed-below-market-price"
+            },
+            {
+              "value": "low-equity",
+              "label": "low-equity"
+            },
+            {
+              "value": "mailing-address-vacant",
+              "label": "mailing-address-vacant"
+            },
+            {
+              "value": "notice-of-default",
+              "label": "notice-of-default"
+            },
+            {
+              "value": "notice-of-lis-pendens",
+              "label": "notice-of-lis-pendens"
+            },
+            {
+              "value": "notice-of-sale",
+              "label": "notice-of-sale"
+            },
+            {
+              "value": "on-market",
+              "label": "on-market"
+            },
+            {
+              "value": "out-of-state-absentee-owner",
+              "label": "out-of-state-absentee-owner"
+            },
+            {
+              "value": "out-of-state-owner",
+              "label": "out-of-state-owner"
+            },
+            {
+              "value": "owner-occupied",
+              "label": "owner-occupied"
+            },
+            {
+              "value": "pending-listing",
+              "label": "pending-listing"
+            },
+            {
+              "value": "preforeclosure",
+              "label": "preforeclosure"
+            },
+            {
+              "value": "recently-sold",
+              "label": "recently-sold"
+            },
+            {
+              "value": "same-property-and-mailing-address",
+              "label": "same-property-and-mailing-address"
+            },
+            {
+              "value": "senior-owner",
+              "label": "senior-owner"
+            },
+            {
+              "value": "tax-default",
+              "label": "tax-default"
+            },
+            {
+              "value": "tired-landlord",
+              "label": "tired-landlord"
+            },
+            {
+              "value": "trust-owned",
+              "label": "trust-owned"
+            },
+            {
+              "value": "unknown-equity",
+              "label": "unknown-equity"
+            },
+            {
+              "value": "vacant",
+              "label": "vacant"
+            },
+            {
+              "value": "vacant-lot",
+              "label": "vacant-lot"
+            }
+          ],
+          "help": "Properties must match AT LEAST ONE selected list."
+        },
+        {
+          "key": "additional_criteria",
+          "label": "Additional Criteria (JSON)",
+          "type": "json",
+          "path": "searchCriteria",
+          "merge": true,
+          "first": true,
+          "help": "Optional JSON object merged into the search criteria. The fields above win on conflict. Callback URL keys are ignored."
+        },
+        {
+          "key": "include_property",
+          "label": "Include Property Record (Billed)",
+          "type": "boolean",
+          "local": true,
+          "default": false,
+          "help": "Off by default. When on, each event also runs a property lookup and adds the full record as \"property\". The lookup is billed per matched property."
+        }
+      ],
+      "dedupe": "id",
+      "sample": {
+        "id": "evt_9c1f2a",
+        "eventId": "evt_9c1f2a",
+        "propertyId": "09201d3bd3134f9380704014781fb4c0",
+        "parcelHash": "a1b2c3d4e5f60718293a4b5c6d7e8f90",
+        "addressHash": "90a01b18e3834e349a8d1d07d7e086ba",
+        "addedToSubscriptionIds": [
+          "FXeLSlemePGGhvt"
+        ],
+        "removedFromSubscriptionIds": [],
+        "propertyChangedAt": "2026-10-28T22:10:41.000Z",
+        "sentAt": "2026-10-28T22:10:45.000Z"
+      }
+    }
+  ],
+  "apiRequest": {
+    "key": "api_request",
+    "resource": "custom",
+    "noun": "API Response",
+    "label": "API Request (Advanced)",
+    "description": "Calls any BatchData API path with your token. Billing follows the endpoint you call. Account balance and billing endpoints, asynchronous (callback) endpoints and monitor creation are not available here.",
+    "methods": [
+      "GET",
+      "POST",
+      "PUT",
+      "PATCH",
+      "DELETE"
+    ],
+    "guard": {
+      "mustStartWith": "/api/",
+      "blockedPathContains": [
+        "wallet"
+      ],
+      "blockedPathSegments": [
+        "async"
+      ],
+      "blockedWrites": [
+        {
+          "pathContains": "property-subscription",
+          "methods": [
+            "POST",
+            "PUT",
+            "PATCH"
+          ]
+        }
+      ]
+    },
+    "sample": {
+      "statusCode": 200,
+      "body": {
+        "status": {
+          "code": 200,
+          "text": "OK"
+        }
+      }
+    }
+  }
+}

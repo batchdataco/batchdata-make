@@ -1,0 +1,23 @@
+{
+  "url": "/v1/property/lookup/all-attributes",
+  "method": "POST",
+  "body": {
+    "requests": [
+      {
+        "address": "{{if(parameters.identifyBy == 'address', parameters.address, undefined)}}",
+        "propertyId": "{{if(parameters.identifyBy == 'propertyId', ifempty(parameters.propertyId, undefined), undefined)}}",
+        "hash": "{{if(parameters.identifyBy == 'hash', ifempty(parameters.hash, undefined), undefined)}}",
+        "apn": "{{if(parameters.identifyBy == 'apn', ifempty(parameters.apn, undefined), undefined)}}",
+        "countyFipsCode": "{{if(parameters.identifyBy == 'apn', ifempty(parameters.countyFipsCode, undefined), undefined)}}",
+        "requestId": "{{ifempty(parameters.requestId, undefined)}}"
+      }
+    ],
+    "options": {
+      "skipTrace": "{{if(parameters.includeSkipTrace == true, true, undefined)}}",
+      "datasets": "{{if(length(parameters.datasets) > 0, parameters.datasets, undefined)}}"
+    }
+  },
+  "response": {
+    "output": "{{first(body.results.properties)}}"
+  }
+}

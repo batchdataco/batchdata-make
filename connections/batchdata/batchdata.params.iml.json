@@ -1,0 +1,9 @@
+[
+  {
+    "name": "apiKey",
+    "type": "password",
+    "label": "API token",
+    "required": true,
+    "help": "Create an API token in your BatchData account and paste it here. Tokens are only available on plans with API access."
+  }
+]

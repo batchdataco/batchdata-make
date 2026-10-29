@@ -1,0 +1,22 @@
+[
+  {
+    "name": "id",
+    "type": "text",
+    "label": "Id"
+  },
+  {
+    "name": "totalDelivered",
+    "type": "number",
+    "label": "Total delivered"
+  },
+  {
+    "name": "lastRequestAt",
+    "type": "text",
+    "label": "Last request at"
+  },
+  {
+    "name": "createdAt",
+    "type": "text",
+    "label": "Created at"
+  }
+]

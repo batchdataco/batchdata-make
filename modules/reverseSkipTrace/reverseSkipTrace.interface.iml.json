@@ -1,0 +1,100 @@
+[
+  {
+    "name": "input",
+    "type": "collection",
+    "label": "Input",
+    "spec": [
+      {
+        "name": "phone",
+        "type": "text",
+        "label": "Phone"
+      },
+      {
+        "name": "requestId",
+        "type": "text",
+        "label": "Request id"
+      }
+    ]
+  },
+  {
+    "name": "persons",
+    "type": "array",
+    "label": "Persons",
+    "spec": [
+      {
+        "name": "name",
+        "type": "collection",
+        "label": "Name",
+        "spec": [
+          {
+            "name": "first",
+            "type": "text",
+            "label": "First"
+          },
+          {
+            "name": "last",
+            "type": "text",
+            "label": "Last"
+          },
+          {
+            "name": "full",
+            "type": "text",
+            "label": "Full"
+          }
+        ]
+      },
+      {
+        "name": "phoneNumbers",
+        "type": "array",
+        "label": "Phone numbers",
+        "spec": [
+          {
+            "name": "number",
+            "type": "text",
+            "label": "Number"
+          },
+          {
+            "name": "type",
+            "type": "text",
+            "label": "Type"
+          },
+          {
+            "name": "tcpa",
+            "type": "boolean",
+            "label": "Tcpa"
+          },
+          {
+            "name": "dnc",
+            "type": "boolean",
+            "label": "Dnc"
+          }
+        ]
+      },
+      {
+        "name": "emails",
+        "type": "array",
+        "label": "Emails",
+        "spec": {
+          "type": "text"
+        }
+      }
+    ]
+  },
+  {
+    "name": "meta",
+    "type": "collection",
+    "label": "Meta",
+    "spec": [
+      {
+        "name": "matched",
+        "type": "boolean",
+        "label": "Matched"
+      },
+      {
+        "name": "error",
+        "type": "boolean",
+        "label": "Error"
+      }
+    ]
+  }
+]

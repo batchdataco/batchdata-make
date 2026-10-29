@@ -1,0 +1,11 @@
+{
+  "url": "/v1/phone/dnc",
+  "method": "POST",
+  "body": {
+    "requests": "{{parameters.phoneNumbers}}"
+  },
+  "response": {
+    "iterate": "{{body.results.phoneNumbers}}",
+    "output": "{{item}}"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "url": "/v2/property/search-sessions/{{replace(replace(parameters.id, '/', '_'), '.', '_')}}",
+  "method": "DELETE",
+  "response": {
+    "output": {
+      "deleted": "{{body.results.deleted}}",
+      "id": "{{body.results.id}}"
+    }
+  }
+}

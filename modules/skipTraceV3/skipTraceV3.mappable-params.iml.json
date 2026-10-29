@@ -1,0 +1,129 @@
+[
+  {
+    "name": "findBy",
+    "type": "select",
+    "label": "Find owner by",
+    "required": true,
+    "default": "address",
+    "options": [
+      {
+        "label": "Property address",
+        "value": "address"
+      },
+      {
+        "label": "APN",
+        "value": "apn"
+      }
+    ]
+  },
+  {
+    "name": "propertyAddress",
+    "type": "collection",
+    "label": "Property address",
+    "spec": [
+      {
+        "name": "street",
+        "type": "text",
+        "label": "Street"
+      },
+      {
+        "name": "city",
+        "type": "text",
+        "label": "City"
+      },
+      {
+        "name": "state",
+        "type": "text",
+        "label": "State",
+        "help": "Two-letter state code, for example AZ."
+      },
+      {
+        "name": "zip",
+        "type": "text",
+        "label": "ZIP code"
+      }
+    ]
+  },
+  {
+    "name": "apn",
+    "type": "text",
+    "label": "APN"
+  },
+  {
+    "name": "countyFipsCode",
+    "type": "text",
+    "label": "County FIPS code"
+  },
+  {
+    "name": "county",
+    "type": "text",
+    "label": "County"
+  },
+  {
+    "name": "state",
+    "type": "text",
+    "label": "State (for APN)"
+  },
+  {
+    "name": "name",
+    "type": "collection",
+    "label": "Owner name (optional)",
+    "spec": [
+      {
+        "name": "first",
+        "type": "text",
+        "label": "First name"
+      },
+      {
+        "name": "last",
+        "type": "text",
+        "label": "Last name"
+      }
+    ]
+  },
+  {
+    "name": "mailingAddress",
+    "type": "collection",
+    "label": "Owner mailing address (optional)",
+    "spec": [
+      {
+        "name": "street",
+        "type": "text",
+        "label": "Street"
+      },
+      {
+        "name": "city",
+        "type": "text",
+        "label": "City"
+      },
+      {
+        "name": "state",
+        "type": "text",
+        "label": "State",
+        "help": "Two-letter state code, for example AZ."
+      },
+      {
+        "name": "zip",
+        "type": "text",
+        "label": "ZIP code"
+      }
+    ]
+  },
+  {
+    "name": "requestId",
+    "type": "text",
+    "label": "Request ID"
+  },
+  {
+    "name": "includeTcpaFlaggedPhones",
+    "type": "boolean",
+    "label": "Include phone numbers flagged as TCPA litigators",
+    "default": false,
+    "help": "Off by default: flagged numbers are removed. Turn on only if your compliance process allows it."
+  },
+  {
+    "name": "prioritizeMobilePhones",
+    "type": "boolean",
+    "label": "Prioritize mobile phones"
+  }
+]

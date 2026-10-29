@@ -1,0 +1,49 @@
+{
+ "status": {
+  "code": 200,
+  "text": "OK"
+ },
+ "results": {
+  "phoneNumbers": [
+   {
+    "number": "6027828692",
+    "dnc": false,
+    "meta": {
+     "error": false,
+     "matched": true
+    }
+   },
+   {
+    "number": "5633574823",
+    "dnc": true,
+    "meta": {
+     "error": false,
+     "matched": true
+    }
+   },
+   {
+    "number": "4808602153",
+    "dnc": true,
+    "meta": {
+     "error": false,
+     "matched": true
+    }
+   }
+  ],
+  "meta": {
+   "apiVersion": "2.0",
+   "results": {
+    "requestCount": 3,
+    "matchCount": 3,
+    "noMatchCount": 0,
+    "errorCount": 0
+   },
+   "performance": {
+    "totalRequestTime": 433,
+    "startTime": "2021-10-05T21:18:50.576Z",
+    "endTime": "2021-10-05T21:18:51.009Z"
+   },
+   "requestId": "qTmKWCL3mDLIpmX"
+  }
+ }
+}

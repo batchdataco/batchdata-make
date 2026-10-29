@@ -1,0 +1,310 @@
+[
+  {
+    "name": "bankruptcy",
+    "type": "collection",
+    "label": "Bankruptcy",
+    "spec": []
+  },
+  {
+    "name": "dnc",
+    "type": "collection",
+    "label": "Dnc",
+    "spec": []
+  },
+  {
+    "name": "emails",
+    "type": "array",
+    "label": "Emails",
+    "spec": [
+      {
+        "name": "email",
+        "type": "text",
+        "label": "Email"
+      }
+    ]
+  },
+  {
+    "name": "mailingAddress",
+    "type": "collection",
+    "label": "Mailing address",
+    "spec": []
+  },
+  {
+    "name": "name",
+    "type": "collection",
+    "label": "Name",
+    "spec": [
+      {
+        "name": "first",
+        "type": "text",
+        "label": "First"
+      },
+      {
+        "name": "last",
+        "type": "text",
+        "label": "Last"
+      }
+    ]
+  },
+  {
+    "name": "phoneNumbers",
+    "type": "array",
+    "label": "Phone numbers",
+    "spec": [
+      {
+        "name": "number",
+        "type": "text",
+        "label": "Number"
+      },
+      {
+        "name": "carrier",
+        "type": "text",
+        "label": "Carrier"
+      },
+      {
+        "name": "type",
+        "type": "text",
+        "label": "Type"
+      },
+      {
+        "name": "tested",
+        "type": "boolean",
+        "label": "Tested"
+      },
+      {
+        "name": "reachable",
+        "type": "boolean",
+        "label": "Reachable"
+      },
+      {
+        "name": "score",
+        "type": "number",
+        "label": "Score"
+      }
+    ]
+  },
+  {
+    "name": "litigator",
+    "type": "boolean",
+    "label": "Litigator"
+  },
+  {
+    "name": "propertyAddress",
+    "type": "collection",
+    "label": "Property address",
+    "spec": [
+      {
+        "name": "houseNumber",
+        "type": "text",
+        "label": "House number"
+      },
+      {
+        "name": "street",
+        "type": "text",
+        "label": "Street"
+      },
+      {
+        "name": "city",
+        "type": "text",
+        "label": "City"
+      },
+      {
+        "name": "county",
+        "type": "text",
+        "label": "County"
+      },
+      {
+        "name": "state",
+        "type": "text",
+        "label": "State"
+      },
+      {
+        "name": "zip",
+        "type": "text",
+        "label": "Zip"
+      },
+      {
+        "name": "zipPlus4",
+        "type": "text",
+        "label": "Zip plus4"
+      },
+      {
+        "name": "formattedStreet",
+        "type": "text",
+        "label": "Formatted street"
+      },
+      {
+        "name": "streetNoUnit",
+        "type": "text",
+        "label": "Street no unit"
+      },
+      {
+        "name": "hash",
+        "type": "text",
+        "label": "Hash"
+      }
+    ]
+  },
+  {
+    "name": "property",
+    "type": "collection",
+    "label": "Property",
+    "spec": [
+      {
+        "name": "address",
+        "type": "collection",
+        "label": "Address",
+        "spec": [
+          {
+            "name": "houseNumber",
+            "type": "text",
+            "label": "House number"
+          },
+          {
+            "name": "street",
+            "type": "text",
+            "label": "Street"
+          },
+          {
+            "name": "city",
+            "type": "text",
+            "label": "City"
+          },
+          {
+            "name": "county",
+            "type": "text",
+            "label": "County"
+          },
+          {
+            "name": "state",
+            "type": "text",
+            "label": "State"
+          },
+          {
+            "name": "zip",
+            "type": "text",
+            "label": "Zip"
+          },
+          {
+            "name": "zipPlus4",
+            "type": "text",
+            "label": "Zip plus4"
+          },
+          {
+            "name": "hash",
+            "type": "text",
+            "label": "Hash"
+          },
+          {
+            "name": "formattedStreet",
+            "type": "text",
+            "label": "Formatted street"
+          },
+          {
+            "name": "streetNoUnit",
+            "type": "text",
+            "label": "Street no unit"
+          }
+        ]
+      },
+      {
+        "name": "owner",
+        "type": "collection",
+        "label": "Owner",
+        "spec": [
+          {
+            "name": "name",
+            "type": "collection",
+            "label": "Name",
+            "spec": [
+              {
+                "name": "first",
+                "type": "text",
+                "label": "First"
+              },
+              {
+                "name": "last",
+                "type": "text",
+                "label": "Last"
+              }
+            ]
+          },
+          {
+            "name": "mailingAddress",
+            "type": "collection",
+            "label": "Mailing address",
+            "spec": [
+              {
+                "name": "houseNumber",
+                "type": "text",
+                "label": "House number"
+              },
+              {
+                "name": "street",
+                "type": "text",
+                "label": "Street"
+              },
+              {
+                "name": "city",
+                "type": "text",
+                "label": "City"
+              },
+              {
+                "name": "county",
+                "type": "text",
+                "label": "County"
+              },
+              {
+                "name": "state",
+                "type": "text",
+                "label": "State"
+              },
+              {
+                "name": "zip",
+                "type": "text",
+                "label": "Zip"
+              },
+              {
+                "name": "formattedStreet",
+                "type": "text",
+                "label": "Formatted street"
+              },
+              {
+                "name": "streetNoUnit",
+                "type": "text",
+                "label": "Street no unit"
+              },
+              {
+                "name": "hash",
+                "type": "text",
+                "label": "Hash"
+              },
+              {
+                "name": "zipPlus4",
+                "type": "text",
+                "label": "Zip plus4"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "meta",
+    "type": "collection",
+    "label": "Meta",
+    "spec": [
+      {
+        "name": "matched",
+        "type": "boolean",
+        "label": "Matched"
+      },
+      {
+        "name": "error",
+        "type": "boolean",
+        "label": "Error"
+      }
+    ]
+  }
+]
