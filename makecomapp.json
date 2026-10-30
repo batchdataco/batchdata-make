@@ -253,7 +253,7 @@
       "investorProperties": {
         "moduleType": "search",
         "label": "Get Investor Properties",
-        "description": "Returns the properties of one investor, one result per property. Get the investor ID from Find Investors (Buy Box). Use the \"nextPageCursor\" value of the last result as Page Cursor to read the next page. Billed per property row returned (take sets the maximum cost of a call).",
+        "description": "Returns the properties of one investor, one result per property. Get the investor ID from Find Investors (Buy Box). Set a Limit and Make reads the pages for you; each result also carries the \"nextPageCursor\" of its page. Billed per property row returned (the Limit sets the maximum cost of a run).",
         "actionCrud": "read",
         "connection": "batchdata",
         "codeFiles": {
@@ -331,7 +331,7 @@
       "createMonitor": {
         "moduleType": "action",
         "label": "Create Property Monitor (Stream Delivery)",
-        "description": "Creates a property monitor that streams changes for matching properties to your own AWS Kinesis stream or Azure Event Hub. For webhook delivery use the \"New Property Monitor Event\" trigger, which sets up and removes its own monitor. Monitors and the events they deliver are billed according to your BatchData plan; contact support@batchservice.com for pricing. Limits: up to 5 monitors per team, a monitor cannot be edited after it is created (delete and recreate it), a new monitor can take up to 7 days to start delivering, and delivery is best effort (4 attempts per event).",
+        "description": "Creates a property monitor that streams changes for matching properties to your own AWS Kinesis stream or Azure Event Hub. For webhook delivery use the \"Watch Property Monitor Events (Instant)\" trigger, which sets up and removes its own monitor. Monitors and the events they deliver are billed according to your BatchData plan; contact support@batchservice.com for pricing. Limits: up to 5 monitors per team, a monitor cannot be edited after it is created (delete and recreate it), a new monitor can take up to 7 days to start delivering, and delivery is best effort (4 attempts per event).",
         "actionCrud": "create",
         "connection": "batchdata",
         "codeFiles": {

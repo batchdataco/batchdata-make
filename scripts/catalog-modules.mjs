@@ -260,7 +260,7 @@ for (const op of catalog.ops) {
     actionCrud: CRUD(op),
     catalogKey: op.key,
     label: op.label,
-    description: describe(op),
+    description: describe(op).replace('the "New Property Monitor Event" trigger', 'the "Watch Property Monitor Events (Instant)" trigger'),
     communication: requestFor(op),
     params: paramsFor(op),
     sampleFrom: () => ({ ...op.sample, ...Object.fromEntries(Object.keys(op.result.attach ?? {}).filter((k) => !(k in op.sample)).map((k) => [k, SAMPLE_FILL[k] ?? {}])) }),
@@ -414,6 +414,10 @@ const swapTakeForLimit = (m, param) => {
   // that follows it is empty and not billed.
   const m = catalogModules.investorProperties;
   swapTakeForLimit(m, limitParam(25, { what: 'properties' }));
+  m.description = m.description
+    .replace('Use the "nextPageCursor" value of the last result as Page Cursor to read the next page.', 'Set a Limit and Make reads the pages for you; each result also carries the "nextPageCursor" of its page.')
+    .replace('(take sets the maximum cost of a call)', '(the Limit sets the maximum cost of a run)');
+  if (/Page Cursor to read|take sets/.test(m.description)) throw new Error('investorProperties description still has the old paging text');
   const cur = m.params.find((x) => x.name === 'pageCursor');
   cur.label = 'Start from page cursor';
   cur.help = 'Optional. Leave empty to start at the first page. The Limit already pages for you, so use this only to continue an earlier run from its Next Page Cursor.';
