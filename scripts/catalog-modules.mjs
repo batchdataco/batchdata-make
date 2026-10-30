@@ -2,6 +2,7 @@
 // The catalog is the single source of truth shared with the Zapier and n8n integrations.
 import fs from 'node:fs';
 import { root } from './lib.mjs';
+import { limitParam, offsetPaging, cursorPaging } from './paging.mjs';
 
 export const catalog = JSON.parse(fs.readFileSync(`${root}/scripts/catalog.json`, 'utf8'));
 const fx = (n) => JSON.parse(fs.readFileSync(`${root}/test/fixtures/${n}.json`, 'utf8'));
@@ -259,7 +260,7 @@ for (const op of catalog.ops) {
     actionCrud: CRUD(op),
     catalogKey: op.key,
     label: op.label,
-    description: describe(op),
+    description: describe(op).replace('the "New Property Monitor Event" trigger', 'the "Watch Property Monitor Events (Instant)" trigger'),
     communication: requestFor(op),
     params: paramsFor(op),
     sampleFrom: () => ({ ...op.sample, ...Object.fromEntries(Object.keys(op.result.attach ?? {}).filter((k) => !(k in op.sample)).map((k) => [k, SAMPLE_FILL[k] ?? {}])) }),
@@ -268,6 +269,9 @@ for (const op of catalog.ops) {
 
 const staticFromFields = (op) => paramsFor(op);
 
+// A team can hold at most 100 search sessions.
+const SESSIONS_MAX = 100;
+const SESSION_LIMIT_DEFAULT = 100;
 const trig = (key) => catalog.triggers.find((t) => t.key === key);
 
 {
@@ -280,16 +284,22 @@ const trig = (key) => catalog.triggers.find((t) => t.key === key);
     communication: {
       url: api(t.http.path),
       method: 'GET',
-      qs: { take: t.fixedQuery.take },
       response: {
         iterate: `{{body.${t.result.list}}}`,
         output: '{{item}}',
         trigger: { type: 'date', date: '{{item.createdAt}}', id: '{{item.id}}', order: 'unordered' },
       },
     },
-    staticParams: [],
+    staticParams: [
+      limitParam(SESSION_LIMIT_DEFAULT, {
+        max: SESSIONS_MAX,
+        what: 'search sessions',
+        extra: ' A team has at most 100 search sessions, so the default returns all of them.',
+      }),
+    ],
     sampleFrom: () => t.sample,
   };
+  offsetPaging(catalogModules.watchSearchSessions.communication, { def: SESSION_LIMIT_DEFAULT, found: 'body.results.total', where: 'qs' });
 }
 {
   // Search-session properties carry neither a date nor an ordered ID. The session itself never
@@ -347,11 +357,14 @@ export const webhooks = {
 export const EVENT_LIMITS_NOTE =
   'Limits: up to 5 monitors per team, a monitor cannot be edited after it is created (delete and recreate it), a new monitor can take up to 7 days to start delivering, and delivery is best effort (4 attempts per event), so the same event can arrive more than once. Use the Event ID to skip repeats.';
 
-const evBase = ev.description
+const evCore = ev.description
   .replace('Turning the Zap or scenario on', 'Turning the scenario on')
-  .replace('turning it off', 'turning it off')
-  .replace(' turn on "Include Property Record" to also look up the full property record.', ' use "Watch Property Monitor Events with Property Record" to also look up the full property record.')
+  .replace('; turn on "Include Property Record" to also look up the full property record.', '.')
   .replace(/ The optional property lookup is billed per event, per matched property\./, '');
+if (evCore.includes('Include Property Record') || evCore.includes('Zap')) throw new Error('monitor event description still has catalog-only wording');
+// The plain trigger points to the property-record version; the property-record version describes itself.
+const evBase = evCore.replace('Limits:', 'To get the full property record with each event, use "Watch Property Monitor Events with Property Record (Instant, Billed)" instead. Limits:');
+
 catalogModules.watchMonitorEvents = {
   moduleType: 'instant_trigger',
   catalogKey: ev.key,
@@ -367,7 +380,7 @@ catalogModules.watchMonitorEventsWithProperty = {
   catalogKey: ev.key,
   webhook: 'monitorEvents',
   label: 'Watch Property Monitor Events with Property Record (Instant, Billed)',
-  description: `${evBase} This version also looks up the full property record for every event. The lookup is billed per event, per matched property, on top of the monitor charges.`,
+  description: `${evCore} This version also looks up the full property record for every event and adds it to the output as "property". The lookup is billed per event, per matched property, on top of the monitor charges.`,
   communication: {
     url: api(ev.hydrate.path),
     method: 'POST',
@@ -379,6 +392,42 @@ catalogModules.watchMonitorEventsWithProperty = {
   staticParams: [],
   sampleFrom: () => ({ ...ev.sample, property: fx('property-lookup-all-attributes').results.properties[0] }),
 };
+
+// ---------- Make limit and pagination for the catalog list modules ----------
+const swapTakeForLimit = (m, param) => {
+  const i = m.params.findIndex((x) => x.name === 'take');
+  if (i < 0) throw new Error(`${m.label} has no take parameter`);
+  m.params[i] = param;
+};
+{
+  const m = catalogModules.getPermits;
+  swapTakeForLimit(m, limitParam(25, { what: 'permits', extra: ' Each page is billed per property, so a Limit above 100 sends more than one billed request.' }));
+  offsetPaging(m.communication, { def: 25, found: 'body.result.meta.results.resultsFound', where: 'body' });
+}
+{
+  const m = catalogModules.investorBuybox;
+  swapTakeForLimit(m, limitParam(25, { what: 'investors' }));
+  offsetPaging(m.communication, { def: 25, found: 'body.result.meta.results.resultsFound', where: 'body' });
+}
+{
+  // Cursor paging only (skip is rejected). A full last page still returns a cursor, and the request
+  // that follows it is empty and not billed.
+  const m = catalogModules.investorProperties;
+  swapTakeForLimit(m, limitParam(25, { what: 'properties' }));
+  m.description = m.description
+    .replace('Use the "nextPageCursor" value of the last result as Page Cursor to read the next page.', 'Set a Limit and Make reads the pages for you; each result also carries the "nextPageCursor" of its page.')
+    .replace('(take sets the maximum cost of a call)', '(the Limit sets the maximum cost of a run)');
+  if (/Page Cursor to read|take sets/.test(m.description)) throw new Error('investorProperties description still has the old paging text');
+  const cur = m.params.find((x) => x.name === 'pageCursor');
+  cur.label = 'Start from page cursor';
+  cur.help = 'Optional. Leave empty to start at the first page. The Limit already pages for you, so use this only to continue an earlier run from its Next Page Cursor.';
+  cursorPaging(m.communication, { def: 25, cursor: 'body.result.nextPageCursor' });
+}
+{
+  const m = catalogModules.listSearchSessions;
+  swapTakeForLimit(m, limitParam(50, { max: SESSIONS_MAX, what: 'search sessions' }));
+  offsetPaging(m.communication, { def: 50, found: 'body.results.total', where: 'qs', skip: 'skip' });
+}
 
 // ---------- RPCs for dropdowns ----------
 export const rpcs = {

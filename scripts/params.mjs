@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import { root } from './lib.mjs';
+import { limitParam } from './paging.mjs';
 
 const C = JSON.parse(fs.readFileSync(`${root}/scripts/constants.json`, 'utf8'));
 
@@ -89,15 +90,8 @@ export const searchParams = [
       },
     ],
   },
-  {
-    name: 'take',
-    type: 'uinteger',
-    label: 'Max results',
-    default: 25,
-    validate: { max: 100 },
-    help: 'Up to 100 per run. You are billed per record returned, and a value of 0 is billed as 1 record.',
-  },
-  { name: 'skip', type: 'uinteger', label: 'Skip', help: 'Number of records to skip, for paging.' },
+  limitParam(25, { what: 'properties', extra: ' You are billed per record returned.' }),
+  { name: 'skip', type: 'uinteger', label: 'Skip', help: 'Number of records to skip before the first one returned. Leave empty to start at the first record.' },
 ];
 
 export const lookupParams = [

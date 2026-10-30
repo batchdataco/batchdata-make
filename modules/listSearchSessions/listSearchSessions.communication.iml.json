@@ -2,11 +2,19 @@
   "url": "/v2/property/search-sessions",
   "method": "GET",
   "qs": {
-    "take": "{{ifempty(parameters.take, 50)}}",
+    "take": "{{min(100, ifempty(parameters.limit, 50))}}",
     "skip": "{{ifempty(parameters.skip, undefined)}}"
   },
   "response": {
     "iterate": "{{body.results.sessions}}",
-    "output": "{{item}}"
+    "output": "{{item}}",
+    "limit": "{{ifempty(parameters.limit, 50)}}"
+  },
+  "pagination": {
+    "qs": {
+      "take": "{{min(100, ifempty(parameters.limit, 50) - (pagination.page - 1) * 100)}}",
+      "skip": "{{ifempty(parameters.skip, 0) + (pagination.page - 1) * 100}}"
+    },
+    "condition": "{{body.results.total > ifempty(parameters.skip, 0) + (pagination.page - 1) * 100 && ifempty(parameters.limit, 50) > (pagination.page - 1) * 100}}"
   }
 }

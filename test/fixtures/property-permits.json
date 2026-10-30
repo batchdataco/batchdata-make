@@ -1,0 +1,21 @@
+{
+  "status": {
+    "code": 200,
+    "text": "OK"
+  },
+  "result": {
+    "meta": {
+      "results": {
+        "resultCount": 1,
+        "resultsFound": 1
+      },
+      "apiVersion": "6.61.0",
+      "requestId": "xi8WLSU6AIgRRlY"
+    },
+    "permits": [
+      {
+        "permitNumber": "BLD-1"
+      }
+    ]
+  }
+}

@@ -1,13 +1,15 @@
 [
   {
-    "name": "take",
-    "label": "Max Results",
-    "type": "integer",
+    "name": "limit",
+    "type": "uinteger",
+    "label": "Limit",
     "default": 50,
+    "required": true,
     "validate": {
       "min": 1,
       "max": 100
-    }
+    },
+    "help": "The maximum number of search sessions to return in total (1 to 100, default 50). They are requested in pages of up to 100, and never more than this number are requested."
   },
   {
     "name": "skip",

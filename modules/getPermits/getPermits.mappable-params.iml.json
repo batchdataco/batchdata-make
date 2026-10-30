@@ -248,14 +248,15 @@
     ]
   },
   {
-    "name": "take",
-    "label": "Max Results",
-    "help": "Whole number from 1 to 100. Default 25.",
-    "type": "integer",
+    "name": "limit",
+    "type": "uinteger",
+    "label": "Limit",
     "default": 25,
+    "required": true,
     "validate": {
       "min": 1,
-      "max": 100
-    }
+      "max": 5000
+    },
+    "help": "The maximum number of permits to return in total (1 to 5000, default 25). They are requested in pages of up to 100, and never more than this number are requested. Each page is billed per property, so a Limit above 100 sends more than one billed request."
   }
 ]

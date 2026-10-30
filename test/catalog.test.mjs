@@ -142,7 +142,7 @@ test('reverse skip trace sends one request and keeps only matched rows', () => {
 });
 
 test('permits, geocoding and investors build the documented requests', () => {
-  const p = request('getPermits', { address: { street: '1 Main St' }, status: { equals: 'active' }, allTags: { inList: ['solar'] }, issueDate: { minDate: '2026-01-02' }, take: 10 });
+  const p = request('getPermits', { address: { street: '1 Main St' }, status: { equals: 'active' }, allTags: { inList: ['solar'] }, issueDate: { minDate: '2026-01-02' }, limit: 10 });
   assert.equal(p.url, '/v2/property/get-property-permits');
   assert.deepEqual(p.body, {
     request: { address: { street: '1 Main St' }, status: { equals: 'active' }, allTags: { inList: ['solar'] }, issueDate: { minDate: '2026-01-02' } },
@@ -190,7 +190,7 @@ test('monitor creation is stream delivery only and never offers a webhook delive
 
 test('polling triggers: sessions by creation date, session properties by poll time, billing disclosed', () => {
   const s = comm('watchSearchSessions');
-  assert.deepEqual(render(s.qs, {}), { take: 100 });
+  assert.deepEqual(render(s.qs, { parameters: {} }), { take: 100 });
   assert.equal(s.response.trigger.date, '{{item.createdAt}}');
   const sample = read(files('watchSearchSessions').samples);
   assert.equal(render(s.response.trigger.id, { item: sample }), sample.id);

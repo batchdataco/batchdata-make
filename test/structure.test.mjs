@@ -146,3 +146,24 @@ test('every module has samples that match its interface top-level names', () => 
     assert.deepEqual(iface, sample, key);
   }
 });
+
+test('makecomapp.json documents the us2 private app as an origin', () => {
+  const o = app.origins[0];
+  assert.equal(o.baseUrl, 'https://us2.make.com/api');
+  assert.equal(o.appId, 'batchdata-r6b83g');
+  assert.equal(o.idMapping.connection[0].remote, 'batchdata-r6b83g');
+  assert.equal(o.apikeyFile, '.secrets/apikey');
+});
+
+test('the README is written for users', () => {
+  const text = fs.readFileSync(path.join(root, 'README.md'), 'utf8');
+  assert.ok(!/not yet imported|BatchLeads|BatchDialer|zapier|n8n/i.test(text));
+  assert.ok(!/\$\s?\d/.test(text), 'the README must not state prices');
+  assert.match(text, /support@batchservice\.com/);
+  assert.match(text, /API token/);
+  assert.ok(fs.existsSync(path.join(root, 'assets/logo-512.png')));
+});
+
+test('no module description refers to itself', () => {
+  for (const [key, m] of Object.entries(app.components.module)) assert.ok(!m.description.includes(`"${m.label}"`), `${key} mentions itself`);
+});
