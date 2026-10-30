@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "name": "limit",
+    "type": "uinteger",
+    "label": "Limit",
+    "default": 100,
+    "required": true,
+    "validate": {
+      "min": 1,
+      "max": 100
+    },
+    "help": "The maximum number of search sessions to return in total (1 to 100, default 100). They are requested in pages of up to 100, and never more than this number are requested. A team has at most 100 search sessions, so the default returns all of them."
+  }
+]

@@ -7,6 +7,7 @@ This is a Make custom app in the local project format used by the Make Apps Edit
 - `scripts/generate.mjs` writes every JSON file under `general/`, `connections/`, `modules/`, `webhooks/`, `rpcs/` and `makecomapp.json` from `scripts/params.mjs`, the fixtures in `test/fixtures/` and the shared operation catalog. `scripts/catalog.json` is a vendored copy of the catalog used by the Zapier and n8n apps (`scripts/catalog.sha256` pins it; a test fails on drift) and `scripts/catalog-modules.mjs` translates it into modules, the webhook and the dynamic dropdowns. The generated files are committed. Edit the scripts, then run `node scripts/generate.mjs`.
 - `test/catalog.test.mjs` checks every catalog module (request, output, TCPA flag, billing text, guards, webhook attach and detach).
 - `test/structure.test.mjs` checks the manifest, file links, billing and compliance copy, and that no callback or wallet fields exist.
+- `test/pagination.test.mjs` plays the six paged modules (Search Properties, Get Investor Properties, Find Investors, Get Property Permits, List Search Sessions, Watch New Search Sessions) against a fake BatchData endpoint the way Make pages: it checks the Limit is met, that no request asks for more records than the Limit has left (billing safety), that the whole body is repeated on every page, and the response paths used. `scripts/paging.mjs` builds the directives.
 - `test/replay.test.mjs` renders the request templates with a small IML evaluator (`test/iml.mjs`) and compares the request bodies and output mapping to the n8n and Zapier integrations.
 
 ```
@@ -20,8 +21,8 @@ Node 20 or later. There are no dependencies.
 1. Create a Make account (the organisation that will own the app) and a Make API key with the `apps:read` and `apps:write` scopes.
 2. Install the Make Apps Editor extension in VS Code and open this folder.
 3. Put the API key in `.secrets/apikey` (the folder is git-ignored).
-4. In `makecomapp.json`, set `origins[0].baseUrl` to your zone, for example `https://us1.make.com/api` or `https://eu1.make.com/api`.
-5. Run **Deploy to Make** from the extension. The app is created as a private app with id `batchdata`.
+4. `makecomapp.json` has one documented origin: the private app `batchdata-r6b83g` in organization 3655001 on `https://us2.make.com/api` (Make added the suffix to the name `batchdata`, so the connection and webhook remote names are `batchdata-r6b83g`). To deploy to another zone or organization, copy that entry, change `baseUrl` and `appId`, and clear the `idMapping`.
+5. Run **Deploy to Make** from the extension.
 6. Open the app in Make and run the checks below.
 
 ## What was and was not verified

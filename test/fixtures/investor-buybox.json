@@ -1,0 +1,22 @@
+{
+  "status": {
+    "code": 200,
+    "text": "OK"
+  },
+  "result": {
+    "investors": [
+      {
+        "id": "inv_1"
+      }
+    ],
+    "properties": [],
+    "meta": {
+      "apiVersion": "2",
+      "results": {
+        "resultCount": 25,
+        "resultsFound": 137
+      },
+      "requestId": "req_8f2a1c"
+    }
+  }
+}

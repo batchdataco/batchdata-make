@@ -20,7 +20,7 @@
       "searchProperties": {
         "moduleType": "search",
         "label": "Search Properties",
-        "description": "Finds properties that match your filters. Billed per record returned. A Max results value of 0 is billed as 1 record. One call returns at most 100 records.",
+        "description": "Finds properties that match your filters. Billed per record returned. Set a Limit to cap the records returned in total. Records are requested in pages of up to 100, and never more than the Limit are requested.",
         "actionCrud": "read",
         "connection": "batchdata",
         "codeFiles": {
@@ -381,7 +381,7 @@
       "watchMonitorEvents": {
         "moduleType": "instant_trigger",
         "label": "Watch Property Monitor Events (Instant)",
-        "description": "Triggers when BatchData reports that a property matching your criteria was added to or removed from a monitor, or changed (instant). Turning the scenario on creates a monitor that delivers to this trigger's own hook URL; turning it off deletes that monitor. Each event carries the property ID and change details; use \"Watch Property Monitor Events with Property Record\" to also look up the full property record. Monitors and the events they deliver are billed according to your BatchData plan; contact support@batchservice.com for pricing. Limits: up to 5 monitors per team, a monitor cannot be edited after it is created (delete and recreate it), a new monitor can take up to 7 days to start delivering, and delivery is best effort (4 attempts per event).",
+        "description": "Triggers when BatchData reports that a property matching your criteria was added to or removed from a monitor, or changed (instant). Turning the scenario on creates a monitor that delivers to this trigger's own hook URL; turning it off deletes that monitor. Each event carries the property ID and change details. Monitors and the events they deliver are billed according to your BatchData plan; contact support@batchservice.com for pricing. To get the full property record with each event, use \"Watch Property Monitor Events with Property Record (Instant, Billed)\" instead. Limits: up to 5 monitors per team, a monitor cannot be edited after it is created (delete and recreate it), a new monitor can take up to 7 days to start delivering, and delivery is best effort (4 attempts per event).",
         "connection": "batchdata",
         "webhook": "monitorEvents",
         "codeFiles": {
@@ -393,7 +393,7 @@
       "watchMonitorEventsWithProperty": {
         "moduleType": "instant_trigger",
         "label": "Watch Property Monitor Events with Property Record (Instant, Billed)",
-        "description": "Triggers when BatchData reports that a property matching your criteria was added to or removed from a monitor, or changed (instant). Turning the scenario on creates a monitor that delivers to this trigger's own hook URL; turning it off deletes that monitor. Each event carries the property ID and change details; use \"Watch Property Monitor Events with Property Record\" to also look up the full property record. Monitors and the events they deliver are billed according to your BatchData plan; contact support@batchservice.com for pricing. Limits: up to 5 monitors per team, a monitor cannot be edited after it is created (delete and recreate it), a new monitor can take up to 7 days to start delivering, and delivery is best effort (4 attempts per event). This version also looks up the full property record for every event. The lookup is billed per event, per matched property, on top of the monitor charges.",
+        "description": "Triggers when BatchData reports that a property matching your criteria was added to or removed from a monitor, or changed (instant). Turning the scenario on creates a monitor that delivers to this trigger's own hook URL; turning it off deletes that monitor. Each event carries the property ID and change details. Monitors and the events they deliver are billed according to your BatchData plan; contact support@batchservice.com for pricing. Limits: up to 5 monitors per team, a monitor cannot be edited after it is created (delete and recreate it), a new monitor can take up to 7 days to start delivering, and delivery is best effort (4 attempts per event). This version also looks up the full property record for every event and adds it to the output as \"property\". The lookup is billed per event, per matched property, on top of the monitor charges.",
         "connection": "batchdata",
         "webhook": "monitorEvents",
         "codeFiles": {
@@ -437,16 +437,16 @@
   },
   "origins": [
     {
-      "label": "Make (set your zone)",
-      "baseUrl": "https://eu1.make.com/api",
-      "appId": "batchdata",
+      "label": "Make us2: batchdata-r6b83g (private app)",
+      "baseUrl": "https://us2.make.com/api",
+      "appId": "batchdata-r6b83g",
       "appVersion": 1,
       "apikeyFile": ".secrets/apikey",
       "idMapping": {
         "connection": [
           {
             "local": "batchdata",
-            "remote": "batchdata"
+            "remote": "batchdata-r6b83g"
           }
         ],
         "module": [
@@ -585,7 +585,7 @@
         "webhook": [
           {
             "local": "monitorEvents",
-            "remote": "monitorEvents"
+            "remote": "batchdata-r6b83g"
           }
         ]
       }

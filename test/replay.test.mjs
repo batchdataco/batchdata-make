@@ -19,7 +19,7 @@ const respond = (name, body, extra = {}) => {
 };
 const iterate = (name, body) => render(comm(name).response.iterate, { body });
 
-test('search: only filled filters are sent, take defaults to 25', () => {
+test('search: only filled filters are sent, the Limit defaults to 25', () => {
   const r = request('searchProperties', {
     query: 'Phoenix, AZ',
     quickLists: ['absentee-owner', 'not-vacant'],
@@ -38,9 +38,9 @@ test('search: only filled filters are sent, take defaults to 25', () => {
   });
 });
 
-test('search: take and skip are passed and kept out of the criteria', () => {
-  const r = request('searchProperties', { query: 'Tempe', take: 0, skip: 50 });
-  assert.deepEqual(r.body, { searchCriteria: { query: 'Tempe' }, options: { take: 0, skip: 50 } });
+test('search: limit and skip are passed and kept out of the criteria', () => {
+  const r = request('searchProperties', { query: 'Tempe', limit: 10, skip: 50 });
+  assert.deepEqual(r.body, { searchCriteria: { query: 'Tempe' }, options: { take: 10, skip: 50 } });
 });
 
 test('search: output is each property plus the result counts', () => {

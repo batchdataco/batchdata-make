@@ -5,6 +5,7 @@ const fns = {
   ifempty: (a, b) => (isEmpty(a) ? b : a),
   __if: (c, a, b) => (c ? a : b),
   omit: (o, ...keys) => Object.fromEntries(Object.entries(o || {}).filter(([k]) => !keys.includes(k))),
+  min: Math.min,
   length: (v) => (v === undefined || v === null ? 0 : v.length),
   first: (a) => (Array.isArray(a) ? a[0] : undefined),
   lower: (s) => String(s ?? '').toLowerCase(),

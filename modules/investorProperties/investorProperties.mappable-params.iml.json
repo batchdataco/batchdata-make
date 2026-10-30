@@ -31,20 +31,21 @@
     "type": "boolean"
   },
   {
-    "name": "take",
-    "label": "Max Results",
-    "help": "Whole number from 1 to 100. Default 25.",
-    "type": "integer",
+    "name": "limit",
+    "type": "uinteger",
+    "label": "Limit",
     "default": 25,
+    "required": true,
     "validate": {
       "min": 1,
-      "max": 100
-    }
+      "max": 5000
+    },
+    "help": "The maximum number of properties to return in total (1 to 5000, default 25). They are requested in pages of up to 100, and never more than this number are requested."
   },
   {
     "name": "pageCursor",
-    "label": "Page Cursor",
-    "help": "Optional. The nextPageCursor from the previous page, used with the same criteria.",
+    "label": "Start from page cursor",
+    "help": "Optional. Leave empty to start at the first page. The Limit already pages for you, so use this only to continue an earlier run from its Next Page Cursor.",
     "type": "text"
   }
 ]

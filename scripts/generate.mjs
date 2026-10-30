@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import { root, write, toInterface } from './lib.mjs';
 import * as P from './params.mjs';
+import { offsetPaging } from './paging.mjs';
 import { catalogModules, catalogGroups, webhooks, rpcs } from './catalog-modules.mjs';
 
 const fx = (n) => JSON.parse(fs.readFileSync(`${root}/test/fixtures/${n}.json`, 'utf8'));
@@ -61,13 +62,13 @@ const modules = {
   searchProperties: {
     moduleType: 'search',
     label: 'Search Properties',
-    description: `Finds properties that match your filters. ${BILL.search} A Max results value of 0 is billed as 1 record. One call returns at most 100 records.`,
+    description: `Finds properties that match your filters. ${BILL.search} Set a Limit to cap the records returned in total. Records are requested in pages of up to 100, and never more than the Limit are requested.`,
     communication: {
       url: '/v1/property/search',
       method: 'POST',
       body: {
-        searchCriteria: "{{omit(parameters, 'take', 'skip')}}",
-        options: { take: '{{ifempty(parameters.take, 25)}}', skip: u('parameters.skip') },
+        searchCriteria: "{{omit(parameters, 'limit', 'skip')}}",
+        options: { skip: u('parameters.skip') },
       },
       response: {
         iterate: '{{body.results.properties}}',
@@ -194,6 +195,7 @@ const modules = {
   },
 };
 
+offsetPaging(modules.searchProperties.communication, { def: 25, found: 'body.results.meta.results.resultsFound', where: 'body', skip: 'skip' });
 Object.assign(modules, catalogModules);
 
 const baseGroups = [
@@ -348,17 +350,21 @@ write('makecomapp.json', {
   },
   origins: [
     {
-      label: 'Make (set your zone)',
-      baseUrl: 'https://eu1.make.com/api',
-      appId: 'batchdata',
+      // The private app that this source was uploaded to (organization 3655001, zone us2).
+      // Make suffixed the app name, so the remote connection and webhook names differ from the local ones.
+      // Put your own Make API token in .secrets/apikey. To deploy to another zone or organization,
+      // copy this entry, change baseUrl and appId, and clear the idMapping.
+      label: 'Make us2: batchdata-r6b83g (private app)',
+      baseUrl: 'https://us2.make.com/api',
+      appId: 'batchdata-r6b83g',
       appVersion: 1,
       apikeyFile: '.secrets/apikey',
       idMapping: {
-        connection: [{ local: 'batchdata', remote: 'batchdata' }],
+        connection: [{ local: 'batchdata', remote: 'batchdata-r6b83g' }],
         module: idMap,
         function: [],
         rpc: rpcIdMap,
-        webhook: webhookIdMap,
+        webhook: webhookIdMap.map((w) => ({ ...w, remote: 'batchdata-r6b83g' })),
       },
     },
   ],

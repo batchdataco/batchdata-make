@@ -14,7 +14,7 @@
       }
     },
     "options": {
-      "take": "{{ifempty(parameters.take, 25)}}"
+      "take": "{{min(100, ifempty(parameters.limit, 25))}}"
     }
   },
   "response": {
@@ -23,6 +23,27 @@
       "{{...}}": "{{item}}",
       "searchMeta": "{{body.result.meta.results}}",
       "warnings": "{{body.result.warnings}}"
-    }
+    },
+    "limit": "{{ifempty(parameters.limit, 25)}}"
+  },
+  "pagination": {
+    "body": {
+      "searchCriteria": {
+        "investor": "{{ifempty(parameters.investor, undefined)}}",
+        "intel": "{{ifempty(parameters.intel, undefined)}}",
+        "{{...}}": "{{if(parameters.additionalCriteria, parseJSON(parameters.additionalCriteria), undefined)}}",
+        "compAddress": {
+          "street": "{{parameters.street}}",
+          "city": "{{ifempty(parameters.city, undefined)}}",
+          "state": "{{ifempty(parameters.state, undefined)}}",
+          "zip": "{{ifempty(parameters.zip, undefined)}}"
+        }
+      },
+      "options": {
+        "take": "{{min(100, ifempty(parameters.limit, 25) - (pagination.page - 1) * 100)}}",
+        "skip": "{{0 + (pagination.page - 1) * 100}}"
+      }
+    },
+    "condition": "{{body.result.meta.results.resultsFound > 0 + (pagination.page - 1) * 100 && ifempty(parameters.limit, 25) > (pagination.page - 1) * 100}}"
   }
 }

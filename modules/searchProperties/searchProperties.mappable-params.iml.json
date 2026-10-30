@@ -698,19 +698,21 @@
     ]
   },
   {
-    "name": "take",
+    "name": "limit",
     "type": "uinteger",
-    "label": "Max results",
+    "label": "Limit",
     "default": 25,
+    "required": true,
     "validate": {
-      "max": 100
+      "min": 1,
+      "max": 5000
     },
-    "help": "Up to 100 per run. You are billed per record returned, and a value of 0 is billed as 1 record."
+    "help": "The maximum number of properties to return in total (1 to 5000, default 25). They are requested in pages of up to 100, and never more than this number are requested. You are billed per record returned."
   },
   {
     "name": "skip",
     "type": "uinteger",
     "label": "Skip",
-    "help": "Number of records to skip, for paging."
+    "help": "Number of records to skip before the first one returned. Leave empty to start at the first record."
   }
 ]

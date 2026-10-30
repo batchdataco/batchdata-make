@@ -1,0 +1,20 @@
+{
+  "status": {
+    "code": 200,
+    "text": "OK"
+  },
+  "result": {
+    "properties": [
+      {
+        "propertyId": "P-85021-7d3e9f"
+      }
+    ],
+    "resultsFound": 48,
+    "resultCount": 1,
+    "nextPageCursor": "HOJZT+Y+Tt/XkfGLHnpi5Q==",
+    "meta": {
+      "apiVersion": "6.94.0",
+      "requestId": "req_3c7d9e"
+    }
+  }
+}

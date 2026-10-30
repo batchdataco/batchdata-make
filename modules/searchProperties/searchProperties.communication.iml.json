@@ -2,10 +2,10 @@
   "url": "/v1/property/search",
   "method": "POST",
   "body": {
-    "searchCriteria": "{{omit(parameters, 'take', 'skip')}}",
+    "searchCriteria": "{{omit(parameters, 'limit', 'skip')}}",
     "options": {
-      "take": "{{ifempty(parameters.take, 25)}}",
-      "skip": "{{ifempty(parameters.skip, undefined)}}"
+      "skip": "{{ifempty(parameters.skip, undefined)}}",
+      "take": "{{min(100, ifempty(parameters.limit, 25))}}"
     }
   },
   "response": {
@@ -13,6 +13,17 @@
     "output": {
       "{{...}}": "{{item}}",
       "searchMeta": "{{body.results.meta.results}}"
-    }
+    },
+    "limit": "{{ifempty(parameters.limit, 25)}}"
+  },
+  "pagination": {
+    "body": {
+      "searchCriteria": "{{omit(parameters, 'limit', 'skip')}}",
+      "options": {
+        "skip": "{{ifempty(parameters.skip, 0) + (pagination.page - 1) * 100}}",
+        "take": "{{min(100, ifempty(parameters.limit, 25) - (pagination.page - 1) * 100)}}"
+      }
+    },
+    "condition": "{{body.results.meta.results.resultsFound > ifempty(parameters.skip, 0) + (pagination.page - 1) * 100 && ifempty(parameters.limit, 25) > (pagination.page - 1) * 100}}"
   }
 }
