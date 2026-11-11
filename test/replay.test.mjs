@@ -19,7 +19,7 @@ const respond = (name, body, extra = {}) => {
 };
 const iterate = (name, body) => render(comm(name).response.iterate, { body });
 
-test('search: only filled filters are sent, the Limit defaults to 25', () => {
+test('search: only filled filters are sent, the Limit defaults to 1', () => {
   const r = request('searchProperties', {
     query: 'Phoenix, AZ',
     quickLists: ['absentee-owner', 'not-vacant'],
@@ -34,7 +34,7 @@ test('search: only filled filters are sent, the Limit defaults to 25', () => {
       building: { bedroomCount: { min: 3 } },
       owner: { ownerOccupied: { equals: false } },
     },
-    options: { take: 25 },
+    options: { take: 1 },
   });
 });
 

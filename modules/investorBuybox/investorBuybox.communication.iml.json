@@ -14,7 +14,7 @@
       }
     },
     "options": {
-      "take": "{{min(100, ifempty(parameters.limit, 25))}}"
+      "take": "{{min(100, ifempty(parameters.limit, 1))}}"
     }
   },
   "response": {
@@ -24,7 +24,7 @@
       "searchMeta": "{{body.result.meta.results}}",
       "warnings": "{{body.result.warnings}}"
     },
-    "limit": "{{ifempty(parameters.limit, 25)}}"
+    "limit": "{{ifempty(parameters.limit, 1)}}"
   },
   "pagination": {
     "body": {
@@ -40,10 +40,10 @@
         }
       },
       "options": {
-        "take": "{{min(100, ifempty(parameters.limit, 25) - (pagination.page - 1) * 100)}}",
+        "take": "{{min(100, ifempty(parameters.limit, 1) - (pagination.page - 1) * 100)}}",
         "skip": "{{0 + (pagination.page - 1) * 100}}"
       }
     },
-    "condition": "{{body.result.meta.results.resultsFound > 0 + (pagination.page - 1) * 100 && ifempty(parameters.limit, 25) > (pagination.page - 1) * 100}}"
+    "condition": "{{body.result.meta.results.resultsFound > 0 + (pagination.page - 1) * 100 && ifempty(parameters.limit, 1) > (pagination.page - 1) * 100}}"
   }
 }

@@ -15,7 +15,7 @@
       "countyFipsCode": "{{ifempty(parameters.countyFipsCode, undefined)}}"
     },
     "options": {
-      "take": "{{min(100, ifempty(parameters.limit, 25))}}"
+      "take": "{{min(100, ifempty(parameters.limit, 1))}}"
     }
   },
   "response": {
@@ -25,7 +25,7 @@
       "property": "{{body.result.property}}",
       "searchMeta": "{{body.result.meta.results}}"
     },
-    "limit": "{{ifempty(parameters.limit, 25)}}"
+    "limit": "{{ifempty(parameters.limit, 1)}}"
   },
   "pagination": {
     "body": {
@@ -42,10 +42,10 @@
         "countyFipsCode": "{{ifempty(parameters.countyFipsCode, undefined)}}"
       },
       "options": {
-        "take": "{{min(100, ifempty(parameters.limit, 25) - (pagination.page - 1) * 100)}}",
+        "take": "{{min(100, ifempty(parameters.limit, 1) - (pagination.page - 1) * 100)}}",
         "skip": "{{0 + (pagination.page - 1) * 100}}"
       }
     },
-    "condition": "{{body.result.meta.results.resultsFound > 0 + (pagination.page - 1) * 100 && ifempty(parameters.limit, 25) > (pagination.page - 1) * 100}}"
+    "condition": "{{body.result.meta.results.resultsFound > 0 + (pagination.page - 1) * 100 && ifempty(parameters.limit, 1) > (pagination.page - 1) * 100}}"
   }
 }

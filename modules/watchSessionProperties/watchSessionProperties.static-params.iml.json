@@ -350,9 +350,9 @@
   {
     "name": "take",
     "label": "Max Results",
-    "help": "Whole number from 1 to 100. Default 25. You are billed per property delivered on each check.",
+    "help": "Whole number from 1 to 100. Default 5. You are billed per property delivered on each check. Use a low number while you test.",
     "type": "integer",
-    "default": 25,
+    "default": 5,
     "validate": {
       "min": 1,
       "max": 100

@@ -5,7 +5,7 @@
     "searchCriteria": "{{omit(parameters, 'limit', 'skip')}}",
     "options": {
       "skip": "{{ifempty(parameters.skip, undefined)}}",
-      "take": "{{min(100, ifempty(parameters.limit, 25))}}"
+      "take": "{{min(100, ifempty(parameters.limit, 1))}}"
     }
   },
   "response": {
@@ -14,16 +14,16 @@
       "{{...}}": "{{item}}",
       "searchMeta": "{{body.results.meta.results}}"
     },
-    "limit": "{{ifempty(parameters.limit, 25)}}"
+    "limit": "{{ifempty(parameters.limit, 1)}}"
   },
   "pagination": {
     "body": {
       "searchCriteria": "{{omit(parameters, 'limit', 'skip')}}",
       "options": {
         "skip": "{{ifempty(parameters.skip, 0) + (pagination.page - 1) * 100}}",
-        "take": "{{min(100, ifempty(parameters.limit, 25) - (pagination.page - 1) * 100)}}"
+        "take": "{{min(100, ifempty(parameters.limit, 1) - (pagination.page - 1) * 100)}}"
       }
     },
-    "condition": "{{body.results.meta.results.resultsFound > ifempty(parameters.skip, 0) + (pagination.page - 1) * 100 && ifempty(parameters.limit, 25) > (pagination.page - 1) * 100}}"
+    "condition": "{{body.results.meta.results.resultsFound > ifempty(parameters.skip, 0) + (pagination.page - 1) * 100 && ifempty(parameters.limit, 1) > (pagination.page - 1) * 100}}"
   }
 }

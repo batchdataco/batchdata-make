@@ -100,7 +100,7 @@ A monitor reports when a property is added to it, removed from it or changed.
 
 Search Properties, Get Investor Properties, Find Investors (Buy Box), Get Property Permits, List Search Sessions and Watch New Search Sessions have a **Limit** field. It is the total number of records you want. Make fetches them in pages of up to 100 and never asks for more than your Limit, so the Limit is also the most you can be billed for in one run. Search Properties and List Search Sessions also have **Skip** to start part-way through the results.
 
-Each record comes out as its own bundle.
+Each record comes out as its own bundle. On billed searches (Search Properties, Get Investor Properties, Find Investors (Buy Box) and Get Property Permits) the default Limit is 1, so a test run does not bill a full page. Raise it when you need more records. Watch New Properties in a Search Session (Billed) defaults to 5 properties per check.
 
 ## Billing
 

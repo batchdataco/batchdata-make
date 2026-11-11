@@ -174,7 +174,7 @@ for (const name of PAGED) {
 
   test(`${name}: the default Limit is a single request`, () => {
     const r = run(name, { ...params }, 1000);
-    const def = name.includes('Sessions') ? (name === 'watchSearchSessions' ? 100 : 50) : 25;
+    const def = { searchProperties: 1, investorProperties: 1, investorBuybox: 1, getPermits: 1, listSearchSessions: 50, watchSearchSessions: 100 }[name];
     assert.equal(r.items.length, Math.min(def, 1000));
     assert.equal(r.requests.length, 1);
   });
