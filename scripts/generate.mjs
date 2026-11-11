@@ -195,7 +195,7 @@ const modules = {
   },
 };
 
-offsetPaging(modules.searchProperties.communication, { def: 25, found: 'body.results.meta.results.resultsFound', where: 'body', skip: 'skip' });
+offsetPaging(modules.searchProperties.communication, { def: 1, found: 'body.results.meta.results.resultsFound', where: 'body', skip: 'skip' });
 Object.assign(modules, catalogModules);
 
 const baseGroups = [
@@ -293,7 +293,9 @@ write('general/base.iml.json', {
       type: 'RuntimeError',
       400: { type: 'DataError', message: "[400] {{ifempty(body.status.message, 'The request was rejected. Check the values you entered.')}}" },
       401: { type: 'InvalidAccessTokenError', message: 'Your BatchData API token is invalid or expired. Create a new connection with a valid token.' },
+      402: { type: 'DataError', message: "{{ifempty(body.status.message, 'Your BatchData account balance is too low for this request.')}} Add funds in your BatchData account, then retry. Contact support@batchservice.com for help." },
       403: { type: 'RuntimeError', message: 'Your BatchData API token does not have access to this data. Contact support@batchservice.com to enable it.' },
+      404: { type: 'RuntimeError', message: "[404] {{ifempty(body.status.message, 'Not found. Check the ID or path.')}}" },
       429: { type: 'RateLimitError', message: 'The BatchData rate limit was reached. Wait a moment and try again.' },
     },
   },
@@ -317,6 +319,11 @@ write('connections/batchdata/batchdata.communication.iml.json', {
   response: {
     valid: '{{statusCode == 400 || (statusCode >= 200 && statusCode < 300)}}',
     data: { apiKey: '{{parameters.apiKey}}' },
+    // Make shows the app name beside every connection, so the label never repeats "BatchData".
+    metadata: {
+      type: 'text',
+      value: "{{if(length(parameters.apiKey) >= 8, 'Token ending ' + substring(parameters.apiKey, length(parameters.apiKey) - 4), if(length(parameters.apiKey) > 0, 'API token', 'API token missing'))}}",
+    },
     error: {
       message: "[{{statusCode}}] {{ifempty(body.status.message, 'Could not verify the API token.')}}",
       401: { type: 'InvalidAccessTokenError', message: 'Invalid API token. Copy a fresh token from your BatchData account.' },

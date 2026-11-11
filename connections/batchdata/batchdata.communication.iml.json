@@ -13,6 +13,10 @@
     "data": {
       "apiKey": "{{parameters.apiKey}}"
     },
+    "metadata": {
+      "type": "text",
+      "value": "{{if(length(parameters.apiKey) >= 8, 'Token ending ' + substring(parameters.apiKey, length(parameters.apiKey) - 4), if(length(parameters.apiKey) > 0, 'API token', 'API token missing'))}}"
+    },
     "error": {
       "401": {
         "type": "InvalidAccessTokenError",

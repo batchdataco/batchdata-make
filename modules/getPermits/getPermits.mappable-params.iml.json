@@ -251,12 +251,12 @@
     "name": "limit",
     "type": "uinteger",
     "label": "Limit",
-    "default": 25,
+    "default": 1,
     "required": true,
     "validate": {
       "min": 1,
       "max": 5000
     },
-    "help": "The maximum number of permits to return in total (1 to 5000, default 25). They are requested in pages of up to 100, and never more than this number are requested. Each page is billed per property, so a Limit above 100 sends more than one billed request."
+    "help": "The maximum number of permits to return in total (1 to 5000, default 1). They are requested in pages of up to 100, and never more than this number are requested. Later modules run once per permit. Each page is billed per property, so a Limit above 100 sends more than one billed request."
   }
 ]

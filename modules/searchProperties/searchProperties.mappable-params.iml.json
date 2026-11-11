@@ -701,13 +701,13 @@
     "name": "limit",
     "type": "uinteger",
     "label": "Limit",
-    "default": 25,
+    "default": 1,
     "required": true,
     "validate": {
       "min": 1,
       "max": 5000
     },
-    "help": "The maximum number of properties to return in total (1 to 5000, default 25). They are requested in pages of up to 100, and never more than this number are requested. You are billed per record returned."
+    "help": "The maximum number of properties to return in total (1 to 5000, default 1). They are requested in pages of up to 100, and never more than this number are requested. You are billed per record returned. Later modules run once per property, so keep Limit at 1 unless you need more."
   },
   {
     "name": "skip",

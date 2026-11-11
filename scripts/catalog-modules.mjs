@@ -323,6 +323,10 @@ const trig = (key) => catalog.triggers.find((t) => t.key === key);
     staticParams: staticFromFields(t),
     sampleFrom: () => ({ ...t.sample, searchMeta: { totalCount: 1 } }),
   };
+  const take = catalogModules.watchSessionProperties.staticParams.find((x) => x.name === 'take');
+  if (!take) throw new Error('watchSessionProperties has no take parameter');
+  take.default = 5;
+  take.help = 'Whole number from 1 to 100. Default 5. You are billed per property delivered on each check. Use a low number while you test.';
 }
 
 // ---------- instant trigger: webhook component + two modules ----------
@@ -401,19 +405,19 @@ const swapTakeForLimit = (m, param) => {
 };
 {
   const m = catalogModules.getPermits;
-  swapTakeForLimit(m, limitParam(25, { what: 'permits', extra: ' Each page is billed per property, so a Limit above 100 sends more than one billed request.' }));
-  offsetPaging(m.communication, { def: 25, found: 'body.result.meta.results.resultsFound', where: 'body' });
+  swapTakeForLimit(m, limitParam(1, { what: 'permits', extra: ' Later modules run once per permit. Each page is billed per property, so a Limit above 100 sends more than one billed request.' }));
+  offsetPaging(m.communication, { def: 1, found: 'body.result.meta.results.resultsFound', where: 'body' });
 }
 {
   const m = catalogModules.investorBuybox;
-  swapTakeForLimit(m, limitParam(25, { what: 'investors' }));
-  offsetPaging(m.communication, { def: 25, found: 'body.result.meta.results.resultsFound', where: 'body' });
+  swapTakeForLimit(m, limitParam(1, { what: 'investors', extra: ' Later modules run once per investor. You are billed per record returned.' }));
+  offsetPaging(m.communication, { def: 1, found: 'body.result.meta.results.resultsFound', where: 'body' });
 }
 {
   // Cursor paging only (skip is rejected). A full last page still returns a cursor, and the request
   // that follows it is empty and not billed.
   const m = catalogModules.investorProperties;
-  swapTakeForLimit(m, limitParam(25, { what: 'properties' }));
+  swapTakeForLimit(m, limitParam(1, { what: 'properties', extra: ' Later modules run once per property. You are billed per record returned.' }));
   m.description = m.description
     .replace('Use the "nextPageCursor" value of the last result as Page Cursor to read the next page.', 'Set a Limit and Make reads the pages for you; each result also carries the "nextPageCursor" of its page.')
     .replace('(take sets the maximum cost of a call)', '(the Limit sets the maximum cost of a run)');
@@ -421,7 +425,7 @@ const swapTakeForLimit = (m, param) => {
   const cur = m.params.find((x) => x.name === 'pageCursor');
   cur.label = 'Start from page cursor';
   cur.help = 'Optional. Leave empty to start at the first page. The Limit already pages for you, so use this only to continue an earlier run from its Next Page Cursor.';
-  cursorPaging(m.communication, { def: 25, cursor: 'body.result.nextPageCursor' });
+  cursorPaging(m.communication, { def: 1, cursor: 'body.result.nextPageCursor' });
 }
 {
   const m = catalogModules.listSearchSessions;

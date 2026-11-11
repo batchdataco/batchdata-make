@@ -154,7 +154,7 @@ test('permits, geocoding and investors build the documented requests', () => {
   const b = request('investorBuybox', { street: '1 Main St', investor: { classification: { inList: ['flipper'] } }, additionalCriteria: '{"x":{"y":1}}' });
   assert.deepEqual(b.body.searchCriteria, { x: { y: 1 }, compAddress: { street: '1 Main St' }, investor: { classification: { inList: ['flipper'] } } });
   const ip = request('investorProperties', { investorId: 'inv1', includeChildEntities: true });
-  assert.deepEqual(ip.body, { searchCriteria: { investorId: 'inv1', includeChildEntities: true }, options: { take: 25 } });
+  assert.deepEqual(ip.body, { searchCriteria: { investorId: 'inv1', includeChildEntities: true }, options: { take: 1 } });
 });
 
 test('search sessions: the session ID and cursor pagination are sent, deletes sanitize the ID', () => {

@@ -14,9 +14,17 @@
         "type": "InvalidAccessTokenError",
         "message": "Your BatchData API token is invalid or expired. Create a new connection with a valid token."
       },
+      "402": {
+        "type": "DataError",
+        "message": "{{ifempty(body.status.message, 'Your BatchData account balance is too low for this request.')}} Add funds in your BatchData account, then retry. Contact support@batchservice.com for help."
+      },
       "403": {
         "type": "RuntimeError",
         "message": "Your BatchData API token does not have access to this data. Contact support@batchservice.com to enable it."
+      },
+      "404": {
+        "type": "RuntimeError",
+        "message": "[404] {{ifempty(body.status.message, 'Not found. Check the ID or path.')}}"
       },
       "429": {
         "type": "RateLimitError",

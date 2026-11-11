@@ -8,7 +8,7 @@
       "includeChildEntities": "{{if(parameters.includeChildEntities == true, true, undefined)}}"
     },
     "options": {
-      "take": "{{min(100, ifempty(parameters.limit, 25))}}",
+      "take": "{{min(100, ifempty(parameters.limit, 1))}}",
       "pageCursor": "{{ifempty(parameters.pageCursor, undefined)}}"
     }
   },
@@ -19,7 +19,7 @@
       "resultsFound": "{{body.result.resultsFound}}",
       "nextPageCursor": "{{body.result.nextPageCursor}}"
     },
-    "limit": "{{ifempty(parameters.limit, 25)}}"
+    "limit": "{{ifempty(parameters.limit, 1)}}"
   },
   "pagination": {
     "body": {
@@ -29,10 +29,10 @@
         "includeChildEntities": "{{if(parameters.includeChildEntities == true, true, undefined)}}"
       },
       "options": {
-        "take": "{{min(100, ifempty(parameters.limit, 25) - (pagination.page - 1) * 100)}}",
+        "take": "{{min(100, ifempty(parameters.limit, 1) - (pagination.page - 1) * 100)}}",
         "pageCursor": "{{body.result.nextPageCursor}}"
       }
     },
-    "condition": "{{length(ifempty(body.result.nextPageCursor, '')) > 0 && ifempty(parameters.limit, 25) > (pagination.page - 1) * 100}}"
+    "condition": "{{length(ifempty(body.result.nextPageCursor, '')) > 0 && ifempty(parameters.limit, 1) > (pagination.page - 1) * 100}}"
   }
 }

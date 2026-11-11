@@ -167,3 +167,35 @@ test('the README is written for users', () => {
 test('no module description refers to itself', () => {
   for (const [key, m] of Object.entries(app.components.module)) assert.ok(!m.description.includes(`"${m.label}"`), `${key} mentions itself`);
 });
+
+test('the connection label fallback never includes the app name', () => {
+  const comm = read('connections/batchdata/batchdata.communication.iml.json');
+  const meta = comm.response.metadata;
+  assert.equal(meta.type, 'text');
+  assert.match(meta.value, /Token ending/);
+  assert.match(meta.value, /API token/);
+  assert.match(meta.value, /API token missing/);
+  assert.ok(!/BatchData/i.test(meta.value), 'connection label must not include the app name');
+});
+
+test('HTTP 402 and 404 have clear error messages', () => {
+  const errors = read('general/base.iml.json').response.error;
+  assert.equal(errors[402].type, 'DataError');
+  assert.match(errors[402].message, /balance is too low/);
+  assert.match(errors[402].message, /support@batchservice\.com/);
+  assert.equal(errors[404].type, 'RuntimeError');
+  assert.match(errors[404].message, /Not found/);
+});
+
+test('billed search modules default to Limit 1, and the billed session trigger defaults to 5', () => {
+  const app = read('makecomapp.json');
+  for (const key of ['searchProperties', 'getPermits', 'investorBuybox', 'investorProperties']) {
+    const params = read(app.components.module[key].codeFiles.mappableParams);
+    const limit = params.find((p) => p.name === 'limit');
+    assert.equal(limit.default, 1, key);
+  }
+  const take = read(app.components.module.watchSessionProperties.codeFiles.staticParams).find((p) => p.name === 'take');
+  assert.equal(take.default, 5);
+  assert.match(take.help, /Default 5/);
+});
+

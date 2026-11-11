@@ -90,7 +90,7 @@ export const searchParams = [
       },
     ],
   },
-  limitParam(25, { what: 'properties', extra: ' You are billed per record returned.' }),
+  limitParam(1, { what: 'properties', extra: ' You are billed per record returned. Later modules run once per property, so keep Limit at 1 unless you need more.' }),
   { name: 'skip', type: 'uinteger', label: 'Skip', help: 'Number of records to skip before the first one returned. Leave empty to start at the first record.' },
 ];
 
