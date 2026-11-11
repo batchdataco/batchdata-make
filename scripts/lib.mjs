@@ -43,10 +43,10 @@ export const toInterface = (value) => {
 };
 
 // Make's first() throws IMLError ("Invalid array") when the value is not an array,
-// which happens on a 401 JSON body or a 200 HTML error page. Guard with ifempty so
-// first() always receives an array; mark the response invalid when the parent object
-// is missing so the user sees InvalidAccessTokenError instead of IMLError.
-export const firstItem = (listPath) => `{{first(ifempty(${listPath}, emptyarray))}}`;
+// including when ifempty(..., emptyarray) is used — emptyarray is a scenario-mapper
+// constant and is not defined in custom-app IML, so first() still receives undefined.
+// IML 1-based index access returns empty on a missing path instead of throwing.
+export const firstItem = (listPath) => `{{${listPath}[1]}}`;
 
 export const UNUSABLE_RESPONSE = 'The BatchData API did not return a usable response. Check that the API token is valid. Contact support@batchservice.com if it still fails.';
 

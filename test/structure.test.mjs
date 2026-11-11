@@ -200,19 +200,17 @@ test('billed search modules default to Limit 1, and the billed session trigger d
 });
 
 
-test('every first() mapping is guarded and marks a missing API object as InvalidAccessTokenError', () => {
+test('list outputs use a 1-based index instead of first(), and mark a missing API object as InvalidAccessTokenError', () => {
   const files = jsonFiles.filter((f) => f.endsWith('.communication.iml.json') || f.endsWith('batchdata.communication.iml.json'));
   let found = 0;
   for (const f of files) {
     const text = fs.readFileSync(f, 'utf8');
     const rel = path.relative(root, f);
-    const matches = [...text.matchAll(/\{\{first\(([^}]+)\)\}\}/g)];
-    for (const m of matches) {
-      found += 1;
-      assert.match(m[1], /ifempty\(.+, emptyarray\)/, `${rel} unguarded first(${m[1]})`);
-    }
+    assert.doesNotMatch(text, /\{\{first\(/, `${rel} still uses first(), which throws IMLError on a 401 or HTML body`);
+    const matches = [...text.matchAll(/\{\{([^{}\]]+\[1\])\}\}/g)];
+    found += matches.length;
   }
-  assert.ok(found >= 3, `expected at least 3 first() mappings, found ${found}`);
+  assert.ok(found >= 3, `expected at least 3 [1] list-item mappings, found ${found}`);
 
   for (const [rel, parent] of [
     ['modules/lookupProperty/lookupProperty.communication.iml.json', 'body.results'],

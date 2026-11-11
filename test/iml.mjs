@@ -21,7 +21,11 @@ const fns = {
 
 const evalExpr = (expr, scope) => {
   // IML reads missing paths as empty instead of failing, so use optional chaining.
-  const js = expr.replace(/\bif\(/g, '__if(').replace(/([\w)\]])\.(?=[A-Za-z_])/g, '$1?.');
+  // IML array indexes are 1-based (and [-1] is the last item); JS arrays are 0-based.
+  const js = expr
+    .replace(/\bif\(/g, '__if(')
+    .replace(/([\w)\]])\.(?=[A-Za-z_])/g, '$1?.')
+    .replace(/\[(\d+)\]/g, (_, n) => `[${Number(n) - 1}]`);
   const f = new Function('scope', 'fns', `with (fns) { with (scope) { return (${js}); } }`);
   return f(scope, fns);
 };

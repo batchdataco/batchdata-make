@@ -16,7 +16,7 @@
     },
     "output": {
       "{{...}}": "{{payload}}",
-      "property": "{{first(ifempty(body.results.properties, emptyarray))}}"
+      "property": "{{body.results.properties[1]}}"
     }
   }
 }
