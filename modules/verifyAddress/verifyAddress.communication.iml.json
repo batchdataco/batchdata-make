@@ -17,6 +17,6 @@
       "type": "InvalidAccessTokenError",
       "message": "The BatchData API did not return a usable response. Check that the API token is valid. Contact support@batchservice.com if it still fails."
     },
-    "output": "{{first(ifempty(body.results.addresses, emptyarray))}}"
+    "output": "{{body.results.addresses[1]}}"
   }
 }
