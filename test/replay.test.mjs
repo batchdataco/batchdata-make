@@ -158,15 +158,21 @@ test('api call: builds url, method, headers and query; wallet paths are redirect
   }
 });
 
-test('connection check treats 400 and 2xx as valid and 401/403 as invalid', () => {
+test('connection check uses address autocomplete and treats only 2xx JSON with a result as valid', () => {
   const c = read('connections/batchdata/batchdata.communication.iml.json');
-  assert.deepEqual(c.body, { requests: [] });
-  const valid = (statusCode) => render(c.response.valid, { statusCode });
-  assert.equal(valid(200), true);
-  assert.equal(valid(400), true);
-  assert.equal(valid(401), false);
-  assert.equal(valid(403), false);
-  assert.equal(valid(500), false);
+  assert.match(c.url, /address\/autocomplete$/);
+  assert.deepEqual(c.body, { searchCriteria: { query: '1600 Penn' }, options: { take: 1 } });
+  const valid = (scope) => render(c.response.valid.condition, scope);
+  const ok = { result: { suggestions: [] } };
+  assert.equal(valid({ statusCode: 200, body: ok }), true);
+  assert.equal(valid({ statusCode: 204, body: ok }), true);
+  assert.equal(valid({ statusCode: 200, body: {} }), false);
+  assert.equal(valid({ statusCode: 200, body: '<!DOCTYPE html><html><title>BatchData</title></html>' }), false);
+  assert.equal(valid({ statusCode: 400, body: ok }), false);
+  assert.equal(valid({ statusCode: 401, body: ok }), false);
+  assert.equal(valid({ statusCode: 403, body: ok }), false);
+  assert.equal(valid({ statusCode: 500, body: ok }), false);
+  assert.equal(c.response.valid.type, 'InvalidAccessTokenError');
   assert.equal(render(c.headers.Authorization, { parameters: { apiKey: 't' } }), 'Bearer t');
   assert.equal(render(c.response.data, { parameters: { apiKey: 't' } }).apiKey, 't');
 });
@@ -179,4 +185,42 @@ test('base: bearer header comes from the connection and errors read the BatchDat
   const fallback = render(b.response.error.message, { statusCode: 500, body: {} });
   assert.match(fallback, /^\[500\]/);
   assert.equal(b.response.error['401'].type, 'InvalidAccessTokenError');
+});
+
+test('lookup, verify address and the billed instant trigger do not throw on a 401 or HTML body', () => {
+  const html = '<!DOCTYPE html><html><title>BatchData</title></html>';
+  const unauthorized = { status: { code: 401, text: 'Unauthorized', message: 'Invalid token.', data: [] } };
+  const lookupFx = fixture('property-lookup-all-attributes');
+  const verifyFx = fixture('address-verify');
+
+  const lookup = comm('lookupProperty');
+  assert.equal(render(lookup.response.valid.condition, { body: lookupFx }), true);
+  assert.equal(render(lookup.response.valid.condition, { body: unauthorized }), false);
+  assert.equal(render(lookup.response.valid.condition, { body: html }), false);
+  assert.equal(lookup.response.valid.type, 'InvalidAccessTokenError');
+  assert.deepEqual(respond('lookupProperty', lookupFx), lookupFx.results.properties[0]);
+  assert.equal(respond('lookupProperty', unauthorized), undefined);
+  assert.equal(respond('lookupProperty', html), undefined);
+
+  const verify = comm('verifyAddress');
+  assert.equal(render(verify.response.valid.condition, { body: verifyFx }), true);
+  assert.equal(render(verify.response.valid.condition, { body: unauthorized }), false);
+  assert.equal(render(verify.response.valid.condition, { body: html }), false);
+  assert.equal(verify.response.valid.type, 'InvalidAccessTokenError');
+  assert.equal(respond('verifyAddress', verifyFx).hash, verifyFx.results.addresses[0].hash);
+  assert.equal(respond('verifyAddress', unauthorized), undefined);
+  assert.equal(respond('verifyAddress', html), undefined);
+
+  const billed = comm('watchMonitorEventsWithProperty');
+  const payload = { eventId: 'e1', propertyId: 'p1' };
+  assert.equal(render(billed.response.valid.condition, { body: lookupFx, payload }), true);
+  assert.equal(render(billed.response.valid.condition, { body: unauthorized, payload }), false);
+  assert.equal(render(billed.response.valid.condition, { body: html, payload }), false);
+  assert.equal(billed.response.valid.type, 'InvalidAccessTokenError');
+  const hydrated = respond('watchMonitorEventsWithProperty', lookupFx, { payload });
+  assert.equal(hydrated.eventId, 'e1');
+  assert.equal(hydrated.property._id, lookupFx.results.properties[0]._id);
+  const failed = respond('watchMonitorEventsWithProperty', html, { payload });
+  assert.equal(failed.eventId, 'e1');
+  assert.equal(failed.property, undefined);
 });

@@ -1,15 +1,24 @@
 {
-  "url": "https://api.batchdata.com/api/v1/address/verify",
+  "url": "https://api.batchdata.com/api/v1/address/autocomplete",
   "method": "POST",
   "headers": {
     "Authorization": "Bearer {{parameters.apiKey}}",
     "Content-Type": "application/json"
   },
   "body": {
-    "requests": []
+    "searchCriteria": {
+      "query": "1600 Penn"
+    },
+    "options": {
+      "take": 1
+    }
   },
   "response": {
-    "valid": "{{statusCode == 400 || (statusCode >= 200 && statusCode < 300)}}",
+    "valid": {
+      "condition": "{{statusCode >= 200 && statusCode < 300 && if(body.result, true, false)}}",
+      "type": "InvalidAccessTokenError",
+      "message": "The BatchData API did not return a usable response. Check that the API token is valid. Contact support@batchservice.com if it still fails."
+    },
     "data": {
       "apiKey": "{{parameters.apiKey}}"
     },

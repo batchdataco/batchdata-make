@@ -15,6 +15,8 @@ const fns = {
   formatDate: (d) => (d ? new Date(d).toISOString().slice(0, 10) : undefined),
   parseJSON: (s) => (s === undefined || s === null || s === '' ? undefined : JSON.parse(s)),
   toCollection: (arr, k, v) => Object.fromEntries((arr || []).map((e) => [e[k], e[v]])),
+  emptyarray: [],
+  emptystring: '',
 };
 
 const evalExpr = (expr, scope) => {

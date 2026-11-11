@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import { root, write, toInterface } from './lib.mjs';
+import { root, write, toInterface, firstItem, requireApiObject } from './lib.mjs';
 import * as P from './params.mjs';
 import { offsetPaging } from './paging.mjs';
 import { catalogModules, catalogGroups, webhooks, rpcs } from './catalog-modules.mjs';
@@ -104,7 +104,7 @@ const modules = {
           datasets: '{{if(length(parameters.datasets) > 0, parameters.datasets, undefined)}}',
         },
       },
-      response: { output: '{{first(body.results.properties)}}' },
+      response: { valid: requireApiObject('body.results'), output: firstItem('body.results.properties') },
     },
     params: P.lookupParams,
     sampleFrom: () => fx('property-lookup-all-attributes').results.properties[0],
@@ -133,7 +133,7 @@ const modules = {
       url: '/v1/address/verify',
       method: 'POST',
       body: { requests: [{ street: '{{parameters.street}}', city: u('parameters.city'), state: u('parameters.state'), zip: u('parameters.zip') }] },
-      response: { output: '{{first(body.results.addresses)}}' },
+      response: { valid: requireApiObject('body.results'), output: firstItem('body.results.addresses') },
     },
     params: P.verifyAddressParams,
     sampleFrom: () => fx('address-verify').results.addresses[0],
@@ -312,12 +312,16 @@ write('connections/batchdata/batchdata.params.iml.json', [
   },
 ]);
 write('connections/batchdata/batchdata.communication.iml.json', {
-  url: 'https://api.batchdata.com/api/v1/address/verify',
+  // Make treats HTTP 400-599 as errors and ignores response.valid for those statuses,
+  // so an empty /v1/address/verify (400) cannot mark a connection as valid.
+  // Autocomplete returns 200 with a valid token and 401 with an invalid one, and is
+  // available to typical API tokens (search-sessions can 403 without that permission).
+  url: 'https://api.batchdata.com/api/v1/address/autocomplete',
   method: 'POST',
   headers: { Authorization: 'Bearer {{parameters.apiKey}}', 'Content-Type': 'application/json' },
-  body: { requests: [] },
+  body: { searchCriteria: { query: '1600 Penn' }, options: { take: 1 } },
   response: {
-    valid: '{{statusCode == 400 || (statusCode >= 200 && statusCode < 300)}}',
+    valid: requireApiObject('body.result', 'statusCode >= 200 && statusCode < 300'),
     data: { apiKey: '{{parameters.apiKey}}' },
     // Make shows the app name beside every connection, so the label never repeats "BatchData".
     metadata: {

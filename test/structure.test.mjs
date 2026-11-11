@@ -199,3 +199,29 @@ test('billed search modules default to Limit 1, and the billed session trigger d
   assert.match(take.help, /Default 5/);
 });
 
+
+test('every first() mapping is guarded and marks a missing API object as InvalidAccessTokenError', () => {
+  const files = jsonFiles.filter((f) => f.endsWith('.communication.iml.json') || f.endsWith('batchdata.communication.iml.json'));
+  let found = 0;
+  for (const f of files) {
+    const text = fs.readFileSync(f, 'utf8');
+    const rel = path.relative(root, f);
+    const matches = [...text.matchAll(/\{\{first\(([^}]+)\)\}\}/g)];
+    for (const m of matches) {
+      found += 1;
+      assert.match(m[1], /ifempty\(.+, emptyarray\)/, `${rel} unguarded first(${m[1]})`);
+    }
+  }
+  assert.ok(found >= 3, `expected at least 3 first() mappings, found ${found}`);
+
+  for (const [rel, parent] of [
+    ['modules/lookupProperty/lookupProperty.communication.iml.json', 'body.results'],
+    ['modules/verifyAddress/verifyAddress.communication.iml.json', 'body.results'],
+    ['modules/watchMonitorEventsWithProperty/watchMonitorEventsWithProperty.communication.iml.json', 'body.results'],
+  ]) {
+    const comm = read(rel);
+    assert.equal(comm.response.valid.type, 'InvalidAccessTokenError', rel);
+    assert.match(comm.response.valid.condition, new RegExp(parent.replace('.', '\\.')), rel);
+    assert.match(comm.response.valid.message, /API token is valid/);
+  }
+});
