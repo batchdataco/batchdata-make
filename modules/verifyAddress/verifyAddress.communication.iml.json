@@ -12,6 +12,11 @@
     ]
   },
   "response": {
-    "output": "{{first(body.results.addresses)}}"
+    "valid": {
+      "condition": "{{if(body.results, true, false)}}",
+      "type": "InvalidAccessTokenError",
+      "message": "The BatchData API did not return a usable response. Check that the API token is valid. Contact support@batchservice.com if it still fails."
+    },
+    "output": "{{first(ifempty(body.results.addresses, emptyarray))}}"
   }
 }

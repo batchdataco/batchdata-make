@@ -1,7 +1,7 @@
 // Turns the shared catalog (scripts/catalog.json) into Make modules, webhooks and RPCs.
 // The catalog is the single source of truth shared with the Zapier and n8n integrations.
 import fs from 'node:fs';
-import { root } from './lib.mjs';
+import { root, firstItem, requireApiObject } from './lib.mjs';
 import { limitParam, offsetPaging, cursorPaging } from './paging.mjs';
 
 export const catalog = JSON.parse(fs.readFileSync(`${root}/scripts/catalog.json`, 'utf8'));
@@ -390,7 +390,8 @@ catalogModules.watchMonitorEventsWithProperty = {
     method: 'POST',
     body: { requests: [{ propertyId: '{{payload.propertyId}}' }] },
     response: {
-      output: { '{{...}}': '{{payload}}', [ev.hydrate.into]: `{{first(body.${ev.hydrate.listPath})}}` },
+      valid: requireApiObject('body.results'),
+      output: { '{{...}}': '{{payload}}', [ev.hydrate.into]: firstItem(`body.${ev.hydrate.listPath}`) },
     },
   },
   staticParams: [],
