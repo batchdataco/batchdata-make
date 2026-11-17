@@ -1,11 +1,12 @@
 // Turns the shared catalog (scripts/catalog.json) into Make modules, webhooks and RPCs.
 // The catalog is the single source of truth shared with the Zapier and n8n integrations.
 import fs from 'node:fs';
-import { root, firstItem, requireApiObject } from './lib.mjs';
+import { root } from './lib.mjs';
 import { limitParam, offsetPaging, cursorPaging } from './paging.mjs';
 
 export const catalog = JSON.parse(fs.readFileSync(`${root}/scripts/catalog.json`, 'utf8'));
-const fx = (n) => JSON.parse(fs.readFileSync(`${root}/test/fixtures/${n}.json`, 'utf8'));
+const MONITOR_OPS = new Set(['list_monitors', 'get_monitor', 'create_monitor', 'delete_monitor']);
+const makeOps = catalog.ops.filter((op) => !MONITOR_OPS.has(op.key));
 
 const camel = (s) => s.replace(/[-_]+([a-z0-9])/g, (_, c) => c.toUpperCase());
 const moduleKey = (key) => camel(key);
@@ -63,7 +64,7 @@ const paramFor = (f, name = camel(f.key), dynamicRpc) => {
   }
 };
 
-const RPC_FOR = { new_search_session: 'listSearchSessions', new_monitor: 'listMonitors' };
+const RPC_FOR = { new_search_session: 'listSearchSessions' };
 
 // Optional nested filters (for example request.status.equals) are grouped into one collection
 // parameter that mirrors the wire shape, so an untouched group is dropped instead of sent as {}.
@@ -253,14 +254,14 @@ const SAMPLE_FILL = { warnings: [], nextPageCursor: 'eyJwYWdlIjoyfQ' };
 
 // ---------- modules ----------
 export const catalogModules = {};
-for (const op of catalog.ops) {
+for (const op of makeOps) {
   const key = moduleKey(op.key);
   catalogModules[key] = {
     moduleType: op.kind === 'search' ? 'search' : 'action',
     actionCrud: CRUD(op),
     catalogKey: op.key,
     label: op.label,
-    description: describe(op).replace('the "New Property Monitor Event" trigger', 'the "Watch Property Monitor Events (Instant)" trigger'),
+    description: describe(op),
     communication: requestFor(op),
     params: paramsFor(op),
     sampleFrom: () => ({ ...op.sample, ...Object.fromEntries(Object.keys(op.result.attach ?? {}).filter((k) => !(k in op.sample)).map((k) => [k, SAMPLE_FILL[k] ?? {}])) }),
@@ -329,74 +330,7 @@ const trig = (key) => catalog.triggers.find((t) => t.key === key);
   take.help = 'Whole number from 1 to 100. Default 5. You are billed per property delivered on each check. Use a low number while you test.';
 }
 
-// ---------- instant trigger: webhook component + two modules ----------
-const ev = trig('monitor_event');
-const criteriaOnly = (f) => !f.local;
-const webhookParams = ev.fields.filter(criteriaOnly).map((f) => paramFor(f));
-export const webhooks = {
-  monitorEvents: {
-    label: 'Property monitor events',
-    webhookType: 'web',
-    communication: {
-      condition: "{{length(ifempty(body.eventId, '')) > 0}}",
-      uid: '{{body.eventId}}',
-      output: { '{{...}}': '{{body}}', id: '{{body.eventId}}' },
-    },
-    params: webhookParams,
-    attach: {
-      url: api(ev.http.path),
-      method: 'POST',
-      body: {
-        ...buildBody(ev, { only: criteriaOnly }),
-        deliveryConfig: { type: 'webhook', url: '{{webhook.url}}' },
-      },
-      response: { data: { externalHookId: '{{body.result.subscriptionId}}' } },
-    },
-    detach: {
-      url: api(ev.http.deletePath).replace('{id}', '{{webhook.externalHookId}}'),
-      method: 'DELETE',
-    },
-  },
-};
-export const EVENT_LIMITS_NOTE =
-  'Limits: up to 5 monitors per team, a monitor cannot be edited after it is created (delete and recreate it), a new monitor can take up to 7 days to start delivering, and delivery is best effort (4 attempts per event), so the same event can arrive more than once. Use the Event ID to skip repeats.';
-
-const evCore = ev.description
-  .replace('Turning the Zap or scenario on', 'Turning the scenario on')
-  .replace('; turn on "Include Property Record" to also look up the full property record.', '.')
-  .replace(/ The optional property lookup is billed per event, per matched property\./, '');
-if (evCore.includes('Include Property Record') || evCore.includes('Zap')) throw new Error('monitor event description still has catalog-only wording');
-// The plain trigger points to the property-record version; the property-record version describes itself.
-const evBase = evCore.replace('Limits:', 'To get the full property record with each event, use "Watch Property Monitor Events with Property Record (Instant, Billed)" instead. Limits:');
-
-catalogModules.watchMonitorEvents = {
-  moduleType: 'instant_trigger',
-  catalogKey: ev.key,
-  webhook: 'monitorEvents',
-  label: 'Watch Property Monitor Events (Instant)',
-  description: evBase,
-  communication: {},
-  staticParams: [],
-  sampleFrom: () => ev.sample,
-};
-catalogModules.watchMonitorEventsWithProperty = {
-  moduleType: 'instant_trigger',
-  catalogKey: ev.key,
-  webhook: 'monitorEvents',
-  label: 'Watch Property Monitor Events with Property Record (Instant, Billed)',
-  description: `${evCore} This version also looks up the full property record for every event and adds it to the output as "property". The lookup is billed per event, per matched property, on top of the monitor charges.`,
-  communication: {
-    url: api(ev.hydrate.path),
-    method: 'POST',
-    body: { requests: [{ propertyId: '{{payload.propertyId}}' }] },
-    response: {
-      valid: requireApiObject('body.results'),
-      output: { '{{...}}': '{{payload}}', [ev.hydrate.into]: firstItem(`body.${ev.hydrate.listPath}`) },
-    },
-  },
-  staticParams: [],
-  sampleFrom: () => ({ ...ev.sample, property: fx('property-lookup-all-attributes').results.properties[0] }),
-};
+export const webhooks = {};
 
 // ---------- Make limit and pagination for the catalog list modules ----------
 const swapTakeForLimit = (m, param) => {
@@ -446,15 +380,6 @@ export const rpcs = {
     },
     params: [],
   },
-  listMonitors: {
-    label: 'List property monitors',
-    communication: {
-      url: '/v2/property-subscription',
-      method: 'GET',
-      response: { iterate: '{{body.results.subscriptions}}', output: { label: '{{item.id}}', value: '{{item.id}}' } },
-    },
-    params: [],
-  },
 };
 
 export const catalogGroups = [
@@ -463,6 +388,5 @@ export const catalogGroups = [
   { label: 'Addresses', modules: ['autocompleteAddress', 'geocodeAddress', 'reverseGeocode', 'batchVerifyAddress'] },
   { label: 'Investors', modules: ['investorBuybox', 'investorProperties'] },
   { label: 'Search sessions', modules: ['createSearchSession', 'listSearchSessions', 'deleteSearchSession'] },
-  { label: 'Property monitors', modules: ['createMonitor', 'listMonitors', 'getMonitor', 'deleteMonitor'] },
-  { label: 'Triggers', modules: ['watchSearchSessions', 'watchSessionProperties', 'watchMonitorEvents', 'watchMonitorEventsWithProperty'] },
+  { label: 'Triggers', modules: ['watchSearchSessions', 'watchSessionProperties'] },
 ];

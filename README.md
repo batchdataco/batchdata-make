@@ -2,7 +2,7 @@
 
 ![BatchData](assets/logo-512.png)
 
-BatchData gives you property, owner and address data through an API. This app brings it into your Make scenarios, so you can find properties, enrich them with owner contact details, verify addresses and phone numbers, and react to property changes without writing code.
+BatchData gives you property, owner and address data through an API. This app brings it into your Make scenarios, so you can find properties, enrich them with owner contact details, and verify addresses and phone numbers without writing code.
 
 Typical uses:
 
@@ -10,7 +10,6 @@ Typical uses:
 - Look up one address and add the full property record, ownership and sale history to a lead.
 - Find the owner's phone numbers and emails (skip trace) for a property, and check the numbers against Do Not Call and TCPA litigator lists.
 - Clean up addresses before mailing, or turn an address into coordinates.
-- Start a scenario the moment a property you are watching changes.
 
 Support: support@batchservice.com
 
@@ -71,24 +70,12 @@ A search session remembers what it has already returned, so each run gives you o
 | List Search Sessions | Lists the sessions on your team. |
 | Delete Search Session | Deletes a session. |
 
-### Property monitors
-
-A monitor reports when a property is added to it, removed from it or changed.
-
-| Module | What it does |
-| --- | --- |
-| Create Property Monitor (Stream Delivery) | Creates a monitor that delivers to AWS Kinesis or Azure Event Hubs. |
-| List Property Monitors, Get Property Monitor | Reads your monitors. |
-| Delete Property Monitor | Deletes a monitor. |
-
 ### Triggers
 
 | Module | Type | What it does |
 | --- | --- | --- |
 | Watch New Search Sessions | Polling | Runs when a new search session appears on your team. |
 | Watch New Properties in a Search Session (Billed) | Polling | Runs for each new property a session delivers. |
-| Watch Property Monitor Events (Instant) | Instant | Runs when a property is added to, removed from or changed in a monitor. |
-| Watch Property Monitor Events with Property Record (Instant, Billed) | Instant | The same, and adds the full property record to each event. |
 
 ### Other
 
@@ -110,26 +97,10 @@ Your BatchData plan decides what each call costs. Each module's description in M
 - Skip trace modules bill per matched property.
 - Address, phone and compliance checks bill per item checked.
 - Autocomplete, geocoding and the modules that list, get or delete search sessions do not bill property records.
-- Property monitors and the events they deliver are billed according to your BatchData plan.
 - Get Property Permits bills per property requested, not per permit. A Limit above 100 sends more than one request.
 - Watch New Properties in a Search Session (Billed) bills every property it delivers, on every scheduled run.
-- Watch Property Monitor Events with Property Record (Instant, Billed) adds one property lookup per event.
 
 For pricing questions, contact support@batchservice.com.
-
-## Property monitor events
-
-When you turn a scenario on, the instant trigger creates a monitor that delivers to that scenario's own Make webhook. When you turn it off, or delete the scenario, the monitor is deleted. You do not enter a callback URL.
-
-Each event contains the event ID, property ID, address and parcel hashes, the IDs of the monitors that added or removed the property, and the time it changed. It does not contain the property record. Use the module with **Property Record** to add it. Use the event ID to skip repeats.
-
-Good to know:
-
-- You can have up to 5 monitors per team, so avoid many scenarios that each create one.
-- A monitor cannot be edited. Delete it and create a new one.
-- A new monitor can take up to 7 days to start delivering.
-- Delivery is best effort, with 4 attempts per event, so the same event can arrive more than once.
-- Make has no polling trigger for new monitors. Use List Property Monitors on a schedule instead.
 
 ## Phone compliance
 

@@ -33,16 +33,24 @@ Not verified, needs a Make account and a BatchData test token (a sandbox token r
 
 - Import with the VS Code extension (the file layout follows public examples, not a Make validator).
 - Connection check. It POSTs a fixed autocomplete query (`searchCriteria.query` = `1600 Penn`, `take` 1) to `/v1/address/autocomplete` and is valid on HTTP 2xx only when `body.result` is present, so a 200 HTML error page is rejected as `InvalidAccessTokenError`. An earlier empty `/v1/address/verify` check (valid on 400 or 2xx) failed in Make because HTTP 400-599 are errors and `response.valid` cannot override that. Autocomplete was chosen over `GET /v2/property/search-sessions?take=1` because search-sessions can return 403 for tokens without that permission.
-- List-item outputs (Get Property Details, Verify Address, and the billed instant trigger's property lookup) use IML 1-based index access (`path[1]`) instead of `first()`, which throws `IMLError` when the value is not an array. `response.valid` marks a missing API object as `InvalidAccessTokenError`, so a 401 JSON body or a 200 HTML page does not surface as `IMLError: Function 'first' finished with error! Invalid array.` A first attempt used `first(ifempty(path, emptyarray))`, but `emptyarray` is a scenario-mapper constant and is not defined in custom-app IML.
+- List-item outputs (Get Property Details and Verify Address) use IML 1-based index access (`path[1]`) instead of `first()`, which throws `IMLError` when the value is not an array. `response.valid` marks a missing API object as `InvalidAccessTokenError`, so a 401 JSON body or a 200 HTML page does not surface as `IMLError: Function 'first' finished with error! Invalid array.` A first attempt used `first(ifempty(path, emptyarray))`, but `emptyarray` is a scenario-mapper constant and is not defined in custom-app IML.
 - Optional fields. The templates use `ifempty(x, undefined)` and `omit()` so empty fields are not sent. Nested optional filters (for example Permit Status) are collection parameters that are dropped when empty. Check that an unfilled nested collection (for example Building) is not sent as `{}`.
-- Instant triggers. Check that turning a scenario on creates the property subscription (attach), that a test event arrives with `eventId` set, and that turning it off deletes the subscription (detach, `externalHookId`). Create hooks only with a sandbox token: a subscription counts towards the team's limit of 5 and cannot be edited.
 - Polling triggers (`Watch New Search Sessions`, `Watch New Properties in a Search Session`): confirm the date ordering and that a first run does not replay old items as expected.
-- Dynamic dropdowns (`rpc://listSearchSessions`, `rpc://listMonitors`): confirm the label and value mapping.
+- Dynamic dropdown (`rpc://listSearchSessions`): confirm the label and value mapping.
 - The `{{...}}` spread in the Search Properties output (adds `searchMeta` next to each property).
 - Make an API Call: the wallet guard redirects any path containing `wallet` to a non-existent path. IML cannot raise a validation error, so this is best effort. Decide whether to keep the module.
 
-- Webhook dedupe. The webhook sets `uid` to `body.eventId`; confirm in Make that a repeated event does not start a second run.
-- Callback keys. IML cannot strip keys recursively. Make an API Call blocks (sends nothing) any body that contains `webhook` or a JSON unicode escape (`u00`). The Additional Criteria JSON fields on search, session and monitor modules are not stripped; BatchData's synchronous endpoints ignore callback keys, and the monitor and trigger modules fix `deliveryConfig` themselves. A Make custom function that strips the keys would close this gap.
+- Callback keys. IML cannot strip keys recursively. Make an API Call blocks (sends nothing) any body that contains `webhook` or a JSON unicode escape (`u00`). The Additional Criteria JSON fields on search and session modules are not stripped; BatchData's synchronous endpoints ignore callback keys. A Make custom function that strips the keys would close this gap.
+
+## Property monitor modules (hidden on Make)
+
+Version 0.4.0 removed the six property monitor modules: Create Property Monitor (Stream Delivery), List Property Monitors, Get Property Monitor, Delete Property Monitor, Watch Property Monitor Events (Instant) and Watch Property Monitor Events with Property Record (Instant, Billed). It also removed the `monitorEvents` webhook and the `listMonitors` RPC, which only these modules used. The reason: the BatchData sandbox token for the Make review does not have the property-subscription permission, so the reviewers cannot test these modules.
+
+On Make, the app `batchdata-r6b83g` is public and in review, and Make does not let a public app delete components. The six modules are set to private there instead. The `monitorEvents` webhook and the `listMonitors` RPC stay on Make, and no module uses them.
+
+`scripts/catalog-modules.mjs` filters the monitor operations out of the vendored catalog, so `scripts/catalog.json` stays unchanged. Make an API Call still blocks POST, PUT and PATCH calls to `property-subscription`.
+
+To restore the modules, revert this commit, run `node scripts/generate.mjs`, deploy to Make, and set the six modules to public again.
 
 ## Decisions
 

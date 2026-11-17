@@ -10,6 +10,8 @@ const read = (rel) => JSON.parse(fs.readFileSync(path.join(root, rel), 'utf8'));
 const catalog = read('scripts/catalog.json');
 const app = read('makecomapp.json');
 const camel = (s) => s.replace(/[-_]+([a-z0-9])/g, (_, c) => c.toUpperCase());
+const MONITOR_OPS = new Set(['list_monitors', 'get_monitor', 'create_monitor', 'delete_monitor']);
+const ops = catalog.ops.filter((op) => !MONITOR_OPS.has(op.key));
 const files = (key) => app.components.module[key].codeFiles;
 const comm = (key) => read(files(key).communication);
 const params = (key) => read(files(key).mappableParams);
@@ -46,17 +48,18 @@ test('vendored catalog matches its recorded hash and the shared source when pres
   if (fs.existsSync(shared)) assert.equal(fs.readFileSync(shared, 'utf8'), raw);
 });
 
-test('every catalog operation and the polling and instant triggers are present as modules', () => {
-  for (const op of catalog.ops) assert.ok(app.components.module[camel(op.key)], op.key);
-  for (const key of ['watchSearchSessions', 'watchSessionProperties', 'watchMonitorEvents', 'watchMonitorEventsWithProperty']) {
+test('every catalog operation except the property monitors and the polling triggers are present as modules', () => {
+  for (const op of ops) assert.ok(app.components.module[camel(op.key)], op.key);
+  for (const key of ['watchSearchSessions', 'watchSessionProperties']) {
     assert.ok(app.components.module[key], key);
   }
-  assert.equal(Object.keys(app.components.module).length, 30);
+  for (const op of catalog.ops.filter((o) => MONITOR_OPS.has(o.key))) assert.equal(app.components.module[camel(op.key)], undefined, op.key);
+  assert.equal(Object.keys(app.components.module).length, 24);
 });
 
 test('copy lint: one contact, no retired names, no callback fields, no Zapier wording', () => {
   const banned = new RegExp(['batch' + 'leads', 'batch\\s*' + 'dialer'].join('|'), 'i');
-  const dirs = ['modules', 'webhooks', 'rpcs', 'connections', 'general'];
+  const dirs = ['modules', 'webhooks', 'rpcs', 'connections', 'general'].filter((d) => fs.existsSync(path.join(root, d)));
   const all = dirs.flatMap((d) => fs.readdirSync(path.join(root, d), { recursive: true }).map((f) => path.join(root, d, f))).filter((f) => f.endsWith('.json'));
   for (const f of [...all, path.join(root, 'makecomapp.json')]) {
     const text = fs.readFileSync(f, 'utf8');
@@ -69,7 +72,7 @@ test('copy lint: one contact, no retired names, no callback fields, no Zapier wo
 });
 
 test('request sweep: every operation builds a versioned URL and a body that renders cleanly', () => {
-  for (const op of catalog.ops) {
+  for (const op of ops) {
     const key = camel(op.key);
     const p = {};
     for (const f of op.fields) {
@@ -92,7 +95,7 @@ test('request sweep: every operation builds a versioned URL and a body that rend
 });
 
 test('output sweep: every operation yields the sample fields from a realistic response', () => {
-  for (const op of catalog.ops) {
+  for (const op of ops) {
     const key = camel(op.key);
     const c = comm(key);
     const body = fakeBody(op);
@@ -173,21 +176,6 @@ test('search sessions: the session ID and cursor pagination are sent, deletes sa
   assert.equal(idParam.options, 'rpc://listSearchSessions');
 });
 
-test('monitor creation is stream delivery only and never offers a webhook delivery type', () => {
-  const m = params('createMonitor');
-  const type = m.find((p) => p.name === 'deliveryType');
-  assert.deepEqual(type.options.map((o) => o.value), ['kinesis', 'event-hub']);
-  const k = request('createMonitor', { deliveryType: 'kinesis', query: 'Phoenix, AZ', kinesis: { streamName: 's', region: 'us-west-2' }, eventHub: { eventHubName: 'ignored' } });
-  assert.deepEqual(k.body, { searchCriteria: { query: 'Phoenix, AZ' }, deliveryConfig: { type: 'kinesis', streamName: 's', region: 'us-west-2' } });
-  const e = request('createMonitor', { deliveryType: 'event-hub', eventHub: { eventHubName: 'h' }, kinesis: { streamName: 'ignored' } });
-  assert.deepEqual(e.body.deliveryConfig, { type: 'event-hub', eventHub: { eventHubName: 'h' } });
-  assert.equal(request('deleteMonitor', { id: 'abc' }).url, '/v2/property-subscription/abc');
-  assert.equal(request('getMonitor', { id: 'abc' }).method, 'GET');
-  for (const key of ['createMonitor', 'listMonitors', 'getMonitor', 'deleteMonitor']) {
-    assert.match(app.components.module[key].description, /5 monitors per team/, key);
-  }
-});
-
 test('polling triggers: sessions by creation date, session properties by poll time, billing disclosed', () => {
   const s = comm('watchSearchSessions');
   assert.deepEqual(render(s.qs, { parameters: {} }), { take: 100 });
@@ -202,40 +190,6 @@ test('polling triggers: sessions by creation date, session properties by poll ti
   const names = read(files('watchSessionProperties').staticParams).map((p) => p.name);
   assert.ok(names.includes('sessionId') && names.includes('take'));
   assert.equal(read(files('watchSessionProperties').staticParams).find((p) => p.name === 'sessionId').required, true);
-});
-
-test('instant trigger: the hook is the trigger\'s own, criteria come from the webhook parameters', () => {
-  const w = app.components.webhook.monitorEvents;
-  const attach = read(w.codeFiles.attach);
-  const scope = { parameters: { query: 'Phoenix, AZ', quickLists: ['vacant'] }, webhook: { url: 'https://hook.make.com/abc' } };
-  assert.deepEqual(render(attach.body, scope), {
-    searchCriteria: { query: 'Phoenix, AZ', quickLists: ['vacant'] },
-    deliveryConfig: { type: 'webhook', url: 'https://hook.make.com/abc' },
-  });
-  const detach = read(w.codeFiles.detach);
-  assert.equal(render(detach.url, { webhook: { externalHookId: 'sub1' } }), '/v2/property-subscription/sub1');
-  assert.equal(render(attach.response.data.externalHookId, { body: { result: { subscriptionId: 'sub1' } } }), 'sub1');
-  const hook = read(w.codeFiles.communication);
-  const payload = { eventId: 'e1', propertyId: 'p1', addedToSubscriptionIds: ['sub1'] };
-  assert.equal(render(hook.condition, { body: payload }), true);
-  assert.equal(render(hook.condition, { body: { hello: 1 } }), false);
-  assert.equal(render(hook.output, { body: payload }).id, 'e1');
-  assert.equal(render(hook.output, { body: payload }).propertyId, 'p1');
-  const params_ = read(w.codeFiles.params).map((p) => p.name);
-  assert.ok(!params_.some((n) => /include|webhook|url/i.test(n)), params_.join());
-});
-
-test('instant trigger: property lookup only happens in the billed variant', () => {
-  assert.deepEqual(comm('watchMonitorEvents'), {});
-  const c = comm('watchMonitorEventsWithProperty');
-  const payload = { id: 'e1', eventId: 'e1', propertyId: 'p1' };
-  assert.equal(c.url, '/v1/property/lookup/all-attributes');
-  assert.deepEqual(render(c.body, { payload }), { requests: [{ propertyId: 'p1' }] });
-  const out = render(c.response.output, { payload, body: { results: { properties: [{ _id: 'p1' }] } } });
-  assert.deepEqual(out, { ...payload, property: { _id: 'p1' } });
-  assert.match(app.components.module.watchMonitorEventsWithProperty.description, /billed per event, per matched property/i);
-  assert.match(app.components.module.watchMonitorEvents.description, /4 attempts per event/);
-  assert.match(app.components.module.watchMonitorEvents.description, /Property Record/);
 });
 
 test('generic API call: wallet, async, path tricks and monitor creation are blocked', () => {
@@ -253,10 +207,9 @@ test('generic API call: wallet, async, path tricks and monitor creation are bloc
   }
 });
 
-test('blocked API calls send no body or query; the webhook dedupes on eventId', () => {
+test('blocked API calls send no body or query', () => {
   const c = comm('makeAnApiCall');
   const scope = { parameters: { url: 'v1/wallet', method: 'POST', body: '{"a":1}', qs: [{ key: 'x', value: '1' }] } };
   assert.equal(render(c.body, scope), undefined);
   assert.deepEqual(render(c.qs, scope), {});
-  assert.equal(JSON.parse(fs.readFileSync(path.join(root, 'webhooks/monitorEvents/monitorEvents.communication.iml.json'), 'utf8')).uid, '{{body.eventId}}');
 });

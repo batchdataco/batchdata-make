@@ -1,7 +1,0 @@
-{
-  "url": "/v2/property-subscription/{{replace(replace(parameters.id, '/', '_'), '.', '_')}}",
-  "method": "GET",
-  "response": {
-    "output": "{{body.result}}"
-  }
-}

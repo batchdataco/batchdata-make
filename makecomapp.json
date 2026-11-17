@@ -302,58 +302,6 @@
           "samples": "modules/deleteSearchSession/deleteSearchSession.samples.iml.json"
         }
       },
-      "listMonitors": {
-        "moduleType": "search",
-        "label": "List Property Monitors",
-        "description": "Lists your property monitors. Needs a token with the property subscription permission. Monitors and the events they deliver are billed according to your BatchData plan; contact support@batchservice.com for pricing. Limits: up to 5 monitors per team, a monitor cannot be edited after it is created (delete and recreate it), a new monitor can take up to 7 days to start delivering, and delivery is best effort (4 attempts per event).",
-        "actionCrud": "read",
-        "connection": "batchdata",
-        "codeFiles": {
-          "communication": "modules/listMonitors/listMonitors.communication.iml.json",
-          "mappableParams": "modules/listMonitors/listMonitors.mappable-params.iml.json",
-          "interface": "modules/listMonitors/listMonitors.interface.iml.json",
-          "samples": "modules/listMonitors/listMonitors.samples.iml.json"
-        }
-      },
-      "getMonitor": {
-        "moduleType": "search",
-        "label": "Get Property Monitor",
-        "description": "Returns one property monitor with its search criteria and delivery settings (secrets are masked). Monitors and the events they deliver are billed according to your BatchData plan; contact support@batchservice.com for pricing. Limits: up to 5 monitors per team, a monitor cannot be edited after it is created (delete and recreate it), a new monitor can take up to 7 days to start delivering, and delivery is best effort (4 attempts per event).",
-        "actionCrud": "read",
-        "connection": "batchdata",
-        "codeFiles": {
-          "communication": "modules/getMonitor/getMonitor.communication.iml.json",
-          "mappableParams": "modules/getMonitor/getMonitor.mappable-params.iml.json",
-          "interface": "modules/getMonitor/getMonitor.interface.iml.json",
-          "samples": "modules/getMonitor/getMonitor.samples.iml.json"
-        }
-      },
-      "createMonitor": {
-        "moduleType": "action",
-        "label": "Create Property Monitor (Stream Delivery)",
-        "description": "Creates a property monitor that streams changes for matching properties to your own AWS Kinesis stream or Azure Event Hub. For webhook delivery use the \"Watch Property Monitor Events (Instant)\" trigger, which sets up and removes its own monitor. Monitors and the events they deliver are billed according to your BatchData plan; contact support@batchservice.com for pricing. Limits: up to 5 monitors per team, a monitor cannot be edited after it is created (delete and recreate it), a new monitor can take up to 7 days to start delivering, and delivery is best effort (4 attempts per event).",
-        "actionCrud": "create",
-        "connection": "batchdata",
-        "codeFiles": {
-          "communication": "modules/createMonitor/createMonitor.communication.iml.json",
-          "mappableParams": "modules/createMonitor/createMonitor.mappable-params.iml.json",
-          "interface": "modules/createMonitor/createMonitor.interface.iml.json",
-          "samples": "modules/createMonitor/createMonitor.samples.iml.json"
-        }
-      },
-      "deleteMonitor": {
-        "moduleType": "action",
-        "label": "Delete Property Monitor",
-        "description": "Deletes a property monitor so it stops delivering events. Monitors and the events they deliver are billed according to your BatchData plan; contact support@batchservice.com for pricing. Limits: up to 5 monitors per team, a monitor cannot be edited after it is created (delete and recreate it), a new monitor can take up to 7 days to start delivering, and delivery is best effort (4 attempts per event).",
-        "actionCrud": "delete",
-        "connection": "batchdata",
-        "codeFiles": {
-          "communication": "modules/deleteMonitor/deleteMonitor.communication.iml.json",
-          "mappableParams": "modules/deleteMonitor/deleteMonitor.mappable-params.iml.json",
-          "interface": "modules/deleteMonitor/deleteMonitor.interface.iml.json",
-          "samples": "modules/deleteMonitor/deleteMonitor.samples.iml.json"
-        }
-      },
       "watchSearchSessions": {
         "moduleType": "trigger",
         "label": "Watch New Search Sessions",
@@ -377,45 +325,9 @@
           "interface": "modules/watchSessionProperties/watchSessionProperties.interface.iml.json",
           "samples": "modules/watchSessionProperties/watchSessionProperties.samples.iml.json"
         }
-      },
-      "watchMonitorEvents": {
-        "moduleType": "instant_trigger",
-        "label": "Watch Property Monitor Events (Instant)",
-        "description": "Triggers when BatchData reports that a property matching your criteria was added to or removed from a monitor, or changed (instant). Turning the scenario on creates a monitor that delivers to this trigger's own hook URL; turning it off deletes that monitor. Each event carries the property ID and change details. Monitors and the events they deliver are billed according to your BatchData plan; contact support@batchservice.com for pricing. To get the full property record with each event, use \"Watch Property Monitor Events with Property Record (Instant, Billed)\" instead. Limits: up to 5 monitors per team, a monitor cannot be edited after it is created (delete and recreate it), a new monitor can take up to 7 days to start delivering, and delivery is best effort (4 attempts per event).",
-        "connection": "batchdata",
-        "webhook": "monitorEvents",
-        "codeFiles": {
-          "communication": "modules/watchMonitorEvents/watchMonitorEvents.communication.iml.json",
-          "interface": "modules/watchMonitorEvents/watchMonitorEvents.interface.iml.json",
-          "samples": "modules/watchMonitorEvents/watchMonitorEvents.samples.iml.json"
-        }
-      },
-      "watchMonitorEventsWithProperty": {
-        "moduleType": "instant_trigger",
-        "label": "Watch Property Monitor Events with Property Record (Instant, Billed)",
-        "description": "Triggers when BatchData reports that a property matching your criteria was added to or removed from a monitor, or changed (instant). Turning the scenario on creates a monitor that delivers to this trigger's own hook URL; turning it off deletes that monitor. Each event carries the property ID and change details. Monitors and the events they deliver are billed according to your BatchData plan; contact support@batchservice.com for pricing. Limits: up to 5 monitors per team, a monitor cannot be edited after it is created (delete and recreate it), a new monitor can take up to 7 days to start delivering, and delivery is best effort (4 attempts per event). This version also looks up the full property record for every event and adds it to the output as \"property\". The lookup is billed per event, per matched property, on top of the monitor charges.",
-        "connection": "batchdata",
-        "webhook": "monitorEvents",
-        "codeFiles": {
-          "communication": "modules/watchMonitorEventsWithProperty/watchMonitorEventsWithProperty.communication.iml.json",
-          "interface": "modules/watchMonitorEventsWithProperty/watchMonitorEventsWithProperty.interface.iml.json",
-          "samples": "modules/watchMonitorEventsWithProperty/watchMonitorEventsWithProperty.samples.iml.json"
-        }
       }
     },
-    "webhook": {
-      "monitorEvents": {
-        "label": "Property monitor events",
-        "webhookType": "web",
-        "connection": "batchdata",
-        "codeFiles": {
-          "communication": "webhooks/monitorEvents/monitorEvents.communication.iml.json",
-          "params": "webhooks/monitorEvents/monitorEvents.params.iml.json",
-          "attach": "webhooks/monitorEvents/monitorEvents.attach.iml.json",
-          "detach": "webhooks/monitorEvents/monitorEvents.detach.iml.json"
-        }
-      }
-    },
+    "webhook": {},
     "rpc": {
       "listSearchSessions": {
         "label": "List search sessions",
@@ -423,14 +335,6 @@
         "codeFiles": {
           "communication": "rpcs/listSearchSessions/listSearchSessions.communication.iml.json",
           "params": "rpcs/listSearchSessions/listSearchSessions.params.iml.json"
-        }
-      },
-      "listMonitors": {
-        "label": "List property monitors",
-        "connection": "batchdata",
-        "codeFiles": {
-          "communication": "rpcs/listMonitors/listMonitors.communication.iml.json",
-          "params": "rpcs/listMonitors/listMonitors.params.iml.json"
         }
       }
     }
@@ -539,36 +443,12 @@
             "remote": "deleteSearchSession"
           },
           {
-            "local": "listMonitors",
-            "remote": "listMonitors"
-          },
-          {
-            "local": "getMonitor",
-            "remote": "getMonitor"
-          },
-          {
-            "local": "createMonitor",
-            "remote": "createMonitor"
-          },
-          {
-            "local": "deleteMonitor",
-            "remote": "deleteMonitor"
-          },
-          {
             "local": "watchSearchSessions",
             "remote": "watchSearchSessions"
           },
           {
             "local": "watchSessionProperties",
             "remote": "watchSessionProperties"
-          },
-          {
-            "local": "watchMonitorEvents",
-            "remote": "watchMonitorEvents"
-          },
-          {
-            "local": "watchMonitorEventsWithProperty",
-            "remote": "watchMonitorEventsWithProperty"
           }
         ],
         "function": [],
@@ -576,18 +456,9 @@
           {
             "local": "listSearchSessions",
             "remote": "listSearchSessions"
-          },
-          {
-            "local": "listMonitors",
-            "remote": "listMonitors"
           }
         ],
-        "webhook": [
-          {
-            "local": "monitorEvents",
-            "remote": "batchdata-r6b83g"
-          }
-        ]
+        "webhook": []
       }
     }
   ]
