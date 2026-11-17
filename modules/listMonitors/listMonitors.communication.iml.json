@@ -1,8 +1,0 @@
-{
-  "url": "/v2/property-subscription",
-  "method": "GET",
-  "response": {
-    "iterate": "{{body.results.subscriptions}}",
-    "output": "{{item}}"
-  }
-}

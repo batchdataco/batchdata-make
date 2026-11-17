@@ -187,7 +187,7 @@ test('base: bearer header comes from the connection and errors read the BatchDat
   assert.equal(b.response.error['401'].type, 'InvalidAccessTokenError');
 });
 
-test('lookup, verify address and the billed instant trigger do not throw on a 401 or HTML body', () => {
+test('lookup and verify address do not throw on a 401 or HTML body', () => {
   const html = '<!DOCTYPE html><html><title>BatchData</title></html>';
   const unauthorized = { status: { code: 401, text: 'Unauthorized', message: 'Invalid token.', data: [] } };
   const lookupFx = fixture('property-lookup-all-attributes');
@@ -210,17 +210,4 @@ test('lookup, verify address and the billed instant trigger do not throw on a 40
   assert.equal(respond('verifyAddress', verifyFx).hash, verifyFx.results.addresses[0].hash);
   assert.equal(respond('verifyAddress', unauthorized), undefined);
   assert.equal(respond('verifyAddress', html), undefined);
-
-  const billed = comm('watchMonitorEventsWithProperty');
-  const payload = { eventId: 'e1', propertyId: 'p1' };
-  assert.equal(render(billed.response.valid.condition, { body: lookupFx, payload }), true);
-  assert.equal(render(billed.response.valid.condition, { body: unauthorized, payload }), false);
-  assert.equal(render(billed.response.valid.condition, { body: html, payload }), false);
-  assert.equal(billed.response.valid.type, 'InvalidAccessTokenError');
-  const hydrated = respond('watchMonitorEventsWithProperty', lookupFx, { payload });
-  assert.equal(hydrated.eventId, 'e1');
-  assert.equal(hydrated.property._id, lookupFx.results.properties[0]._id);
-  const failed = respond('watchMonitorEventsWithProperty', html, { payload });
-  assert.equal(failed.eventId, 'e1');
-  assert.equal(failed.property, undefined);
 });

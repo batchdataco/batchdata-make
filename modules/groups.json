@@ -51,21 +51,10 @@
     ]
   },
   {
-    "label": "Property monitors",
-    "modules": [
-      "createMonitor",
-      "listMonitors",
-      "getMonitor",
-      "deleteMonitor"
-    ]
-  },
-  {
     "label": "Triggers",
     "modules": [
       "watchSearchSessions",
-      "watchSessionProperties",
-      "watchMonitorEvents",
-      "watchMonitorEventsWithProperty"
+      "watchSessionProperties"
     ]
   },
   {

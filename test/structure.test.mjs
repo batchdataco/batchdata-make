@@ -41,11 +41,11 @@ test('id mapping covers every module and groups cover every module', () => {
   assert.deepEqual(grouped, keys);
 });
 
-test('triggers: polling ones declare a trigger rule, instant ones point at a declared webhook', () => {
+test('triggers: the two polling ones declare a trigger rule and there are no instant triggers', () => {
   const polling = Object.entries(app.components.module).filter(([, m]) => m.moduleType === 'trigger');
   const instant = Object.entries(app.components.module).filter(([, m]) => m.moduleType === 'instant_trigger');
   assert.equal(polling.length, 2);
-  assert.equal(instant.length, 2);
+  assert.equal(instant.length, 0);
   for (const [key, m] of polling) {
     const rule = read(m.codeFiles.communication).response.trigger;
     assert.ok(['id', 'date'].includes(rule.type), key);
@@ -53,31 +53,16 @@ test('triggers: polling ones declare a trigger rule, instant ones point at a dec
     assert.ok(m.codeFiles.staticParams, key);
     assert.equal(m.codeFiles.mappableParams, undefined, key);
   }
-  for (const [key, m] of instant) {
-    assert.ok(app.components.webhook[m.webhook], key);
-    assert.equal(m.actionCrud, undefined, key);
-  }
 });
 
-test('the webhook component creates and removes its own monitor and nothing else', () => {
-  const w = app.components.webhook.monitorEvents;
-  assert.equal(w.webhookType, 'web');
-  assert.equal(w.connection, 'batchdata');
-  for (const rel of Object.values(w.codeFiles)) assert.ok(fs.existsSync(path.join(root, rel)), rel);
-  const attach = read(w.codeFiles.attach);
-  assert.equal(attach.method, 'POST');
-  assert.equal(attach.url, '/v2/property-subscription');
-  assert.deepEqual(attach.body.deliveryConfig, { type: 'webhook', url: '{{webhook.url}}' });
-  assert.equal(attach.response.data.externalHookId, '{{body.result.subscriptionId}}');
-  const detach = read(w.codeFiles.detach);
-  assert.equal(detach.method, 'DELETE');
-  assert.equal(detach.url, '/v2/property-subscription/{{webhook.externalHookId}}');
-  assert.deepEqual(app.origins[0].idMapping.webhook.map((x) => x.local), ['monitorEvents']);
+test('the app declares no webhook component', () => {
+  assert.deepEqual(app.components.webhook, {});
+  assert.deepEqual(app.origins[0].idMapping.webhook, []);
 });
 
 test('RPC dropdowns are declared, mapped and used', () => {
-  assert.deepEqual(Object.keys(app.components.rpc).sort(), ['listMonitors', 'listSearchSessions']);
-  assert.deepEqual(app.origins[0].idMapping.rpc.map((x) => x.local).sort(), ['listMonitors', 'listSearchSessions']);
+  assert.deepEqual(Object.keys(app.components.rpc).sort(), ['listSearchSessions']);
+  assert.deepEqual(app.origins[0].idMapping.rpc.map((x) => x.local).sort(), ['listSearchSessions']);
   for (const r of Object.values(app.components.rpc)) for (const rel of Object.values(r.codeFiles)) assert.ok(fs.existsSync(path.join(root, rel)), rel);
   const used = JSON.stringify(read(app.components.module.deleteSearchSession.codeFiles.mappableParams));
   assert.match(used, /rpc:\/\/listSearchSessions/);
@@ -210,16 +195,29 @@ test('list outputs use a 1-based index instead of first(), and mark a missing AP
     const matches = [...text.matchAll(/\{\{([^{}\]]+\[1\])\}\}/g)];
     found += matches.length;
   }
-  assert.ok(found >= 3, `expected at least 3 [1] list-item mappings, found ${found}`);
+  assert.ok(found >= 2, `expected at least 2 [1] list-item mappings, found ${found}`);
 
   for (const [rel, parent] of [
     ['modules/lookupProperty/lookupProperty.communication.iml.json', 'body.results'],
     ['modules/verifyAddress/verifyAddress.communication.iml.json', 'body.results'],
-    ['modules/watchMonitorEventsWithProperty/watchMonitorEventsWithProperty.communication.iml.json', 'body.results'],
   ]) {
     const comm = read(rel);
     assert.equal(comm.response.valid.type, 'InvalidAccessTokenError', rel);
     assert.match(comm.response.valid.condition, new RegExp(parent.replace('.', '\\.')), rel);
     assert.match(comm.response.valid.message, /API token is valid/);
   }
+});
+
+test('the property monitor modules, their webhook and their RPC are not generated', () => {
+  const removed = ['createMonitor', 'getMonitor', 'deleteMonitor', 'listMonitors', 'watchMonitorEvents', 'watchMonitorEventsWithProperty', 'monitorEvents', 'rpc://listMonitors'];
+  const generatedDirs = ['modules', 'webhooks', 'rpcs', 'connections', 'general'];
+  const generated = allFiles.filter((f) => generatedDirs.some((d) => path.relative(root, f).startsWith(`${d}${path.sep}`)));
+  assert.ok(generated.length > 30);
+  for (const f of [path.join(root, 'makecomapp.json'), ...generated]) {
+    const text = fs.readFileSync(f, 'utf8');
+    for (const name of removed) assert.ok(!text.includes(name), `${path.relative(root, f)} mentions ${name}`);
+  }
+  for (const name of removed.slice(0, 6)) assert.equal(app.components.module[name], undefined, name);
+  assert.equal(app.components.rpc.listMonitors, undefined);
+  for (const dir of ['webhooks/monitorEvents', 'rpcs/listMonitors', ...removed.slice(0, 6).map((n) => `modules/${n}`)]) assert.ok(!fs.existsSync(path.join(root, dir)), dir);
 });
